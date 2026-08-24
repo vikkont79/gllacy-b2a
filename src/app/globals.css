@@ -11,7 +11,7 @@
   --color-primary-light: oklch(from var(--color-primary) calc(l + 10) c h); /* ≈ #feafc3 */
   --color-primary-lighter: oklch(from var(--color-primary) calc(l + 15) c h); /* ≈ #ffcbd8 */
 
-  --color-text: oklch(70% 0 0deg); /* #e7e7e7 */
+  --color-text: oklch(70% 0 0deg); /* #b9b9b9 */
   --color-text-dark: oklch(from var(--color-text) calc(l - 50) c h); /* ≈ #2d3440 */
   --color-text-medium: oklch(from var(--color-text) calc(l - 35) c h); /* #565c66 */
   --color-text-light: oklch(from var(--color-text) calc(l + 20) c h); /* #e7e7e7 */
@@ -22,7 +22,7 @@
   --color-success: oklch(70% 0.2 140deg);
 
   /* ===== ТИПОГРАФИКА ===== */
-  --font-family-base: 'Inter', 'Arial', sans-serif;
+  --font-family-base: var(--font-inter), 'Arial', sans-serif;
 
   --text-xs: clamp(0.625rem, 0.8vw, 0.75rem);    /* 10 → 12px */
   --text-sm: clamp(0.75rem, 0.9vw, 0.875rem);    /* 12 → 14px */
@@ -57,4 +57,40 @@
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* ===== БАЗА И СБРОСЫ ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--text-base);
+  line-height: 22px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

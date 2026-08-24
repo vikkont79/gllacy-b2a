@@ -1,0 +1,60 @@
+:root {
+    /* ===== ЦВЕТА ===== */
+  --color-white: oklch(100% 0 0deg); /* #ffffff */
+  --color-black: oklch(0% 0 0deg); /* #000000 */
+
+  --color-primary:oklch(65% 0.2 12deg); /* ≈ #ff7799 */
+  /* Тёмные оттенки */
+  --color-primary-dark: oklch(from var(--color-primary) calc(l - 20) c h); /* ≈ #ff2f64 */
+  --color-primary-medium: oklch(from var(--color-primary) calc(l - 10) c h); /* ≈ #ff4a78 */
+  /* Светлые оттенки */
+  --color-primary-light: oklch(from var(--color-primary) calc(l + 10) c h); /* ≈ #feafc3 */
+  --color-primary-lighter: oklch(from var(--color-primary) calc(l + 15) c h); /* ≈ #ffcbd8 */
+
+  --color-text: oklch(70% 0 0deg); /* #e7e7e7 */
+  --color-text-dark: oklch(from var(--color-text) calc(l - 50) c h); /* ≈ #2d3440 */
+  --color-text-medium: oklch(from var(--color-text) calc(l - 35) c h); /* #565c66 */
+  --color-text-light: oklch(from var(--color-text) calc(l + 20) c h); /* #e7e7e7 */
+
+  /* Статусы */
+  --color-error: oklch(60% 0.2 25deg); /* ≈ #EA5454 */
+  --color-warning: oklch(70% 0.2 55deg); /* ≈ #fd912e */
+  --color-success: oklch(70% 0.2 140deg);
+
+  /* ===== ТИПОГРАФИКА ===== */
+  --font-family-base: 'Inter', 'Arial', sans-serif;
+
+  --text-xs: clamp(0.625rem, 0.8vw, 0.75rem);    /* 10 → 12px */
+  --text-sm: clamp(0.75rem, 0.9vw, 0.875rem);    /* 12 → 14px */
+  --text-base: clamp(0.875rem, 1vw, 1rem);       /* 14 → 16px */
+  --text-md: clamp(1rem, 1.1vw, 1.125rem);       /* 16 → 18px */
+  --title-sm: clamp(1.125rem, 1.8vw, 1.25rem);   /* 18 → 20px */
+  --title-md: clamp(1.25rem, 2.2vw, 1.5rem);     /* 20 → 24px */
+  --title-large: clamp(1.5rem, 2.8vw, 2rem);     /* 24 → 32px */
+  --title-xl: clamp(1.75rem, 3.2vw, 2.25rem);   /* 28 → 36px */
+
+  /* ===== ОТСТУПЫ ===== */
+  --base-indent: 0.25rem;
+
+  --space-xs: var(--base-indent);
+  --space-sm: calc(var(--base-indent) * 2);
+  --space-md: calc(var(--base-indent) * 4);
+  --space-lg: calc(var(--base-indent) * 6);
+  --space-xl: calc(var(--base-indent) * 8);
+  --space-2xl: calc(var(--base-indent) * 10);
+
+  /* ===== РАДИУСЫ ===== */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* ===== ТЕНИ ===== */
+  --shadow-sm: 0 4px 12px oklch(from var(--color-text-dark) l c h / 0.1);
+  --shadow-md: 0 8px 16px oklch(from var(--color-text-dark) l c h / 0.12);
+  --shadow-lg: 0 15px 40px oklch(from var(--color-text-dark) l c h / 0.12);
+
+  /* ===== АНИМАЦИИ ===== */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}

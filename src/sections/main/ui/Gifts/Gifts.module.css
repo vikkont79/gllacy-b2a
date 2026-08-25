@@ -1,0 +1,51 @@
+/* Подарки */
+
+.gifts {
+  margin-block-end: 80px;
+}
+
+.gifts__slogan {
+  margin-block: 0 55px;
+  padding-inline: 368px;
+  text-align: center;
+  font-size: var(--title-large);
+  line-height: 46px;
+  font-weight: 900;
+}
+
+.gifts__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.gifts__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline-start: 36px;
+  background-color: var(--color-primary);
+  border-radius: 16px;
+}
+
+.gifts__description {
+  padding-block: 36px 32px;
+}
+
+.gifts__title {
+  margin-block: 0 28px;
+  font-size: var(--title-md);
+  line-height: 30px;
+}
+
+.gifts__text {
+  margin-block: 0 28px;
+}
+
+.gifts__img {
+  inline-size: 219px;
+  display: block;
+}

@@ -8,7 +8,7 @@
   --color-primary-dark: oklch(from var(--color-primary) calc(l - 0.20) c h); /* ≈ #ff2f64 */
   --color-primary-medium: oklch(from var(--color-primary) calc(l - 0.10) c h); /* ≈ #ff4a78 */
   /* Светлые оттенки */
-  --color-primary-light: oklch(from var(--color-primary) calc(l + 0.10) c h); /* ≈ #feafc3 */
+  --color-primary-light: oklch(from var(--color-primary) calc(l + 0.15) c h); /* ≈ #feafc3 */
   --color-primary-lighter: oklch(from var(--color-primary) calc(l + 0.15) c h); /* ≈ #ffcbd8 */
 
   --color-text: oklch(70% 0 0deg); /* #b9b9b9 */

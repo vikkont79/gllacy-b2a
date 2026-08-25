@@ -1,0 +1,82 @@
+/* О компании */
+
+.about {
+  margin-block-end: 80px;
+  padding: 24px;
+  background-image: url(../../../../shared/assets/images/backgrounds/about-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left -28px top 0;
+  border-radius: 16px;
+}
+
+.about__wrapper {
+  padding-inline: 40px;
+  padding-block: 56px;
+  border-radius: 16px;
+  background-color: var(--color-white);
+}
+
+.about__slogan {
+  margin-block: 0 56px;
+  text-align: center;
+  font-size: var(--title-large);
+  line-height: 46px;
+  font-weight: 900;
+}
+
+.about__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 32px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.about__item {
+  position: relative;
+  padding-inline-start: 64px;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    inline-size: 48px;
+    block-size: 48px;
+    border: 2px var(--color-text-dark) solid;
+    border-radius: 50%;
+  }
+
+  &::after {
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    content: "";
+    inline-size: 48px;
+    block-size: 48px;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+  }
+}
+
+.about__item--ice-cream::after {
+  background-image: url(/icons/ice-cream.svg);
+}
+
+.about__item--cow::after {
+  background-image: url(/icons/cow.svg);
+}
+
+.about__item--leaf::after {
+  background-image: url(/icons/leaf.svg);
+}
+
+.about__item--thermometer::after {
+  background-image: url(/icons/thermometer.svg);
+}
+
+.about__text {
+  margin: 0;
+}

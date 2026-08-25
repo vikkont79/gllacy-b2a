@@ -1,0 +1,79 @@
+/* ===== ДОСТАВКА И ЗВОНОК ===== */
+
+.delivery {
+  position: relative;
+  margin-block-end: 80px;
+  padding: 64px;
+  border-radius: 16px;
+  background-color: var(--color-white);
+  background-image: url(../../../../shared/assets/images/backgrounds/delivery-bg.png);
+  background-repeat: no-repeat;
+  background-size: 105%;
+  background-position: top -140px right 0;
+  /* Фон с рожками лежит «вверх ногами» — переворачиваем контейнер,
+     а внутренности возвращаем обратно */
+  transform: scale(-1, 1);
+}
+
+.inner {
+  position: relative;
+  transform: scale(-1, 1);
+}
+
+.intro {
+  max-inline-size: 640px;
+  margin-inline: auto;
+  margin-block-end: 48px;
+  text-align: center;
+}
+
+.title {
+  margin-block: 0 24px;
+  font-size: var(--title-large);
+  line-height: 46px;
+  font-weight: 900;
+}
+
+.text {
+  margin: 0;
+  color: var(--color-text-medium);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.phone {
+  font-size: var(--title-md);
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.cardText {
+  margin: 0;
+  color: var(--color-text-medium);
+}
+
+.form {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.field {
+  flex: 1;
+  min-inline-size: 0;
+}

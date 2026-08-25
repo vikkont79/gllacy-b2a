@@ -5,16 +5,16 @@
 
   --color-primary:oklch(65% 0.2 12deg); /* ≈ #ff7799 */
   /* Тёмные оттенки */
-  --color-primary-dark: oklch(from var(--color-primary) calc(l - 20) c h); /* ≈ #ff2f64 */
-  --color-primary-medium: oklch(from var(--color-primary) calc(l - 10) c h); /* ≈ #ff4a78 */
+  --color-primary-dark: oklch(from var(--color-primary) calc(l - 0.20) c h); /* ≈ #ff2f64 */
+  --color-primary-medium: oklch(from var(--color-primary) calc(l - 0.10) c h); /* ≈ #ff4a78 */
   /* Светлые оттенки */
-  --color-primary-light: oklch(from var(--color-primary) calc(l + 10) c h); /* ≈ #feafc3 */
-  --color-primary-lighter: oklch(from var(--color-primary) calc(l + 15) c h); /* ≈ #ffcbd8 */
+  --color-primary-light: oklch(from var(--color-primary) calc(l + 0.10) c h); /* ≈ #feafc3 */
+  --color-primary-lighter: oklch(from var(--color-primary) calc(l + 0.15) c h); /* ≈ #ffcbd8 */
 
   --color-text: oklch(70% 0 0deg); /* #b9b9b9 */
-  --color-text-dark: oklch(from var(--color-text) calc(l - 50) c h); /* ≈ #2d3440 */
-  --color-text-medium: oklch(from var(--color-text) calc(l - 35) c h); /* #565c66 */
-  --color-text-light: oklch(from var(--color-text) calc(l + 20) c h); /* #e7e7e7 */
+  --color-text-dark: oklch(from var(--color-text) calc(l - 0.50) c h); /* ≈ #2d3440 */
+  --color-text-medium: oklch(from var(--color-text) calc(l - 0.35) c h); /* #565c66 */
+  --color-text-light: oklch(from var(--color-text) calc(l + 0.20) c h); /* #e7e7e7 */
 
   /* Статусы */
   --color-error: oklch(60% 0.2 25deg); /* ≈ #EA5454 */

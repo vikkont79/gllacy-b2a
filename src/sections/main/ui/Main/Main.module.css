@@ -1,85 +1,4 @@
-/* ===== КНОПКИ И ИНПУТЫ (общие) ===== */
-
-.button {
-  padding-inline: 32px;
-  padding-block: 12px;
-  border: none;
-  border-radius: 26px;
-  outline: 4px oklch(from var(--color-white) l c h / 0.4) solid;
-  background-color: var(--color-white);
-  font-family: inherit;
-  font-size: var(--text-base);
-  line-height: 20px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition:
-    background-color 100ms ease-out,
-    outline-color 100ms ease-out,
-    box-shadow 100ms ease-out;
-
-  &:hover {
-    outline-color: var(--color-white);
-    background-color: oklch(from var(--color-white) l c h / 0.4);
-    box-shadow: 0 4px 15px 0 rgb(133 133 133 / 0.15); /* TODO: нет токена */
-    transition:
-      background-color,
-      outline,
-      box-shadow 100ms ease-out;
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-text-dark);
-    background-color: oklch(from var(--color-white) l c h / 0.5);
-  }
-
-  &:active {
-    outline: 2px solid var(--color-text-dark);
-    background-color: var(--color-white);
-    box-shadow: var(--shadow-sm);
-  }
-
-  &:disabled {
-    outline: 4px solid oklch(from var(--color-white) l c h / 0.4);
-    background-color: var(--color-text-light);
-    color: var(--color-text);
-  }
-}
-
-.button--dark {
-  outline: 4px solid oklch(from var(--color-primary-dark) l c h / 0.3);
-  background-color: var(--color-primary-dark);
-  color: var(--color-white);
-
-  &:hover {
-    outline: 4px solid var(--color-primary-dark);
-    background-color: oklch(from var(--color-white) l c h / 0.3);
-    color: var(--color-text-dark);
-    transition:
-      background-color,
-      outline,
-      color 100ms ease-out;
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-text-dark);
-    background-color: var(--color-primary-dark);
-    color: var(--color-white);
-  }
-
-  &:active {
-    outline: 2px solid var(--color-text-dark);
-    background-color: var(--color-primary-lighter);
-    color: var(--color-white);
-  }
-
-  &:disabled {
-    outline: 4px solid oklch(from var(--color-text) l c h / 0.3);
-    background-color: var(--color-text);
-    color: var(--color-text-medium);
-  }
-}
-
+/* ===== ИНПУТЫ (до появления shared-компонента) ===== */
 .input {
   padding-inline: 16px;
   padding-block: 14px;
@@ -219,22 +138,7 @@
   border: none;
   background-color: transparent;
   font-family: inherit;
-  font-size: var(--text-base);
-}
-
-.site-nav__link:has(.site-nav__icon),
-.site-nav__button:has(.site-nav__icon) {
-  padding-inline-end: 38px;
-}
-
-.site-nav__icon {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: auto;
-  right: 16px;
-  margin: auto;
-  fill: var(--color-text-dark);
+  font-weight: 400;
 }
 
 .site-nav__button:focus-within:has(~ .header-catalog__list) {
@@ -257,8 +161,8 @@
   }
 }
 
-.site-nav__button:focus-within:has(~ .header-catalog__list) .site-nav__icon {
-  fill: var(--color-white);
+/* Поворот иконки-шеврона (первый дочерний спан кнопки) при открытом каталоге */
+.site-nav__button:focus-within:has(~ .header-catalog__list) > span:first-child {
   transform: rotate(180deg);
 }
 
@@ -385,36 +289,16 @@
   border: none;
   background-color: transparent;
   font-family: inherit;
-  font-size: var(--text-base);
-}
-
-.user-nav__button:has(.user-nav__icon):not(
-    .user-nav__item--seach .user-nav__button
-  ) {
-  padding-inline-start: 38px;
-}
-
-.user-nav__icon {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 16px;
-  right: auto;
-  margin: auto;
-  fill: var(--color-text-dark);
+  font-weight: 400;
 }
 
 .user-nav__item--seach .user-nav__button {
   padding: 8px;
-  border-radius: 27px;
-}
-
-.user-nav__item--seach .user-nav__icon {
-  inset: 0;
 }
 
 .user-nav__item--seach .user-nav__button:focus-within:has(~ .popover) {
   background-color: var(--color-primary-medium);
+  color: var(--color-white);
   transition: opacity 100ms ease-out;
 
   &:hover {
@@ -428,10 +312,6 @@
   &:active {
     opacity: 0.3;
   }
-}
-
-.user-nav__item--seach .user-nav__button:focus-within:has(~ .popover) .user-nav__icon {
-  fill: var(--color-white);
 }
 
 .user-nav__button:focus-within:has(~ .popover) {
@@ -450,10 +330,6 @@
   &:active {
     opacity: 0.3;
   }
-}
-
-.user-nav__button:focus-within:has(~ .popover) .user-nav__icon {
-  fill: var(--color-white);
 }
 
 /* ===== ОСНОВНОЙ БЛОК ===== */
@@ -577,45 +453,11 @@
   justify-content: space-between;
 }
 
+/* Размеры стрелок слайдера; цвета/состояния — у варианта outline компонента Button */
 .promo__button {
   inline-size: 40px;
   block-size: 40px;
   padding: 11px;
-  border: 2px var(--color-white) solid;
-  border-radius: 26px;
-  background-color: oklch(from var(--color-white) l c h / 0.3);
-  transition: background-color 100ms ease-out;
-
-  &:hover {
-    background-color: var(--color-white);
-    transition: background-color 100ms ease-out;
-  }
-
-  &:focus {
-    outline: 2px var(--color-text-dark) solid;
-    background-color: oklch(from var(--color-white) l c h / 0.3);
-  }
-
-  &:active {
-    background-color: oklch(from var(--color-white) l c h / 0.5);
-    transition:
-      background-color 100ms ease-out,
-      outline 100ms ease-out;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-}
-
-.promo__icon {
-  fill: var(--color-white);
-}
-
-.promo__button:hover .promo__icon,
-.promo__button:focus .promo__icon,
-.promo__button:active .promo__icon {
-  fill: var(--color-text-dark);
 }
 
 .promo__footer {
@@ -801,14 +643,16 @@
   position: relative;
   inline-size: 32px;
   block-size: 32px;
+  padding: 0;
   border: none;
   outline: none;
-  border-radius: 26px;
+  color: var(--color-white);
   background-color: var(--color-primary-dark);
 
   &:hover {
     outline: 2px solid var(--color-primary-dark);
     background-color: oklch(from var(--color-white) l c h / 0.3);
+    color: var(--color-text-dark);
   }
 
   &:focus {
@@ -819,24 +663,13 @@
   &:active {
     outline: 2px solid var(--color-primary-dark);
     background-color: var(--color-primary-lighter);
+    color: var(--color-text-dark);
   }
 
   &:disabled {
     background-color: var(--color-text);
+    color: var(--color-text-medium);
   }
-}
-
-.taste__icon {
-  fill: var(--color-white);
-}
-
-.taste__button:hover .taste__icon,
-.taste__button:active .taste__icon {
-  fill: var(--color-text-dark);
-}
-
-.taste__button:disabled .taste__icon {
-  fill: var(--color-text-medium);
 }
 
 /* О компании */
@@ -1067,16 +900,12 @@
   block-size: 14px;
   margin-inline-start: 4px;
   margin-block: 3px;
-  border: none;
-  background-image: url(/icons/tooltip.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
+  padding: 0;
+}
 
-  &:focus .delivery-form__tooltip-info,
-  &:active .delivery-form__tooltip-info {
-    display: block;
-  }
+.delivery-form__tooltip:focus + .delivery-form__tooltip-info,
+.delivery-form__tooltip:active + .delivery-form__tooltip-info {
+  display: block;
 }
 
 .delivery-form__tooltip-info {
@@ -1202,15 +1031,18 @@
   border-radius: 24px;
   outline: 2px solid oklch(from var(--color-white) l c h / 0.3);
   background-color: transparent;
+  color: var(--color-text-dark);
 
   &:hover {
     outline: 2px solid oklch(from var(--color-white) l c h / 0.5);
     background-color: var(--color-text-dark);
+    color: var(--color-white);
   }
 
   &:focus {
     outline: 2px var(--color-text-dark) solid;
     background-color: var(--color-text-dark);
+    color: var(--color-white);
   }
 
   &:active {
@@ -1374,10 +1206,7 @@
 .cart-product__cross-button {
   inline-size: 16px;
   block-size: 16px;
-  border: none;
-  background-color: transparent;
-  background-image: url(/icons/cross.svg);
-  background-repeat: no-repeat;
+  padding: 0;
 }
 
 .popover-cart__buy-block {
@@ -1386,11 +1215,6 @@
   gap: 24px;
 }
 
-.popover-cart__button {
-  outline-color: oklch(from var(--color-primary-dark) l c h / 0.3);
-  background-color: var(--color-primary-dark);
-  color: var(--color-white);
-}
 
 .popover-cart__price {
   margin: 0;
@@ -1422,11 +1246,6 @@
   gap: 23px;
 }
 
-.popover-login__button {
-  outline-color: oklch(from var(--color-primary-dark) l c h / 0.3);
-  background-color: var(--color-primary-dark);
-  color: var(--color-white);
-}
 
 .popover-login__link {
   display: block;

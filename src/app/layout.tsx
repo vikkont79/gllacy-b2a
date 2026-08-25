@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { inter } from "@/shared/lib/fonts";
+import { Layout } from "@/widgets/layout";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ru" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }

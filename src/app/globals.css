@@ -84,6 +84,15 @@ img {
   height: auto;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  /* якорные ссылки не прячутся под краем вьюпорта */
+  scroll-margin-top: 24px;
+}
+
 .visually-hidden {
   position: absolute;
   inline-size: 1px;
@@ -93,4 +102,39 @@ img {
   border: 0;
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+/* ===== ИНПУТЫ (временно, до появления shared-компонента Input) ===== */
+
+.input {
+  padding-inline: 16px;
+  padding-block: 14px;
+  border: none;
+  outline: 1px var(--color-text) solid;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-white);
+  font-family: inherit;
+  font-size: var(--text-base);
+  line-height: 20px;
+
+  &:hover {
+    outline-color: var(--color-text-dark);
+  }
+
+  &:focus {
+    outline-width: 3px;
+  }
+
+  &:invalid {
+    outline-color: var(--color-error);
+
+    &:hover {
+      outline-width: 3px;
+    }
+  }
+
+  &:disabled {
+    background-color: var(--color-text-light);
+    opacity: 0.65;
+  }
 }

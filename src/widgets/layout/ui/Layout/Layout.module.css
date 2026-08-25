@@ -1,0 +1,8 @@
+.layout {
+  position: relative;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  min-block-size: 100vh;
+  min-inline-size: 1366px;
+  background-color: var(--color-primary-light);
+}

@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { Icon, Link } from "@/shared/ui";
+import Image from 'next/image'
+import { Icon, Link } from '@/shared/ui'
 
-import styles from "./Footer.module.css";
+import styles from './Footer.module.css'
 
 const Footer = () => {
   return (
-    <footer className={`${styles["main-footer"]} ${styles.wrapper}`}>
+    <footer className={`${styles.footer} wrapper`}>
       <ul className={`${styles["main-footer__list"]} ${styles.social}`}>
         <li className={styles["social__item"]}>
           {/* href подставим, когда появятся реальные каналы */}
@@ -44,10 +44,10 @@ const Footer = () => {
             />
           </Link>
         </p>
-        <p className={styles["copyright__text"]}>© Глейси, 2026</p>
       </div>
+      <p className={styles["copyright__text"]}>© ГлAIси, 2026</p>
     </footer>
-  );
-};
+  )
+}
 
-export { Footer };
+export { Footer }

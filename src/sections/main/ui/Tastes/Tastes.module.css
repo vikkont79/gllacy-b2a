@@ -1,28 +1,27 @@
-/* Вкусы */
-
 .tastes {
-  margin-block-end: 80px;
+  margin-block-end: 50px;
+
+  @media (min-width: 1024px) {
+    margin-block-end: 80px;
+  }
 }
 
-.tastes__slogan {
-  margin-block: 0 107px;
-  padding-inline: 320px;
-  text-align: center;
-  font-size: var(--title-large);
-  line-height: 46px;
-  font-weight: 900;
+.title {
+  max-inline-size: 580px;
 }
 
-.tastes__list {
+.list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 91px 30px;
-  margin: 0;
+  grid-template-columns: repeat(auto-fit, 280px);
+  justify-content: center;
+  gap: 92px 30px;
+  margin-block: 0;
   padding: 0;
+  padding-block-start: 52px;
   list-style-type: none;
 }
 
-.tastes__item {
+.item {
   padding-inline: 40px;
   padding-block-end: 24px;
   text-align: center;
@@ -30,36 +29,36 @@
   border-radius: var(--radius-md);
 }
 
-.taste__wrapper {
-  margin-block-start: -51px;
+.taste{
+  margin-block-start: -52px;
 }
 
-.taste__img {
+.img {
   display: block;
-  inline-size: 168px;
-  margin-inline: 11px;
+  max-inline-size: 168px;
+  margin-inline:auto;
   margin-block-end: 16px;
 }
 
-.taste__title {
+.cardTitle {
   margin-block: 0 8px;
   font-size: var(--title-sm);
   line-height: 24px;
 }
 
-.taste__description {
+.description {
   margin-block: 0 16px;
   color: var(--color-text-medium);
 }
 
-.taste__buy-block {
+.purchase {
   display: flex;
   justify-content: space-between;
   gap: 5px;
   align-items: center;
 }
 
-.taste__price {
+.price {
   margin: 0;
   font-size: var(--title-sm);
   line-height: 24px;
@@ -67,35 +66,14 @@
   word-spacing: 2px;
 }
 
-.taste__button {
-  position: relative;
+.button {
   inline-size: 32px;
   block-size: 32px;
   padding: 0;
-  border: none;
   outline: none;
-  color: var(--color-white);
-  background-color: var(--color-primary-dark);
-
-  &:hover {
-    outline: 2px solid var(--color-primary-dark);
-    background-color: oklch(from var(--color-white) l c h / 0.3);
-    color: var(--color-text-dark);
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-text-dark);
-    background-color: var(--color-primary-dark);
-  }
 
   &:active {
     outline: 2px solid var(--color-primary-dark);
-    background-color: var(--color-primary-lighter);
     color: var(--color-text-dark);
-  }
-
-  &:disabled {
-    background-color: var(--color-text);
-    color: var(--color-text-medium);
   }
 }

@@ -1,11 +1,11 @@
 import styles from './Icon.module.css'
 
 interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
-  name: string;
-  size?: number | string;
-  mobSize?: number | string;
-  color?: string;
-  label?: string;
+  name: string
+  size?: number | string
+  mobSize?: number | string
+  color?: string
+  label?: string
 }
 
 const Icon = ({

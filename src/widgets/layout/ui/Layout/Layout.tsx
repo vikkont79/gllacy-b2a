@@ -4,7 +4,7 @@ import { Header } from '../Header/Header'
 import styles from './Layout.module.css'
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const Layout = ({ children }: LayoutProps) => {

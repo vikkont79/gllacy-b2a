@@ -1,6 +1,6 @@
-import { Button, Link } from "@/shared/ui";
+import { Button, Link } from '@/shared/ui'
 
-import styles from "./Delivery.module.css";
+import styles from './Delivery.module.css'
 
 const Delivery = () => {
   return (
@@ -8,8 +8,10 @@ const Delivery = () => {
       <h2 className="visually-hidden">Доставка.</h2>
       <div className={styles.inner}>
         <div className={styles.intro}>
-          <h3 className={styles.title}>
-            Доставка любимого мороженого на дом
+          <h3 className={`${styles.title} title`}>
+                      Доставка
+                      <br /> любимого мороженого
+                      <br /> на дом
           </h3>
           <p className={styles.text}>
             Хочется полакомиться любимым десертом,
@@ -48,13 +50,13 @@ const Delivery = () => {
                 required
                 className={`input ${styles.field}`}
               />
-              <Button type="submit">Перезвоните мне</Button>
+              <Button type="submit">Позвоните мне</Button>
             </form>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export { Delivery };
+export { Delivery }

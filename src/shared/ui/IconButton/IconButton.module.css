@@ -12,3 +12,11 @@
 .iconButton[data-icon-position='right'] {
   flex-direction: row-reverse;
 }
+
+.text {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}

@@ -1,46 +1,63 @@
-import styles from "./About.module.css";
+import { Icon } from '@/shared/ui'
+import styles from './About.module.css'
 
 const About = () => {
   return (
-        <section className={styles.about} id="about">
-          <div className={styles["about__wrapper"]}>
+      <section className={styles.about} id="about">
+          <div className={styles.wrapper}>
             <h2 className="visually-hidden">Информация о нас.</h2>
-            <p className={styles["about__slogan"]}>
-              Магазин Глейси – это онлайн и офлайн-магазин по продаже мороженого
-              собственного производства на развес
+            <p className={`${styles.title} title`}>
+              Магазин Глейси – это онлайн-магазин по продаже мороженого
+              собственного производства
             </p>
-            <ul className={styles["about__list"]}>
+            <ul className={styles.list}>
               <li
-                className={`${styles["about__item"]} ${styles["about__item--ice-cream"]}`}
+                className={styles.item}
               >
-                <p className={styles["about__text"]}>
+                <Icon
+                  className={styles.icon}
+                  name='ice-cream'
+                />
+                <p className={styles.text}>
                   Всё наше мороженое изготавливается на собственном производстве
                   с использованием современного оборудования и проверенных
                   временем технологий.
                 </p>
               </li>
               <li
-                className={`${styles["about__item"]} ${styles["about__item--cow"]}`}
+                className={`${styles.item} ${styles.cow}`}
               >
-                <p className={styles["about__text"]}>
+                <Icon
+                  className={styles.icon}
+                  name='cow'
+                />
+                <p className={styles.text}>
                   Закупка ингредиентов производится только
                   <br /> у проверенных фермерских хозяйств, с которыми
                   <br /> нас связывает долговременное сотрудничество.
                 </p>
               </li>
               <li
-                className={`${styles["about__item"]} ${styles["about__item--leaf"]}`}
+                className={`${styles.item} ${styles.leaf}`}
               >
-                <p className={styles["about__text"]}>
+                <Icon
+                  className={styles.icon}
+                  name='leaf'
+                />
+                <p className={styles.text}>
                   Для приготовления мороженого используются сливки и молоко
                   высочайшего качества. Все ингредиенты
                   <br /> и добавки произведены из натурального сырья.
                 </p>
               </li>
               <li
-                className={`${styles["about__item"]} ${styles["about__item--thermometer"]}`}
+                className={`${styles.item} ${styles.thermometer}`}
               >
-                <p className={styles["about__text"]}>
+                <Icon
+                  className={styles.icon}
+                  name='thermometer'
+                />
+                <p className={styles.text}>
                   Доставка нашего мороженого осуществляется в специальном
                   термопаке, который не даёт мороженому растаять и позволяет
                   сохранить превосходный вкус.
@@ -50,7 +67,7 @@ const About = () => {
           </div>
         </section>
 
-  );
-};
+  )
+}
 
-export { About };
+export { About }

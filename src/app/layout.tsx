@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { inter } from "@/shared/lib/fonts";
-import { Layout } from "@/widgets/layout";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { inter } from '@/shared/lib/fonts'
+import { Layout } from '@/widgets/layout'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Gllacy Shop",
-  description: "Магазин мороженого Глейси",
-};
+  title: 'Gllacy Shop',
+  description: 'Магазин мороженого Глейси',
+}
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -15,5 +15,5 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Layout>{children}</Layout>
       </body>
     </html>
-  );
+  )
 }

@@ -1,11 +1,10 @@
-/* ===== ПОДВАЛ ===== */
-
-.main-footer {
+.footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: start;
-  gap: 30px;
-  padding-block: 48px;
+  align-items: center;
+  column-gap: 30px;
+  padding-block-end: 48px;
 }
 
 .main-footer__list {
@@ -22,12 +21,17 @@
 .social__link {
   position: relative;
   display: block;
-  inline-size: 24px;
-  block-size: 24px;
-  border-radius: 24px;
+  inline-size: 16px;
+  block-size: 16px;
+  border-radius: 16px;
   outline: 2px solid oklch(from var(--color-white) l c h / 0.3);
   background-color: transparent;
   color: var(--color-text-dark);
+
+  @media (min-width: 768px) {
+    inline-size: 24px;
+    block-size: 24px;
+  }
 
   &:hover {
     outline: 2px solid oklch(from var(--color-white) l c h / 0.5);
@@ -56,12 +60,12 @@
 }
 
 .copyright {
-  max-inline-size: 200px;
   font-size: var(--text-xs);
   line-height: 16px;
 }
 
 .copyright__text {
+  font-size: var(--text-xs);
   margin-block: 14px 0;
 }
 
@@ -79,10 +83,4 @@
 .copyright__img {
   display: block;
   inline-size: 93px;
-}
-
-/* Обёртка ширины — дубль из Main.module.css, общая для секций */
-.wrapper {
-  inline-size: 1170px;
-  margin-inline: auto;
 }

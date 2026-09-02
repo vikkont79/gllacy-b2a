@@ -3,20 +3,20 @@ import styles from './Button.module.css'
 import type { BasePressableProps, Size, Variant } from '../../types'
 
 interface BaseButtonProps extends BasePressableProps {
-  variant?: Variant;
-  size?: Size;
+  variant?: Variant
+  size?: Size
 }
 
 type ButtonProps = BaseButtonProps & (
   | {
-    type?: 'button' | 'submit' | 'reset';
-    onClick?: () => void;
-    href?: never;
+    type?: 'button' | 'submit' | 'reset'
+    onClick?: () => void
+    href?: never
   }
   | {
-    href: string;
-    type?: never;
-    onClick?: never;
+    href: string
+    type?: never
+    onClick?: never
   }
 )
 

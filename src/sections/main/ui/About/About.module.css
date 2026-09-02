@@ -1,82 +1,77 @@
-/* О компании */
-
 .about {
-  margin-block-end: 80px;
+  position: relative;
+  margin-block-end: 50px;
   padding: 24px;
   background-image: url(../../../../shared/assets/images/backgrounds/about-bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left -28px top 0;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
+
+  @media (min-width: 1024px) {
+    margin-block-end: 80px;
+  }
 }
 
-.about__wrapper {
-  padding-inline: 40px;
-  padding-block: 56px;
-  border-radius: 16px;
+.wrapper {
+  padding-inline: 24px;
+  padding-block: 32px;
+  border-radius: var(--radius-lg);
   background-color: var(--color-white);
+
+  @media(min-width: 768px) {
+    padding-inline: 52px;
+    padding-block: 56px;
+  }
 }
 
-.about__slogan {
-  margin-block: 0 56px;
-  text-align: center;
-  font-size: var(--title-large);
-  line-height: 46px;
-  font-weight: 900;
+.title {
+  margin-block-start: 0;
+  font-size: var(--title-md);
+  text-wrap: balance;
+
+  @media(min-width: 1024px) {
+    font-size: var(--title-large);
+  }
 }
 
-.about__list {
+.list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 40px 32px;
-  margin: 0;
-  padding: 0;
+  margin-block: 0;
+  padding-inline-start: 0;
   list-style-type: none;
-}
 
-.about__item {
-  position: relative;
-  padding-inline-start: 64px;
-
-  &::before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    content: "";
-    inline-size: 48px;
-    block-size: 48px;
-    border: 2px var(--color-text-dark) solid;
-    border-radius: 50%;
-  }
-
-  &::after {
-    position: absolute;
-    left: 7px;
-    top: 8px;
-    content: "";
-    inline-size: 48px;
-    block-size: 48px;
-    background-repeat: no-repeat;
-    background-size: 32px 32px;
+  @media(min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-.about__item--ice-cream::after {
-  background-image: url(/icons/ice-cream.svg);
+.item {
+  @media(min-width: 768px) {
+    display: flex;
+  }
 }
 
-.about__item--cow::after {
-  background-image: url(/icons/cow.svg);
+.icon {
+  display: block;
+  float: left;
+  margin-inline-end: 12px;
+  padding: 12px;
+  border: 2px var(--color-text-dark) solid;
+
+  @media(min-width: 768px) {
+    float: none;
+    margin-inline-end: 16px;
+  }
+
+  @media(min-width: 1024px) {
+    margin-inline-end: 24px;
+  }
 }
 
-.about__item--leaf::after {
-  background-image: url(/icons/leaf.svg);
-}
-
-.about__item--thermometer::after {
-  background-image: url(/icons/thermometer.svg);
-}
-
-.about__text {
+.text {
   margin: 0;
+  text-align: start;
+  text-wrap: balance;
 }

@@ -3,13 +3,13 @@ import { Icon, type IconProps } from '../Icon/Icon'
 import styles from './IconButton.module.css'
 
 interface IconButtonProps extends Omit<ButtonProps, 'children'> {
-  icon: string;
-  iconSize?: IconProps['size'];
+  icon: string
+  iconSize?: IconProps['size']
   iconSizeMob?: IconProps['mobSize']
-  iconColor?: IconProps['color'];
-  iconLabel?: IconProps['label'];
-  iconPosition?: 'left' | 'right';
-  children?: React.ReactNode;
+  iconColor?: IconProps['color']
+  iconLabel?: IconProps['label']
+  iconPosition?: 'left' | 'right'
+  children?: React.ReactNode
 }
 const IconButton = ({
   icon,
@@ -36,7 +36,7 @@ const IconButton = ({
         label={iconLabel || (typeof children === 'string' ? children : undefined)}
         className={styles.icon}
       />
-      {children && <span>{children}</span>}
+      {children && <span className={styles.text}>{children}</span>}
     </Button>
   )
 }

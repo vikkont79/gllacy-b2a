@@ -1,0 +1,101 @@
+.delivery {
+  margin-block-end: 50px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: var(--color-white);
+  background-image: url(../../../../shared/assets/images/backgrounds/delivery-bg.png);
+  background-repeat: no-repeat;
+  background-size: 105%;
+  /* Фон с рожками лежит «вверх ногами» — переворачиваем контейнер,
+     а внутренности возвращаем обратно */
+  transform: scale(-1, 1);
+
+  @media (min-width: 768px) {
+    padding: 32px;
+    background-position: top -140px right 0;
+  }
+
+  @media (min-width: 1024px) {
+    margin-block-end: 80px;
+  }
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  gap: 30px;
+  transform: scale(-1, 1);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.intro {
+  display: grid;
+  max-inline-size: 480px;
+  text-wrap: balance;
+
+  @media (min-width: 1024px) {
+    min-inline-size: 380px;
+  }
+}
+
+.title {
+  margin-block: 0 24px;
+  font-size: var(--title-md);
+  font-weight: 900;
+
+  @media(min-width: 1024px) {
+    font-size: var(--title-large);
+  }
+}
+
+.text {
+  margin: 0;
+  color: var(--color-text-medium);
+}
+
+.cards {
+  display: grid;
+  gap: 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.phone {
+  font-size: var(--title-md);
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.cardText {
+  margin: 0;
+  color: var(--color-text-medium);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.field {
+  flex: 1;
+  min-inline-size: 0;
+}

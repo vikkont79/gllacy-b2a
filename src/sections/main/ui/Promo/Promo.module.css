@@ -1,0 +1,99 @@
+.promo {
+  margin-block: 50px;
+
+  @media(min-width: 1024px) {
+    margin-block-end: 80px;
+  }
+}
+
+/* Лента слайдов: горизонтальный скролл с привязкой, скроллбар скрыт */
+.promoList {
+  display: flex;
+  margin-block: 0;
+  padding-inline-start: 0;
+  list-style-type: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Каждый слайд — на ширину контейнера, прилипает к началу */
+.promoItem {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  anchor-scope: --promo-image;
+}
+
+.icecreamBlock {
+  position: relative;
+  display: grid;
+  block-size: 507px;
+
+  @media(min-width: 768px) {
+    grid-template-columns: minmax(100px, 525px) auto;
+    block-size: auto;
+    align-items: center;
+  }
+}
+
+.description {
+  min-inline-size: 0;
+  align-self: center;
+  text-wrap: balance;
+
+  @media(min-width: 1024px) {
+    padding-inline: 70px 26px;
+  }
+}
+
+.title {
+  margin-block: 0 24px;
+
+  @media(min-width: 1024px) {
+    font-size: var(--title-xl);
+  }
+}
+
+.text {
+  margin-block: 0 48px;
+  font-size: var(--text-md);
+  line-height: 24px;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  anchor-name: --promo-image;
+  display: block;
+  inline-size: 350px;
+  min-block-size: 507px;
+  margin-inline: auto;
+  filter: blur(1px);
+
+  @media(min-width: 768px) {
+    position: static;
+    filter: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  position-anchor: --promo-image;
+  inline-size: 40px;
+  block-size: 40px;
+  padding: 11px;
+  pointer-events: auto;
+}
+
+.arrowPrev {
+  left: anchor(--promo-image left);
+}
+
+.arrowNext {
+  right: anchor(--promo-image right);
+}

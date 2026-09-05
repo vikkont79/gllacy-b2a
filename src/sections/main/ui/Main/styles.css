@@ -1060,8 +1060,8 @@ img {
 .delivery__wrapper {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 500px;
-  transform: scale(-1, 1);
+  grid-template-columns: 1fr min-content;
+  transform: scale(-1, 1);  
 }
 
 .delivery__intro {

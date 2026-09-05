@@ -1,0 +1,103 @@
+.tastes {
+  margin-block-end: 50px;
+
+  @media (min-width: 1024px) {
+    margin-block-end: 80px;
+  }
+}
+
+.title {
+  max-inline-size: 580px;
+}
+
+.list {
+  display: flex;
+  min-inline-size: 0;
+  justify-content: flex-start;
+  gap: 30px;
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--page-padding));
+  padding-inline: var(--page-padding);
+  padding-block-start: 52px;
+  list-style-type: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  scroll-padding-inline-start: var(--page-padding);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 280px);
+    justify-content: center;
+    gap: 92px 30px;
+    margin-inline: 0;
+    padding-inline: 0;;
+  }
+}
+
+.item {
+  flex: 0 0 240px;
+  padding-inline: 32px;
+  padding-block-end: 24px;
+  text-align: center;
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  scroll-snap-align: start;
+
+  @media (min-width: 1024px) {
+    padding-inline: 40px;
+  }
+}
+
+.taste {
+  margin-block-start: -52px;
+}
+
+.img {
+  display: block;
+  max-inline-size: 168px;
+  margin-inline: auto;
+  margin-block-end: 16px;
+}
+
+.cardTitle {
+  margin-block: 0 8px;
+  font-size: var(--title-sm);
+  line-height: 24px;
+}
+
+.description {
+  margin-block: 0 16px;
+  color: var(--color-text-medium);
+}
+
+.purchase {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  align-items: center;
+}
+
+.price {
+  margin: 0;
+  font-size: var(--title-sm);
+  line-height: 24px;
+  font-weight: 700;
+  word-spacing: 2px;
+}
+
+.button {
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 0;
+  outline: none;
+
+  &:active {
+    outline: 2px solid var(--color-primary-dark);
+    color: var(--color-text-dark);
+  }
+}

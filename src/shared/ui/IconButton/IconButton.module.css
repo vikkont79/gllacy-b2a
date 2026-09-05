@@ -1,0 +1,22 @@
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.iconButton[data-icon-position='right'] {
+  flex-direction: row-reverse;
+}
+
+.text {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}

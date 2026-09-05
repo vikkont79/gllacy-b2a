@@ -1,0 +1,47 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: var(--text-sm);
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.item:not(:last-child) {
+  position: relative;
+  padding-inline-end: 28px;
+
+  &::after {
+    position: absolute;
+    content: "";
+    right: 8px;
+    top: 4px;
+    inline-size: 12px;
+    block-size: 12px;
+    background-image: url('/icons/arrow-dub.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.link {
+  color: var(--color-text-dark);
+  text-decoration: none;
+}
+
+.current {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    inline-size: 100%;
+    block-size: 1px;
+    background-color: var(--color-text-dark);
+  }
+}

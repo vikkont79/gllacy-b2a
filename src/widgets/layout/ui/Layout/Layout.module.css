@@ -1,6 +1,7 @@
 .layout {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: min-content 1fr min-content;
-  min-block-size: 100vh;    
+  min-block-size: 100vh;
 }

@@ -3,9 +3,9 @@
 import Image, { type StaticImageData } from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { Button, IconButton } from '@/shared/ui'
-import icecreamStrawberryCurrent from '@/shared/assets/images/promo/icecream-strawberry-current.png'
-import icecreamBananaCurrent from '@/shared/assets/images/promo/icecream-banana-current.png'
-import icecreamCaramelCurrent from '@/shared/assets/images/promo/icecream-caramel-current.png'
+import icecreamStrawberryCurrent from '@/shared/assets/images/promo/icecream-strawberry.png'
+import icecreamBananaCurrent from '@/shared/assets/images/promo/icecream-banana.png'
+import icecreamCaramelCurrent from '@/shared/assets/images/promo/icecream-caramel.png'
 import styles from './Promo.module.css'
 
 interface PromoImage {
@@ -79,10 +79,26 @@ const Promo = () => {
     const track = trackRef.current
     if (!track) return
 
+    // Лента: [последний, ...все, первый]. Позиция = реальный индекс + 1 буфер слева.
+    // При выезде на буферную копию мгновенно перепрыгиваем на настоящий слайд,
+    // чтобы свайп не упирался в края ленты и всегда крутился по кругу.
     const index = Math.round(track.scrollLeft / track.clientWidth)
-    // Настоящий индекс = позиция в ленте минус один буфер слева.
     const real = index - 1
-    if (real < 0 || real >= slideCount) return
+
+    if (real === -1) {
+      // Буфер слева — дубль последнего слайда: прыгаем на настоящий последний.
+      track.scrollLeft = slideCount * track.clientWidth
+      setActiveIndex(slideCount - 1)
+      return
+    }
+
+    if (real === slideCount) {
+      // Буфер справа — дубль первого слайда: прыгаем на настоящий первый.
+      track.scrollLeft = 1 * track.clientWidth
+      setActiveIndex(0)
+      return
+    }
+
     setActiveIndex(real)
   }
 
@@ -105,31 +121,37 @@ const Promo = () => {
   }
 
   return (
-    <section className={styles.promo}>
+      <section className={styles.promo}>
       <h2 className="visually-hidden">Наши лучшие товары.</h2>
-      <div className={styles.slider}>
-        <ul className={styles.promoList} ref={trackRef} onScroll={handleScroll}>
-          {looped.map((slide, index) => (
+      <ul className={styles.promoList} ref={trackRef} onScroll={handleScroll}>
+        {looped.map((slide, index) => {
+          // Реальный индекс слайда с учётом буферных копий по краям ленты.
+          // Стрелки рендерим только у активного слайда, чтобы absolute-кнопки
+          // скрытых слайдов не проступали через соседние.
+          const real = (index - 1 + slideCount) % slideCount
+          const isActive = real === activeIndex
+
+          return (
             <li key={index} className={styles.promoItem}>
               <div className={styles.icecreamBlock}>
                 <div className={styles.description}>
                   <h3 className={`${styles.title} title`}>{slide.title}</h3>
                   <p className={styles.text}>{slide.text}</p>
-                  <Button type="button" className={styles.button}>
+                  <Button>
                     Заказать
                   </Button>
                 </div>
-                <div className={styles.imageWrapper}>
-                  <Image
+                <Image
                     className={styles.image}
-                    src={slide.image.src}
-                    width={350}
-                    height={507}
-                    alt={slide.image.alt}
-                  />
-                  <div className={styles.controls}>
+                  src={slide.image.src}
+                  width={350}
+                  height={507}
+                  alt={slide.image.alt}
+                />
+                {isActive && (
+                  <>
                     <IconButton
-                      className={styles.arrow}
+                      className={`${styles.arrow} ${styles.arrowPrev}`}
                       variant="outline"
                       icon="arrow-left"
                       iconSize={16}
@@ -137,20 +159,20 @@ const Promo = () => {
                       onClick={handlePrevious}
                     />
                     <IconButton
-                      className={styles.arrow}
+                      className={`${styles.arrow} ${styles.arrowNext}`}
                       variant="outline"
                       icon="arrow-right"
                       iconSize={16}
                       iconLabel="Следующий слайд."
                       onClick={handleNext}
                     />
-                  </div>
-                </div>
+                  </>
+                )}
               </div>
             </li>
-          ))}
+            )
+          })}
         </ul>
-      </div>
     </section>
   )
 }

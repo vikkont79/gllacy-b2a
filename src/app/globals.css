@@ -34,6 +34,7 @@
   --title-xl: clamp(1.75rem, 3.2vw, 2.25rem);   /* 28 → 36px */
 
   /* ===== ОТСТУПЫ ===== */
+  --page-padding: clamp(20px, 5vw, 60px);
   --base-indent: 0.25rem;
 
   --space-xs: var(--base-indent);
@@ -102,7 +103,7 @@ body {
 .wrapper {
   inline-size: min(1440px, 100%);
   margin-inline: auto;
-  padding-inline: clamp(20px, 5vw, 60px);
+  padding-inline: var(--page-padding);
 }
 
 .title {

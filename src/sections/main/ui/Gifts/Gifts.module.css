@@ -70,9 +70,5 @@
       inline-size: 219px;
       align-self: flex-end;
       filter: none;
-  }
-
-  @media (min-width: 1024px) {
-      align-self: flex-end;
-  }
+  }  
 }

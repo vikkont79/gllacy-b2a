@@ -9,7 +9,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <li className={styles.item}>
+    
       <article className={styles.card}>
         <Image
           className={styles.img}
@@ -20,7 +20,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         />
         <h3 className={styles.title}>{product.title}</h3>
         <p className={styles.description}>{product.description}</p>
-        <div className={styles.buyBlock}>
+        <div className={styles.purchase}>
           <p className={styles.price}>{product.price} ₽/кг</p>
           <IconButton
             className={styles.button}
@@ -31,7 +31,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
         </div>
       </article>
-    </li>
+    
   )
 }
 

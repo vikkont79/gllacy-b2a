@@ -1,9 +1,13 @@
 import { Link } from '@/shared/ui'
 import styles from './Breadcrumbs.module.css'
 
-const Breadcrumbs = () => {
+interface BreadcrumbsProps {
+  className?: string
+}
+
+const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
   return (
-    <ul className={styles.list}>
+    <ul className={`${styles.list} ${className || ''}`.trim()}>
       <li className={styles.item}>
         <Link href="/" className={styles.link}>Главная</Link>
       </li>

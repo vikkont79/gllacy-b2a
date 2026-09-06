@@ -1,12 +1,16 @@
 import styles from './CatalogFilter.module.css'
 
+interface CatalogFilterProps {
+  className?: string
+}
+
 const fatnessOptions = ['0%', 'до 10%', 'до 30%', 'выше 30%']
 
 const fillerOptions = ['шоколадные', 'сахарные посыпки', 'фрукты', 'сиропы', 'джемы']
 
-const CatalogFilter = () => {
+const CatalogFilter = ({ className = '' }: CatalogFilterProps) => {
   return (
-    <form className={styles.filter} action="#" method="post">
+    <form className={`${styles.filter} ${className || ''}`.trim()} action="#" method="post">
       <fieldset className={styles.group}>
         <legend className={styles.title}>Сортировка:</legend>
         <div className={styles.select}>

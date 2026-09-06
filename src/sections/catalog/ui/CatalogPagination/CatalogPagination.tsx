@@ -3,11 +3,15 @@ import { Button } from '@/shared/ui'
 import { Icon } from '@/shared/ui'
 import styles from './CatalogPagination.module.css'
 
+interface CatalogPaginationProps {
+  className?: string
+}
+
 const pages = [1, 2, 3, 4, 5]
 
-const CatalogPagination = () => {
+const CatalogPagination = ({ className = '' }: CatalogPaginationProps) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${className || ''}`.trim()}>
       <div className={styles.spacer}></div>
       <Button
         className={styles.showMore}

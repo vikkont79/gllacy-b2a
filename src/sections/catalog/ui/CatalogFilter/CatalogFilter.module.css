@@ -1,0 +1,294 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: var(--text-sm);
+  line-height: 20px;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 196px));
+    gap: 15px 24px;
+    align-items: end;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+
+.group {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.title {
+  margin-inline-start: 14px;
+  margin-block-end: 8px;
+  text-align: start;
+}
+
+.fatnessGroup {
+  @media (min-width: 1024px) {
+    grid-column: span 2;
+  }
+}
+
+.fillerGroup {
+  @media (min-width: 1024px) {
+    grid-column: span 3;
+  }
+}
+
+.select {
+  position: relative;
+  inline-size: 196px;
+}
+
+.selectControl {
+  inline-size: 100%;
+  padding: 8px 16px;
+  padding-inline-end: 63px;
+  border: none;
+  border-radius: 20px;
+  background-color: oklch(from var(--color-white) l c h / 0.3);
+  background-image: url('/icons/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  color: inherit;
+  font: inherit;
+  appearance: none;
+
+  &:hover {
+    background-color: oklch(from var(--color-white) l c h / 0.5);
+  }
+
+  &:focus {
+    outline: 2px var(--color-white) solid;
+    background-color: oklch(from var(--color-white) l c h / 0.4);
+  }
+}
+
+/* Цветовая схема фильтра на прозрачном фоне: элементы используют
+   белую подложку поверх розового фона страницы */
+
+.priceInputs {
+  inline-size: 135px;
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: 8px;
+}
+
+.priceLabel {
+  color: var(--color-text-dark);
+}
+
+.priceInput {
+  inline-size: 30px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  appearance: textfield;
+  letter-spacing: 1px;
+  color: inherit;
+  font: inherit;
+}
+
+.priceInput::-webkit-outer-spin-button,
+.priceInput::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.rangeBlock {
+  inline-size: 196px;
+  padding: 18px 16px;
+  border-radius: 20px;
+  background-color: oklch(from var(--color-white) l c h / 0.3);
+}
+
+.rangeScale {
+  position: relative;
+  block-size: 2px;
+  background-color: oklch(from var(--color-text-dark) l c h / 0.3);
+}
+
+.rangeBar {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 16px;
+  inline-size: 44px;
+  block-size: 2px;
+  background-color: var(--color-text-dark);
+}
+
+.rangeToggle {
+  position: absolute;
+  inset-block-start: -7px;
+  inline-size: 16px;
+  block-size: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-text-dark);
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-white);
+
+    &::after {
+      background-color: var(--color-text-dark);
+    }
+  }
+
+  &:focus {
+    outline: 2px var(--color-text-dark) solid;
+    outline-offset: -2px;
+  }
+
+  &:active {
+    background-color: var(--color-text-dark);
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    left: 6px;
+    top: 6px;
+    inline-size: 4px;
+    block-size: 4px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+  }
+}
+
+.rangeMin {
+  left: -8px;
+}
+
+.rangeMax {
+  right: -8px;
+}
+
+.controlsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 8px 24px;
+  list-style-type: none;
+  border-radius: 20px;
+  background-color: oklch(from var(--color-white) l c h / 0.3);
+}
+
+.control {
+  position: relative;
+  display: block;
+  padding-inline-start: 24px;
+}
+
+.controlMark {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.controlInput[type="radio"] + .controlMark {
+  border: 1px var(--color-text-dark) solid;
+  border-radius: 50%;
+
+  &:hover {
+    border-color: var(--color-white);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.controlInput[type="radio"]:checked + .controlMark::before {
+  position: absolute;
+  content: "";
+  left: 4px;
+  top: 4px;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background-color: var(--color-text-dark);
+}
+
+.controlInput[type="radio"]:checked + .controlMark:hover::before {
+  background-color: var(--color-white);
+}
+
+.controlInput[type="radio"]:checked + .controlMark:disabled::before {
+  opacity: 0.4;
+}
+
+.controlInput[type="checkbox"] + .controlMark {
+  background-image: url('/icons/checkbox-false.svg');
+
+  &:hover {
+    background-image: url('/icons/checkbox-false-hover.svg');
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.controlInput[type="checkbox"]:checked + .controlMark {
+  background-image: url('/icons/checkbox-true.svg');
+
+  &:hover {
+    background-image: url('/icons/checkbox-true-hover.svg');
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.submit {
+  inline-size: 182px;
+  margin-block-start: auto;
+  margin-inline: auto;
+  padding-block: 8px;
+  border: none;
+  border-radius: 26px;
+  outline: 2px var(--color-white) solid;
+  background-color: oklch(from var(--color-white) l c h / 0.3);
+  color: var(--color-text-dark);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease-out, outline-color var(--duration-fast) ease-out;
+
+  &:hover {
+    outline-color: oklch(from var(--color-white) l c h / 0.3);
+    background-color: var(--color-white);
+  }
+
+  &:focus {
+    background-color: oklch(from var(--color-white) l c h / 0.3);
+    outline-color: var(--color-text-dark);
+  }
+
+  &:active {
+    outline-color: transparent;
+    background-color: oklch(from var(--color-white) l c h / 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  @media (min-width: 768px) {
+    margin-inline: 0;
+  }
+}

@@ -1,0 +1,12 @@
+.products {
+  margin-block-end: 40px;
+}
+
+.filter {
+  max-inline-size: 823px;
+  margin-block-end: 40px;
+}
+
+.pagination {
+  margin-block-start: 16px;
+}

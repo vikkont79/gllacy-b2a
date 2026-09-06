@@ -1,0 +1,17 @@
+.header {
+  margin-block: 32px 40px;
+
+  @media (min-width: 768px) {
+    margin-block-end: 40px;
+  }
+}
+
+.breadcrumbs {
+  margin-block: 0 var(--space-md);
+}
+
+.title {
+  margin-block: 0;
+  font-size: var(--title-large);
+  text-align: start;
+}

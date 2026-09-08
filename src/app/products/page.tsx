@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Каталог | Gllacy Shop',
 }
 
-export default function Catalog() {
+export default function Products() {
   return (
     <CatalogPage />
   )

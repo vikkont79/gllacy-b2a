@@ -17,7 +17,7 @@ export const products = sqliteTable('products', {
   slug: text('slug').notNull().unique(),
   name: text('name').notNull(),
   base: text('base', { enum: ['plombir', 'slivochnoe', 'sorbet'] }).notNull(),
-  flavourId: integer('flavourId').references(() => flavours.id),
+  flavourId: integer('flavourId').notNull().references(() => flavours.id),
   price: integer('price').notNull(),
   calories: integer('calories').notNull(),
   shelfLife: integer('shelfLife').notNull(),
@@ -28,6 +28,8 @@ export const products = sqliteTable('products', {
   createdAt: integer('createdAt', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
   updatedAt: integer('updatedAt', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
 })
+
+export type ProductRow = typeof products.$inferSelect
 
 export const productToppings = sqliteTable(
   'product_toppings',

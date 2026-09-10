@@ -1,21 +1,22 @@
-import { products } from '../../lib/products'
-import { ProductCard } from '../ProductCard/ProductCard'
+import { ProductCard } from '@/entities/product'
+import type { Product } from '@/entities/product/types'
 import styles from './CatalogList.module.css'
 
 interface CatalogListProps {
   className?: string
+  products: Product[]
 }
 
-const CatalogList = ({ className }: CatalogListProps) => {
+const CatalogList = ({ className = '', products }: CatalogListProps) => {
   return (
-    <ul className={`${styles.catalog} ${className || ''}`.trim()}>
-      {products.map((product) => ( 
+    <ul className={`${styles.catalog} ${className}`.trim()}>
+      {products.map((product) => (
         <li key={product.id} className={styles.item}>
-          <ProductCard key={product.id} product={product} />
+          <ProductCard product={product} />
         </li>
       ))}
     </ul>
-    )
+  )
 }
 
 export { CatalogList }

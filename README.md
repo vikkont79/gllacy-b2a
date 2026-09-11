@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Глейси (gllacy-b2a)
 
-## Getting Started
+Магазин мороженого собственного производства под заказ.
+Учебно-боевой проект, который становится реальным инструментом продажи:
+витрина → корзина → заказ без регистрации → оплата → обработка в админке.
 
-First, run the development server:
+Производство под заказ — без остатков и резервов. Данные структурированы
+для поисковых агентов (b2a).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Стек
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js 16 (App Router, `src/`) · TypeScript (strict) · CSS-модули + токены в `:root`
+Turso (libSQL) + Drizzle ORM · zod · pnpm
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Быстрый старт
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. `pnpm install`
+2. Скопировать `.env.example` → `.env` и заполнить переменные (Turso)
+3. `pnpm db:migrate`
+4. `pnpm dev`
 
-## Learn More
+## Команды
 
-To learn more about Next.js, take a look at the following resources:
+| Команда | Действие |
+|---|---|
+| `pnpm dev` | dev-сервер |
+| `pnpm build` | прод-сборка |
+| `pnpm lint` | eslint |
+| `pnpm tsc --noEmit` | проверка типов |
+| `pnpm db:generate` | генерация миграции из схемы |
+| `pnpm db:migrate` | накатить миграции |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Документация
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `docs/roadmap.md` — цели, принципы, вертикали
+- `AGENTS.md` — правила разработки и структура проекта
 
-## Deploy on Vercel
+## Деплой
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel — preview-деплой на каждый пуш, прод — по мёрджу в основную ветку.

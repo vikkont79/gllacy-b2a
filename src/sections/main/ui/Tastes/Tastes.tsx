@@ -1,9 +1,20 @@
 import { getProducts } from '@/entities/product/api/getProducts'
 import { ProductCard } from '@/entities/product'
+import type { Product } from '@/entities/product/types'
 import styles from './Tastes.module.css'
 
 const Tastes = async () => {
-  const items = (await getProducts()).slice(0, 4)
+  let items: Product[] = []
+
+  try {
+    items = (await getProducts()).slice(0, 4)
+  } catch {
+    return null
+  }
+
+  if (items.length === 0) {
+    return null
+  }
 
   return (
     <section className={styles.tastes}>

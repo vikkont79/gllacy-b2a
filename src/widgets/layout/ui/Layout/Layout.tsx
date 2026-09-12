@@ -10,6 +10,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div className={styles.layout}>
+      <a href="#content" className={styles.skip}>
+        Перейти к содержимому
+      </a>
       <Header />
       {children}
       <Footer />

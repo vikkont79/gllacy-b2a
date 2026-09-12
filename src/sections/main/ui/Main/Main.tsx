@@ -7,7 +7,7 @@ import { Tastes } from '../Tastes/Tastes'
 
 const MainPage = () => {
   return (
-    <main className="wrapper">
+    <main id="content" tabIndex={-1} className="wrapper">
       <h1 className="visually-hidden">Магазин мороженого Глейси.</h1>
       <Promo />
       <Gifts />

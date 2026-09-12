@@ -19,7 +19,7 @@ const CatalogPage = async () => {
   }
 
   return (
-    <main className="wrapper">
+    <main id="content" tabIndex={-1} className="wrapper">
       <CatalogHeader />
       <section className={styles.products}>
         <h2 className="visually-hidden">Список товаров с фильтрами.</h2>

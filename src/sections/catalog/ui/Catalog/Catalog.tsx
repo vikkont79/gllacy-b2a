@@ -1,3 +1,4 @@
+import { parseCatalogParams } from '@/sections/catalog/lib'
 import { getProducts } from '@/entities/product/api/getProducts'
 import type { Product } from '@/entities/product/types'
 import { ErrorState } from '@/shared/ui'
@@ -7,12 +8,16 @@ import { CatalogPagination } from '../CatalogPagination/CatalogPagination'
 import { CatalogList } from '../CatalogList/CatalogList'
 import styles from './Catalog.module.css'
 
-const CatalogPage = async () => {
+interface CatalogPageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
   let products: Product[] = []
   let productsError = false
 
   try {
-    products = await getProducts()
+    products = (await getProducts(parseCatalogParams(await searchParams))).items
   } catch (error) {
     console.error('CatalogPage: не удалось загрузить каталог:', error)
     productsError = true

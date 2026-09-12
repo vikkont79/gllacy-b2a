@@ -7,7 +7,7 @@ const Tastes = async () => {
   let items: Product[] = []
 
   try {
-    items = (await getProducts()).slice(0, 4)
+    items = (await getProducts({ limit: 4 })).items
   } catch {
     return null
   }

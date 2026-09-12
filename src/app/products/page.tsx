@@ -8,8 +8,12 @@ export const metadata: Metadata = {
     'сортировка по популярности и стоимости.',
 }
 
-export default function Products() {
+export default function Products({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
   return (
-    <CatalogPage />
+    <CatalogPage searchParams={searchParams} />
   )
 }

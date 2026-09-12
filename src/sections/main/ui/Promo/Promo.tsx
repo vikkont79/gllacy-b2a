@@ -55,7 +55,7 @@ const slides: PromoSlide[] = [
       </>
     ),
     image: { src: icecreamCaramelCurrent, alt: 'Карамельный рожок.' },
-    },
+  },
 ]
 
 const slideCount = slides.length
@@ -121,18 +121,32 @@ const Promo = () => {
   }
 
   return (
-      <section className={styles.promo}>
+    <section className={styles.promo}>
       <h2 className="visually-hidden">Наши лучшие товары.</h2>
-      <ul className={styles.promoList} ref={trackRef} onScroll={handleScroll}>
+      <ul
+        className={styles.promoList}
+        ref={trackRef}
+        onScroll={handleScroll}
+        role="group"
+        aria-roledescription="Карусель"
+        aria-label="Промо-слайды"
+      >
         {looped.map((slide, index) => {
           // Реальный индекс слайда с учётом буферных копий по краям ленты.
           // Стрелки рендерим только у активного слайда, чтобы absolute-кнопки
           // скрытых слайдов не проступали через соседние.
+          const isBuffer = index === 0 || index === slideCount + 1
           const real = (index - 1 + slideCount) % slideCount
           const isActive = real === activeIndex
+          const isHidden = isBuffer || !isActive
 
           return (
-            <li key={index} className={styles.promoItem}>
+            <li
+              key={index}
+              className={styles.promoItem}
+              aria-hidden={isHidden}
+              inert={isHidden}
+            >
               <div className={styles.icecreamBlock}>
                 <div className={styles.description}>
                   <h3 className={`${styles.title} title`}>{slide.title}</h3>
@@ -142,7 +156,7 @@ const Promo = () => {
                   </Button>
                 </div>
                 <Image
-                    className={styles.image}
+                  className={styles.image}
                   src={slide.image.src}
                   width={350}
                   height={507}
@@ -170,9 +184,9 @@ const Promo = () => {
                 )}
               </div>
             </li>
-            )
-          })}
-        </ul>
+          )
+        })}
+      </ul>
     </section>
   )
 }

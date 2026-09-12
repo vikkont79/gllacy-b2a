@@ -1,0 +1,19 @@
+.error {
+  padding-block: 60px;
+  text-align: center;
+}
+
+.title {
+  margin-block: 0 8px;
+}
+
+.message {
+  margin-block: 0 8px;
+  color: var(--color-text-medium);
+}
+
+.digest {
+  margin-block: 0 16px;
+  font-size: 14px;
+  color: var(--color-text-medium);
+}

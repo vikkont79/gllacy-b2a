@@ -1,4 +1,5 @@
 export { Button } from './Button/Button'
+export { ErrorState } from './ErrorState/ErrorState'
 export { Link } from './Link/Link'
 export { Icon } from './Icon/Icon'
 export { IconButton } from './IconButton/IconButton'

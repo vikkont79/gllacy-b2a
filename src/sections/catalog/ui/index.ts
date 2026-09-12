@@ -1,1 +1,1 @@
-export { CatalogPage } from './Catalog/CatalogPage'
+export { CatalogPage } from './Catalog/Catalog'

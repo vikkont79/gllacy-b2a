@@ -4,11 +4,11 @@ import logo from '@/shared/assets/images/logo.svg'
 import styles from './Header.module.css'
 
 const catalogItems = [
-  { title: 'Новинки', href: '/catalog', isNew: true },
-  { title: 'Сливочное', href: '/catalog' },
-  { title: 'Щербеты', href: '/catalog' },
-  { title: 'Фруктовый лед', href: '/catalog' },
-  { title: 'Мелорин', href: '/catalog' },
+  { title: 'Новинки', href: '/products', isNew: true },
+  { title: 'Сливочное', href: '/products' },
+  { title: 'Щербеты', href: '/products' },
+  { title: 'Фруктовый лед', href: '/products' },
+  { title: 'Мелорин', href: '/products' },
 ]
 
 const Header = () => {

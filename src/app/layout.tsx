@@ -4,8 +4,8 @@ import { Layout } from '@/widgets/layout'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Gllacy Shop',
-  description: 'Магазин мороженого Глейси',
+  title: { default: 'Глейси', template: '%s | Глейси' },
+  description: 'Магазин мороженого собственного производства под заказ.',
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

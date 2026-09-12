@@ -45,7 +45,7 @@ const Footer = () => {
           </Link>
         </p>
       </div>
-      <p className={styles["copyright__text"]}>© ГлAIси, 2026</p>
+      <p className={styles["copyright__text"]}>© Глейси, 2026</p>
     </footer>
   )
 }

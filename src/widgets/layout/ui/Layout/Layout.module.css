@@ -5,3 +5,22 @@
   grid-template-rows: min-content 1fr min-content;
   min-block-size: 100vh;
 }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding-block: 10px;
+  padding-inline: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-text-dark);
+  font: inherit;
+}
+
+.skip:focus,
+.skip:focus-visible {
+  left: var(--page-padding);
+  outline-width: 3px;
+}

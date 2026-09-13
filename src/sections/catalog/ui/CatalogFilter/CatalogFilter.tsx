@@ -10,12 +10,12 @@ const fillerOptions = ['шоколадные', 'сахарные посыпки'
 
 const CatalogFilter = ({ className = '' }: CatalogFilterProps) => {
   return (
-    <form className={`${styles.filter} ${className || ''}`.trim()} action="#" method="post">
+    <form className={`${styles.filter} ${className || ''}`.trim()} action="/products" method="get">
       <fieldset className={styles.group}>
         <legend className={styles.title}>Сортировка:</legend>
         <div className={styles.select}>
           <label className="visually-hidden" htmlFor="taste-sorting">Сортировка товаров каталога.</label>
-          <select className={styles.selectControl} id="taste-sorting" name="taste-sorting" defaultValue="popular">
+          <select className={styles.selectControl} id="taste-sorting" name="sort" defaultValue="popular">
             <option value="popular">по популярности</option>
             <option value="cheap">сначала дешёвые</option>
             <option value="expensive">сначала дорогие</option>

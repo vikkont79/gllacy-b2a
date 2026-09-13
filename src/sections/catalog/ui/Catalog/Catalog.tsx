@@ -1,6 +1,6 @@
 import { parseCatalogParams } from '@/sections/catalog/lib'
 import { getProducts } from '@/entities/product/api/getProducts'
-import type { Product } from '@/entities/product/types'
+import type { GetProductsOptions, Product } from '@/entities/product/types'
 import { ErrorState } from '@/shared/ui'
 import { CatalogHeader } from '../CatalogHeader/CatalogHeader'
 import { CatalogFilter } from '../CatalogFilter/CatalogFilter'
@@ -13,11 +13,16 @@ interface CatalogPageProps {
 }
 
 const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
+  let options: GetProductsOptions = {}
   let products: Product[] = []
+  let total = 0
   let productsError = false
 
   try {
-    products = (await getProducts(parseCatalogParams(await searchParams))).items
+    options = parseCatalogParams(await searchParams)
+    const result = await getProducts(options)
+    products = result.items
+    total = result.total
   } catch (error) {
     console.error('CatalogPage: не удалось загрузить каталог:', error)
     productsError = true
@@ -36,7 +41,7 @@ const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
         ) : (
           <CatalogList products={products} />
         )}
-        <CatalogPagination className={styles.pagination} />
+        <CatalogPagination className={styles.pagination} options={options} total={total} />
       </section>
     </main>
   )

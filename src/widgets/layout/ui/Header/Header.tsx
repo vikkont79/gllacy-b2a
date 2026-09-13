@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import { Icon, IconButton, Link } from '@/shared/ui'
 import logo from '@/shared/assets/images/logo.svg'
+import { AutoCloseDetails } from './AutoCloseDetails'
 import styles from './Header.module.css'
 
 const catalogItems = [
-  { title: 'Новинки', href: '/products', isNew: true },
-  { title: 'Сливочное', href: '/products' },
-  { title: 'Щербеты', href: '/products' },
-  { title: 'Фруктовый лед', href: '/products' },
-  { title: 'Мелорин', href: '/products' },
+  { title: 'Новинки', href: '/products?isNew=1', isNew: true },
+  { title: 'Пломбир', href: '/products?base=plombir' },
+  { title: 'Сливочное', href: '/products?base=slivochnoe' },
+  { title: 'Сорбеты', href: '/products?base=sorbet' },
 ]
 
 const Header = () => {
@@ -26,7 +26,7 @@ const Header = () => {
       <nav className={styles.nav}>
         <ul className={styles.navList}>
           <li>
-            <details className={styles.catalog}>
+            <AutoCloseDetails className={styles.catalog}>
               <summary className={styles.navLink}>
                 Каталог
                 <Icon
@@ -49,7 +49,7 @@ const Header = () => {
                     </li>
                   ))}
                 </ul>
-              </details>
+              </AutoCloseDetails>
             </li>
             <li>
               <Link href='/#about' className={styles.navLink}>

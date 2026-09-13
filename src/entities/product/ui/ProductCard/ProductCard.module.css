@@ -4,9 +4,13 @@
 
 .img {
   display: block;
-  max-inline-size: 168px;
+  max-inline-size: 148px;
   margin-inline: auto;
   margin-block-end: 16px;
+
+  @media (min-width: 1024px) {
+    max-inline-size: 168px;
+  }
 }
 
 .title {

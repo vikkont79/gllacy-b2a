@@ -15,28 +15,28 @@ const CatalogPagination = ({
   options,
   total,
 }: CatalogPaginationProps) => {
-  const { sort, page = 1, limit = ITEMS_PER_PAGE } = options
+  const { page = 1, limit = ITEMS_PER_PAGE } = options
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE)
   const offset = (page - 1) * ITEMS_PER_PAGE
   const activeStart = page
   const activeEnd = Math.min(totalPages, Math.ceil((offset + limit) / ITEMS_PER_PAGE))
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
   const hasMore = total - offset > limit
-  const buildUrl = (params: GetProductsOptions) => createCatalogUrl({ sort, ...params })
+  const buildUrl = (params: GetProductsOptions) => createCatalogUrl({ ...options, ...params })
   const isActive = (pageNumber: number) => pageNumber >= activeStart && pageNumber <= activeEnd
 
   return (
     <div className={`${styles.wrapper} ${className || ''}`.trim()}>
       <div className={styles.spacer}></div>
       {hasMore && (
-        <Button href={buildUrl({ page, limit: limit + ITEMS_PER_PAGE })} className={styles.showMore}>
+        <Button href={buildUrl({ limit: limit + ITEMS_PER_PAGE })} className={styles.showMore}>
           Показать ещё
         </Button>
       )}
       <ul className={styles.pagination}>
         <li>
           {page > 1 ? (
-            <Link href={buildUrl({ page: page - 1, limit })} className={`${styles.link} ${styles.prev}`}>
+            <Link href={buildUrl({ page: page - 1 })} className={`${styles.link} ${styles.prev}`}>
               <Icon name="arrow-left" size={16} />
               <span className="visually-hidden">Предыдущая страница.</span>
             </Link>
@@ -50,7 +50,7 @@ const CatalogPagination = ({
         {pages.map((pageNumber) => (
           <li key={pageNumber}>
             <Link
-              href={buildUrl({ page: pageNumber, limit })}
+              href={buildUrl({ page: pageNumber })}
               className={`${styles.link}${isActive(pageNumber) ? ` ${styles.current}` : ''}`}
               aria-current={isActive(pageNumber) ? 'page' : undefined}
             >
@@ -60,7 +60,7 @@ const CatalogPagination = ({
         ))}
         <li>
           {page < totalPages ? (
-            <Link href={buildUrl({ page: page + 1, limit })} className={`${styles.link} ${styles.next}`}>
+            <Link href={buildUrl({ page: page + 1 })} className={`${styles.link} ${styles.next}`}>
               <Icon name="arrow-right" size={16} />
               <span className="visually-hidden">Следующая страница.</span>
             </Link>

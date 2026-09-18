@@ -7,10 +7,14 @@ export type Product = ProductRow & {
 
 export type Sort = 'cheap' | 'expensive'
 
+export type Base = ProductRow['base']
+
 export type GetProductsOptions = {
   sort?: Sort
   page?: number
   limit?: number
+  base?: Base
+  isNew?: boolean
 }
 
 export type ProductsResult = {

@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useRef, type ReactNode } from 'react'
-import { usePathname } from 'next/navigation'
+import { useRef, type MouseEvent, type ReactNode } from 'react'
 
 interface AutoCloseDetailsProps {
   className?: string
@@ -10,14 +9,15 @@ interface AutoCloseDetailsProps {
 
 const AutoCloseDetails = ({ className, children }: AutoCloseDetailsProps) => {
   const ref = useRef<HTMLDetailsElement>(null)
-  const pathname = usePathname()
 
-  useEffect(() => {
-    ref.current?.removeAttribute('open')
-  }, [pathname])
+  const handleClick = (event: MouseEvent<HTMLDetailsElement>) => {
+    if ((event.target as HTMLElement).closest('a')) {
+      ref.current?.removeAttribute('open')
+    }
+  }
 
   return (
-    <details ref={ref} className={className}>
+    <details ref={ref} className={className} onClickCapture={handleClick}>
       {children}
     </details>
   )

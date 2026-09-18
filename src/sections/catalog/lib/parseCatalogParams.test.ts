@@ -23,4 +23,21 @@ describe('parseCatalogParams', () => {
   it('игнорирует нецифровые page и limit', () => {
     expect(parseCatalogParams({ page: 'abc', limit: '-1' })).toEqual({})
   })
+
+  it('читает base категории', () => {
+    expect(parseCatalogParams({ base: 'sorbet' })).toEqual({ base: 'sorbet' })
+  })
+
+  it('игнорирует неизвестный base', () => {
+    expect(parseCatalogParams({ base: 'newbase' })).toEqual({})
+  })
+
+  it('читает isNew из "1"', () => {
+    expect(parseCatalogParams({ isNew: '1' })).toEqual({ isNew: true })
+  })
+
+  it('игнорирует неединичный isNew', () => {
+    expect(parseCatalogParams({ isNew: '0' })).toEqual({})
+    expect(parseCatalogParams({ isNew: 'abc' })).toEqual({})
+  })
 })

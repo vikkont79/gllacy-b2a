@@ -16,4 +16,10 @@ describe('createCatalogUrl', () => {
   it('пропускает незаданные параметры', () => {
     expect(createCatalogUrl({ page: 1 })).toBe('/products?page=1')
   })
+
+  it('эмитит base и isNew', () => {
+    expect(createCatalogUrl({ base: 'plombir', isNew: true })).toBe(
+      '/products?base=plombir&isNew=1',
+    )
+  })
 })

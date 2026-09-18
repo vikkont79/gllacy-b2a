@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { cache } from 'react'
-import { asc, desc, eq, getTableColumns, sql } from 'drizzle-orm'
+import { and, asc, desc, eq, getTableColumns, sql } from 'drizzle-orm'
 
 import { db } from '@db/client'
 import { flavours, productToppings, products, toppings } from '@db/schema'
@@ -15,9 +15,15 @@ const ORDER_BY: Record<Sort, ReturnType<typeof asc>[]> = {
 
 export const getProducts = cache(
   async (options: GetProductsOptions = {}): Promise<ProductsResult> => {
-    const { sort, page = 1, limit = ITEMS_PER_PAGE } = options
+    const { sort, base, isNew, page = 1, limit = ITEMS_PER_PAGE } = options
     const offset = (page - 1) * ITEMS_PER_PAGE
     const orderBy = sort ? ORDER_BY[sort] : [asc(products.id)]
+
+    const filters = [
+      eq(products.isAvailable, true),
+      ...(base ? [eq(products.base, base)] : []),
+      ...(isNew ? [eq(products.isNew, true)] : []),
+    ]
 
     try {
       const [rows, total] = await Promise.all([
@@ -31,12 +37,12 @@ export const getProducts = cache(
           .innerJoin(flavours, eq(products.flavourId, flavours.id))
           .leftJoin(productToppings, eq(productToppings.productId, products.id))
           .leftJoin(toppings, eq(productToppings.toppingId, toppings.id))
-          .where(eq(products.isAvailable, true))
+          .where(and(...filters))
           .groupBy(products.id)
           .orderBy(...orderBy)
           .limit(limit)
           .offset(offset),
-        db.$count(products, eq(products.isAvailable, true)),
+        db.$count(products, and(...filters)),
       ])
 
       const items = rows.map((row) => ({

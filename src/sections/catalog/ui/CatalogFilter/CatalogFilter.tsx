@@ -1,21 +1,82 @@
+'use client'
+
+import { useState, type FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
+
+import { createCatalogUrl, FATNESS_OPTIONS, TOPPING_KIND_OPTIONS } from '@/sections/catalog/lib'
+import type { Base, GetProductsOptions, Sort, ToppingKind } from '@/entities/product/types'
+import { Toggle } from '@/shared/ui'
+
 import styles from './CatalogFilter.module.css'
+
+const SORTS: readonly Sort[] = ['cheap', 'expensive']
 
 interface CatalogFilterProps {
   className?: string
+  initialOptions: GetProductsOptions
 }
 
-const fatnessOptions = ['0%', 'до 10%', 'до 30%', 'выше 30%']
+const CatalogFilter = ({ className = '', initialOptions }: CatalogFilterProps) => {
+  const router = useRouter()
 
-const fillerOptions = ['шоколадные', 'сахарные посыпки', 'фрукты', 'сиропы', 'джемы']
+  const [sort, setSort] = useState<Sort | undefined>(initialOptions.sort)
+  const [fatness, setFatness] = useState<Base | undefined>(initialOptions.base)
+  const [selectedToppings, setSelectedToppings] = useState<ToppingKind[]>(
+    initialOptions.toppings ?? [],
+  )
 
-const CatalogFilter = ({ className = '' }: CatalogFilterProps) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const nextOptions: GetProductsOptions = {
+      base: fatness,
+      isNew: initialOptions.isNew,
+      sort,
+      toppings: selectedToppings.length > 0 ? selectedToppings : undefined,
+    }
+
+    router.push(createCatalogUrl(nextOptions))
+  }
+
+  const handleFatnessChange = (value: boolean | string) => {
+    if (typeof value === 'string') {
+      setFatness(value as Base)
+    }
+  }
+
+  const handleToppingChange =
+    (kind: ToppingKind) => (value: boolean | string) => {
+      if (typeof value !== 'boolean') return
+
+      setSelectedToppings((current) =>
+        value
+          ? current.includes(kind)
+            ? current
+            : [...current, kind]
+          : current.filter((currentKind) => currentKind !== kind),
+      )
+    }
+
+  const handleReset = () => {
+    router.push('/products')
+  }
+
   return (
-    <form className={`${styles.filter} ${className || ''}`.trim()} action="/products" method="get">
+    <form className={`${styles.filter} ${className || ''}`.trim()} onSubmit={handleSubmit}>
       <fieldset className={styles.group}>
         <legend className={styles.title}>Сортировка:</legend>
         <div className={styles.select}>
           <label className="visually-hidden" htmlFor="taste-sorting">Сортировка товаров каталога.</label>
-          <select className={styles.selectControl} id="taste-sorting" name="sort" defaultValue="popular">
+          <select
+            className={styles.selectControl}
+            id="taste-sorting"
+            name="sort"
+            value={sort ?? 'popular'}
+            onChange={(event) => {
+              const value = event.target.value
+              setSort((SORTS as readonly string[]).includes(value) ? (value as Sort) : undefined)
+            }}
+          >
             <option value="popular">по популярности</option>
             <option value="cheap">сначала дешёвые</option>
             <option value="expensive">сначала дорогие</option>
@@ -46,19 +107,19 @@ const CatalogFilter = ({ className = '' }: CatalogFilterProps) => {
       <fieldset className={`${styles.group} ${styles.fatnessGroup}`}>
         <legend className={styles.title}>Жирность:</legend>
         <ul className={styles.controlsList}>
-          {fatnessOptions.map((option, index) => (
-            <li className={styles.controlItem} key={option}>
-              <label className={styles.control}>
-                <input
-                  className={`${styles.controlInput} visually-hidden`}
-                  type="radio"
-                  name="fatness"
-                  value={option}
-                  defaultChecked={index === 1}
-                />
-                <span className={styles.controlMark}></span>
-                <span className={styles.controlLabel}>{option}</span>
-              </label>
+          {FATNESS_OPTIONS.map((option) => (
+            <li key={option.base}>
+              <Toggle
+                label={option.label}
+                name="fatness"
+                value={option.base}
+                type="radio"
+                checked={fatness === option.base}
+                onChange={handleFatnessChange}
+                variant="transparent"
+                size="small"
+                iconSize={16}
+              />
             </li>
           ))}
         </ul>
@@ -67,24 +128,26 @@ const CatalogFilter = ({ className = '' }: CatalogFilterProps) => {
       <fieldset className={`${styles.group} ${styles.fillerGroup}`}>
         <legend className={styles.title}>Наполнители:</legend>
         <ul className={styles.controlsList}>
-          {fillerOptions.map((option, index) => (
-            <li className={styles.controlItem} key={option}>
-              <label className={styles.control}>
-                <input
-                  className={`${styles.controlInput} visually-hidden`}
-                  type="checkbox"
-                  name={option}
-                  defaultChecked={index < 2}
-                />
-                <span className={styles.controlMark}></span>
-                <span className={styles.controlLabel}>{option}</span>
-              </label>
+          {TOPPING_KIND_OPTIONS.map((option) => (
+            <li key={option.kind}>
+              <Toggle
+                label={option.label}
+                name="toppings"
+                value={option.kind}
+                type="checkbox"
+                checked={selectedToppings.includes(option.kind)}
+                onChange={handleToppingChange(option.kind)}
+                variant="transparent"
+                size="small"
+                iconSize={16}
+              />
             </li>
           ))}
         </ul>
       </fieldset>
 
       <button className={styles.submit} type="submit">Применить</button>
+      <button className={styles.submit} type="button" onClick={handleReset}>Сбросить</button>
     </form>
   )
 }

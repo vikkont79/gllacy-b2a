@@ -1,6 +1,6 @@
-import { parseCatalogParams } from '@/sections/catalog/lib'
+import { createCatalogUrl, parseCatalogParams } from '@/sections/catalog/lib'
 import { getProducts } from '@/entities/product/api/getProducts'
-import type { GetProductsOptions, Product } from '@/entities/product/types'
+import type { Product } from '@/entities/product/types'
 import { ErrorState } from '@/shared/ui'
 import { CatalogHeader } from '../CatalogHeader/CatalogHeader'
 import { CatalogFilter } from '../CatalogFilter/CatalogFilter'
@@ -13,13 +13,13 @@ interface CatalogPageProps {
 }
 
 const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
-  let options: GetProductsOptions = {}
+  const options = parseCatalogParams(await searchParams)    
+  
   let products: Product[] = []
   let total = 0
   let productsError = false
 
-  try {
-    options = parseCatalogParams(await searchParams)
+  try {    
     const result = await getProducts(options)
     products = result.items
     total = result.total
@@ -33,7 +33,11 @@ const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
       <CatalogHeader />
       <section className={styles.products}>
         <h2 className="visually-hidden">Список товаров с фильтрами.</h2>
-        <CatalogFilter className={styles.filter} />
+        <CatalogFilter
+          key={createCatalogUrl(options)}
+          className={styles.filter}
+          initialOptions={options}
+        />
         {productsError ? (
           <ErrorState message="Не удалось загрузить каталог. Попробуйте позже" />
         ) : products.length === 0 ? (

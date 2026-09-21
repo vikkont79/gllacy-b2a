@@ -9,12 +9,15 @@ export type Sort = 'cheap' | 'expensive'
 
 export type Base = ProductRow['base']
 
+export type ToppingKind = 'chunk' | 'topping' | 'syrup' | 'sprinkle'
+
 export type GetProductsOptions = {
   sort?: Sort
   page?: number
   limit?: number
   base?: Base
   isNew?: boolean
+  toppings?: ToppingKind[]
 }
 
 export type ProductsResult = {

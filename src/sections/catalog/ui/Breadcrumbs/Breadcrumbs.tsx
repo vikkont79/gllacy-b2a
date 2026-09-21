@@ -12,7 +12,7 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
         <Link href="/" className={styles.link}>Главная</Link>
       </li>
       <li className={styles.item}>
-        <Link href="/catalog" className={styles.link}>Каталог</Link>
+        <Link href="/products" className={styles.link}>Каталог</Link>
       </li>
       <li className={`${styles.item} ${styles.current}`}>
         <span className={styles.link}>Сливочное мороженое</span>

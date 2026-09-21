@@ -8,6 +8,7 @@ export const createCatalogUrl = (params: GetProductsOptions): string => {
   if (params.limit) search.set('limit', String(params.limit))
   if (params.base) search.set('base', params.base)
   if (params.isNew) search.set('isNew', '1')
+  for (const kind of params.toppings ?? []) search.append('toppings', kind)
 
   const query = search.toString()
   return query ? `/products?${query}` : '/products'

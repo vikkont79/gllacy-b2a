@@ -40,4 +40,30 @@ describe('parseCatalogParams', () => {
     expect(parseCatalogParams({ isNew: '0' })).toEqual({})
     expect(parseCatalogParams({ isNew: 'abc' })).toEqual({})
   })
+
+  it('читает выбранные kinds из массива', () => {
+    expect(parseCatalogParams({ toppings: ['chunk', 'syrup'] })).toEqual({
+      toppings: ['chunk', 'syrup'],
+    })
+  })
+
+  it('читает одиночный kind из строки', () => {
+    expect(parseCatalogParams({ toppings: 'syrup' })).toEqual({
+      toppings: ['syrup'],
+    })
+  })
+
+  it('игнорирует невалидный одиночный kind', () => {
+    expect(parseCatalogParams({ toppings: 'newkind' })).toEqual({})
+  })
+
+  it('отбрасывает неизвестные kinds, оставляя валидные', () => {
+    expect(parseCatalogParams({ toppings: ['chunk', 'newkind'] })).toEqual({
+      toppings: ['chunk'],
+    })
+  })
+
+  it('игнорирует toppings, пустой после фильтрации', () => {
+    expect(parseCatalogParams({ toppings: ['nope'] })).toEqual({})
+  })
 })

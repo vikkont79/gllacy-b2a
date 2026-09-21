@@ -22,4 +22,10 @@ describe('createCatalogUrl', () => {
       '/products?base=plombir&isNew=1',
     )
   })
+
+  it('сериализует kinds повторяющимся параметром', () => {
+    expect(createCatalogUrl({ toppings: ['chunk', 'syrup'] })).toBe(
+      '/products?toppings=chunk&toppings=syrup',
+    )
+  })
 })

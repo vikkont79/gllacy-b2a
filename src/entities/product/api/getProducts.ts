@@ -15,7 +15,14 @@ const ORDER_BY: Record<Sort, ReturnType<typeof asc>[]> = {
 
 export const getProducts = cache(
   async (options: GetProductsOptions = {}): Promise<ProductsResult> => {
-    const { sort, base, isNew, page = 1, limit = ITEMS_PER_PAGE } = options
+    const {
+      sort,
+      base,
+      isNew,
+      toppings: selectedKinds = [],
+      page = 1,
+      limit = ITEMS_PER_PAGE,
+    } = options
     const offset = (page - 1) * ITEMS_PER_PAGE
     const orderBy = sort ? ORDER_BY[sort] : [asc(products.id)]
 
@@ -23,6 +30,16 @@ export const getProducts = cache(
       eq(products.isAvailable, true),
       ...(base ? [eq(products.base, base)] : []),
       ...(isNew ? [eq(products.isNew, true)] : []),
+      ...(selectedKinds.length > 0
+        ? [
+            sql`EXISTS (
+              SELECT 1 FROM ${productToppings} pt
+              JOIN ${toppings} t2 ON t2.id = pt.toppingId
+              WHERE pt.productId = ${products.id}
+                AND t2.kind IN (${sql.join(selectedKinds.map((kind) => sql`${kind}`), sql`, `)})
+            )`,
+          ]
+        : []),
     ]
 
     try {

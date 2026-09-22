@@ -185,35 +185,7 @@
   inline-size: 182px;
   margin-block-start: auto;
   margin-inline: auto;
-  padding-block: 8px;
-  border: none;
-  border-radius: 26px;
-  outline: 2px var(--color-white) solid;
-  background-color: oklch(from var(--color-white) l c h / 0.3);
   color: var(--color-text-dark);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color var(--duration-fast) ease-out, outline-color var(--duration-fast) ease-out;
-
-  &:hover {
-    outline-color: oklch(from var(--color-white) l c h / 0.3);
-    background-color: var(--color-white);
-  }
-
-  &:focus {
-    background-color: oklch(from var(--color-white) l c h / 0.3);
-    outline-color: var(--color-text-dark);
-  }
-
-  &:active {
-    outline-color: transparent;
-    background-color: oklch(from var(--color-white) l c h / 0.5);
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
 
   @media (min-width: 768px) {
     margin-inline: 0;

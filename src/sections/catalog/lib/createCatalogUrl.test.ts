@@ -13,6 +13,10 @@ describe('createCatalogUrl', () => {
     )
   })
 
+  it('сериализует «популярный» сорт в URL', () => {
+    expect(createCatalogUrl({ sort: 'popular' })).toBe('/products?sort=popular')
+  })
+
   it('пропускает незаданные параметры', () => {
     expect(createCatalogUrl({ page: 1 })).toBe('/products?page=1')
   })

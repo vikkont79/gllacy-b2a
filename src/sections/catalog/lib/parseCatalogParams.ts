@@ -1,8 +1,8 @@
- import type { Base, GetProductsOptions, Sort, ToppingKind } from '@/entities/product/types'
+import type { Base, GetProductsOptions, Sort, ToppingKind } from '@/entities/product/types'
 
 type RawSearchParams = Record<string, string | string[] | undefined>
 
-const SORTS: readonly Sort[] = ['cheap', 'expensive']
+const SORTS: readonly Sort[] = ['popular', 'cheap', 'expensive']
 const BASES: readonly Base[] = ['plombir', 'slivochnoe', 'sorbet']
 const TOPPING_KINDS: readonly ToppingKind[] = ['chunk', 'topping', 'syrup', 'sprinkle']
 

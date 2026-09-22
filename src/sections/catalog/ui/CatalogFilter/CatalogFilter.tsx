@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useTransition, type SubmitEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { createCatalogUrl, FATNESS_OPTIONS, TOPPING_KIND_OPTIONS } from '@/sections/catalog/lib'
 import type { Base, GetProductsOptions, Sort, ToppingKind } from '@/entities/product/types'
-import { Toggle } from '@/shared/ui'
+import { Button, Toggle } from '@/shared/ui'
 
 import styles from './CatalogFilter.module.css'
 
-const SORTS: readonly Sort[] = ['cheap', 'expensive']
+const SORTS: readonly Sort[] = ['popular', 'cheap', 'expensive']
 
 interface CatalogFilterProps {
   className?: string
@@ -18,6 +18,7 @@ interface CatalogFilterProps {
 
 const CatalogFilter = ({ className = '', initialOptions }: CatalogFilterProps) => {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
   const [sort, setSort] = useState<Sort | undefined>(initialOptions.sort)
   const [fatness, setFatness] = useState<Base | undefined>(initialOptions.base)
@@ -25,7 +26,7 @@ const CatalogFilter = ({ className = '', initialOptions }: CatalogFilterProps) =
     initialOptions.toppings ?? [],
   )
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const nextOptions: GetProductsOptions = {
@@ -35,7 +36,9 @@ const CatalogFilter = ({ className = '', initialOptions }: CatalogFilterProps) =
       toppings: selectedToppings.length > 0 ? selectedToppings : undefined,
     }
 
-    router.push(createCatalogUrl(nextOptions))
+    startTransition(() => {
+      router.push(createCatalogUrl(nextOptions))
+    })
   }
 
   const handleFatnessChange = (value: boolean | string) => {
@@ -58,11 +61,18 @@ const CatalogFilter = ({ className = '', initialOptions }: CatalogFilterProps) =
     }
 
   const handleReset = () => {
-    router.push('/products')
+    startTransition(() => {
+      router.push('/products')
+    })
   }
 
   return (
-    <form className={`${styles.filter} ${className || ''}`.trim()} onSubmit={handleSubmit}>
+    <form
+      className={`${styles.filter} ${className || ''}`.trim()}
+      onSubmit={handleSubmit}
+      inert={isPending}
+      aria-busy={isPending}
+    >
       <fieldset className={styles.group}>
         <legend className={styles.title}>Сортировка:</legend>
         <div className={styles.select}>
@@ -146,8 +156,25 @@ const CatalogFilter = ({ className = '', initialOptions }: CatalogFilterProps) =
         </ul>
       </fieldset>
 
-      <button className={styles.submit} type="submit">Применить</button>
-      <button className={styles.submit} type="button" onClick={handleReset}>Сбросить</button>
+      <Button
+        className={styles.submit}
+        type="submit"
+        variant="outline"
+        size="small"
+        disabled={isPending}
+      >
+        Применить
+      </Button>
+      <Button
+        className={styles.submit}
+        type="button"
+        variant="outline"
+        size="small"
+        disabled={isPending}
+        onClick={handleReset}
+      >
+        Сбросить
+      </Button>
     </form>
   )
 }

@@ -11,8 +11,11 @@ describe('parseCatalogParams', () => {
     expect(parseCatalogParams({ sort: 'cheap' })).toEqual({ sort: 'cheap' })
   })
 
-  it('игнорирует «популярный» и неизвестный сорт', () => {
-    expect(parseCatalogParams({ sort: 'popular' })).toEqual({})
+  it('читает «популярный» сорт', () => {
+    expect(parseCatalogParams({ sort: 'popular' })).toEqual({ sort: 'popular' })
+  })
+
+  it('игнорирует неизвестный сорт', () => {
     expect(parseCatalogParams({ sort: 'abc' })).toEqual({})
   })
 

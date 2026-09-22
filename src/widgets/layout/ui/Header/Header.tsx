@@ -1,15 +1,9 @@
 import Image from 'next/image'
 import { Icon, IconButton, Link } from '@/shared/ui'
 import logo from '@/shared/assets/images/logo.svg'
+import { CATALOG_CATEGORIES } from '@/shared/config'
 import { AutoCloseDetails } from './AutoCloseDetails'
 import styles from './Header.module.css'
-
-const catalogItems = [
-  { title: 'Новинки', href: '/products?isNew=1', isNew: true },
-  { title: 'Пломбир', href: '/products?base=plombir' },
-  { title: 'Сливочное', href: '/products?base=slivochnoe' },
-  { title: 'Сорбеты', href: '/products?base=sorbet' },
-]
 
 const Header = () => {
   return (
@@ -36,7 +30,7 @@ const Header = () => {
                   />
                 </summary>
                 <ul className={styles.catalogList}>
-                  {catalogItems.map((item) => (
+                  {CATALOG_CATEGORIES.map((item) => (
                     <li
                       key={item.title}
                       className={`${styles.catalogItem}${

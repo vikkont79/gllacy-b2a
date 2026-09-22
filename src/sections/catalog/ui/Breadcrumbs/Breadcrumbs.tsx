@@ -3,9 +3,10 @@ import styles from './Breadcrumbs.module.css'
 
 interface BreadcrumbsProps {
   className?: string
+  crumb: string
 }
 
-const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ className = '', crumb }: BreadcrumbsProps) => {
   return (
     <ul className={`${styles.list} ${className || ''}`.trim()}>
       <li className={styles.item}>
@@ -15,7 +16,7 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
         <Link href="/products" className={styles.link}>Каталог</Link>
       </li>
       <li className={`${styles.item} ${styles.current}`}>
-        <span className={styles.link}>Сливочное мороженое</span>
+        <span className={styles.link}>{crumb}</span>
       </li>
     </ul>
   )

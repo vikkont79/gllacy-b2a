@@ -91,7 +91,7 @@ input[type='radio']+.toggleControl {
   left: var(--indent-3);
   top: 100%;
   color: var(--color-error);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 2;
 }
 

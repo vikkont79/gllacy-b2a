@@ -2,6 +2,7 @@ import { createCatalogUrl, parseCatalogParams } from '@/sections/catalog/lib'
 import { getProducts } from '@/entities/product/api/getProducts'
 import type { ProductRow } from '@db/schema'
 import { ErrorState } from '@/shared/ui'
+import { getCatalogTitle } from '@/shared/config'
 import { CatalogHeader } from '../CatalogHeader/CatalogHeader'
 import { CatalogFilter } from '../CatalogFilter/CatalogFilter'
 import { CatalogPagination } from '../CatalogPagination/CatalogPagination'
@@ -13,7 +14,8 @@ interface CatalogPageProps {
 }
 
 const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
-  const options = parseCatalogParams(await searchParams)    
+  const options = parseCatalogParams(await searchParams)
+  const title = getCatalogTitle(options.base)    
   
   let products: ProductRow[] = []
   let total = 0
@@ -30,7 +32,7 @@ const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
 
   return (
     <main id="content" tabIndex={-1} className="wrapper">
-      <CatalogHeader />
+      <CatalogHeader title={title} />
       <section className={styles.products}>
         <h2 className="visually-hidden">Список товаров с фильтрами.</h2>
         <CatalogFilter

@@ -1,10 +1,10 @@
 import { getProducts } from '@/entities/product/api/getProducts'
 import { ProductCard } from '@/entities/product'
-import type { Product } from '@/entities/product/types'
+import type { ProductRow } from '@db/schema'
 import styles from './Tastes.module.css'
 
 const Tastes = async () => {
-  let items: Product[] = []
+  let items: ProductRow[] = []
 
   try {
     items = (await getProducts({ limit: 4 })).items

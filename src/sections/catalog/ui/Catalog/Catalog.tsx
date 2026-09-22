@@ -1,6 +1,6 @@
 import { createCatalogUrl, parseCatalogParams } from '@/sections/catalog/lib'
 import { getProducts } from '@/entities/product/api/getProducts'
-import type { Product } from '@/entities/product/types'
+import type { ProductRow } from '@db/schema'
 import { ErrorState } from '@/shared/ui'
 import { CatalogHeader } from '../CatalogHeader/CatalogHeader'
 import { CatalogFilter } from '../CatalogFilter/CatalogFilter'
@@ -15,7 +15,7 @@ interface CatalogPageProps {
 const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
   const options = parseCatalogParams(await searchParams)    
   
-  let products: Product[] = []
+  let products: ProductRow[] = []
   let total = 0
   let productsError = false
 

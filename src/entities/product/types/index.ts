@@ -5,7 +5,7 @@ export type Product = ProductRow & {
   toppings: string[]
 }
 
-export type Sort = 'cheap' | 'expensive'
+export type Sort = 'popular' | 'cheap' | 'expensive'
 
 export type Base = ProductRow['base']
 
@@ -21,6 +21,6 @@ export type GetProductsOptions = {
 }
 
 export type ProductsResult = {
-  items: Product[]
+  items: ProductRow[]
   total: number
 }

@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { IconButton } from '@/shared/ui'
-import type { Product } from '@/entities/product/types'
+import type { ProductRow } from '@db/schema'
 import styles from './ProductCard.module.css'
 
 interface ProductCardProps {
-  product: Product
+  product: ProductRow
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {

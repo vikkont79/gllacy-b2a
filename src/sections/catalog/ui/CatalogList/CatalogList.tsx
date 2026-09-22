@@ -1,10 +1,10 @@
 import { ProductCard } from '@/entities/product'
-import type { Product } from '@/entities/product/types'
+import type { ProductRow } from '@db/schema'
 import styles from './CatalogList.module.css'
 
 interface CatalogListProps {
   className?: string
-  products: Product[]
+  products: ProductRow[]
 }
 
 const CatalogList = ({ className = '', products }: CatalogListProps) => {

@@ -4,11 +4,12 @@ import { cache } from 'react'
 import { and, asc, desc, eq, getTableColumns, sql } from 'drizzle-orm'
 
 import { db } from '@db/client'
-import { flavours, productToppings, products, toppings } from '@db/schema'
+import { productToppings, products, toppings } from '@db/schema'
 import { ITEMS_PER_PAGE } from '@/shared/config'
 import type { GetProductsOptions, ProductsResult, Sort } from '../types'
 
 const ORDER_BY: Record<Sort, ReturnType<typeof asc>[]> = {
+  popular: [asc(products.id)],
   cheap: [asc(products.price), asc(products.id)],
   expensive: [desc(products.price), asc(products.id)],
 }
@@ -24,7 +25,7 @@ export const getProducts = cache(
       limit = ITEMS_PER_PAGE,
     } = options
     const offset = (page - 1) * ITEMS_PER_PAGE
-    const orderBy = sort ? ORDER_BY[sort] : [asc(products.id)]
+    const orderBy = ORDER_BY[sort ?? 'popular']
 
     const filters = [
       eq(products.isAvailable, true),
@@ -45,29 +46,16 @@ export const getProducts = cache(
     try {
       const [rows, total] = await Promise.all([
         db
-          .select({
-            ...getTableColumns(products),
-            flavour: flavours.name,
-            toppings: sql<string | null>`group_concat(${toppings.name}, ', ')`,
-          })
+          .select({ ...getTableColumns(products) })
           .from(products)
-          .innerJoin(flavours, eq(products.flavourId, flavours.id))
-          .leftJoin(productToppings, eq(productToppings.productId, products.id))
-          .leftJoin(toppings, eq(productToppings.toppingId, toppings.id))
           .where(and(...filters))
-          .groupBy(products.id)
           .orderBy(...orderBy)
           .limit(limit)
           .offset(offset),
         db.$count(products, and(...filters)),
       ])
 
-      const items = rows.map((row) => ({
-        ...row,
-        toppings: (row.toppings ?? '').split(', ').filter((item) => item.length > 0),
-      }))
-
-      return { items, total }
+      return { items: rows, total }
     } catch (error) {
       console.error('Ошибка загрузки каталога', error)
       throw new Error('Ошибка загрузки каталога')

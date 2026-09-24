@@ -71,102 +71,24 @@
 }
 
 .priceInputs {
-  inline-size: 135px;
+  inline-size: 286px;
   display: flex;
-  justify-content: space-between;
-  margin-block-end: 8px;
-}
-
-.priceLabel {
-  color: var(--color-text-dark);
-}
-
-.priceInput {
-  inline-size: 30px;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  appearance: textfield;
-  letter-spacing: 1px;
-  color: inherit;
-  font: inherit;
-}
-
-.priceInput::-webkit-outer-spin-button,
-.priceInput::-webkit-inner-spin-button {
-  appearance: none;
-  margin: 0;
-}
-
-.rangeBlock {
-  inline-size: 196px;
-  padding: 18px 16px;
+  align-items: center;
+  gap: 24px;
+  padding-inline: 24px;
+  padding-block: 2px;
   border-radius: 20px;
   background-color: oklch(from var(--color-white) l c h / 0.3);
 }
 
-.rangeScale {
-  position: relative;
-  block-size: 2px;
-  background-color: oklch(from var(--color-text-dark) l c h / 0.3);
+.priceInput {
+  flex: 1 1 0;
+  min-inline-size: 40px;
+
 }
 
-.rangeBar {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-start: 16px;
-  inline-size: 44px;
-  block-size: 2px;
-  background-color: var(--color-text-dark);
-}
-
-.rangeToggle {
-  position: absolute;
-  inset-block-start: -7px;
-  inline-size: 16px;
-  block-size: 16px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background-color: var(--color-text-dark);
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    background-color: var(--color-white);
-
-    &::after {
-      background-color: var(--color-text-dark);
-    }
-  }
-
-  &:focus {
-    outline: 2px var(--color-text-dark) solid;
-    outline-offset: -2px;
-  }
-
-  &:active {
-    background-color: var(--color-text-dark);
-  }
-
-  &::after {
-    position: absolute;
-    content: "";
-    left: 6px;
-    top: 6px;
-    inline-size: 4px;
-    block-size: 4px;
-    border-radius: 50%;
-    background-color: var(--color-white);
-  }
-}
-
-.rangeMin {
-  left: -8px;
-}
-
-.rangeMax {
-  right: -8px;
+.priceInput input {
+  border-color: transparent;
 }
 
 .controlsList {

@@ -9,7 +9,7 @@ const TOPPING_KINDS: readonly ToppingKind[] = ['chunk', 'topping', 'syrup', 'spr
 export const parseCatalogParams = (params: RawSearchParams): GetProductsOptions => {
   const options: GetProductsOptions = {}
 
-  const { sort, page, limit, base, isNew, toppings } = params
+  const { sort, page, limit, base, isNew, toppings, minPrice, maxPrice } = params
 
   if (typeof sort === 'string' && (SORTS as readonly string[]).includes(sort)) {
     options.sort = sort as Sort
@@ -29,6 +29,14 @@ export const parseCatalogParams = (params: RawSearchParams): GetProductsOptions 
 
   if (isNew === '1') {
     options.isNew = true
+  }
+
+  if (typeof minPrice === 'string' && /^\d+$/.test(minPrice)) {
+    options.minPrice = Number(minPrice)
+  }
+
+  if (typeof maxPrice === 'string' && /^\d+$/.test(maxPrice)) {
+    options.maxPrice = Number(maxPrice)
   }
 
   const toppingsList = Array.isArray(toppings)

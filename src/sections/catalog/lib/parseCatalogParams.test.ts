@@ -69,4 +69,27 @@ describe('parseCatalogParams', () => {
   it('игнорирует toppings, пустой после фильтрации', () => {
     expect(parseCatalogParams({ toppings: ['nope'] })).toEqual({})
   })
+
+  it('читает minPrice и maxPrice из цифр', () => {
+    expect(parseCatalogParams({ minPrice: '150', maxPrice: '400' })).toEqual({
+      minPrice: 150,
+      maxPrice: 400,
+    })
+  })
+
+  it('читает одно из полей цены', () => {
+    expect(parseCatalogParams({ minPrice: '50' })).toEqual({ minPrice: 50 })
+    expect(parseCatalogParams({ maxPrice: '250' })).toEqual({ maxPrice: 250 })
+  })
+
+  it('игнорирует нецифровую и отрицательную цену', () => {
+    expect(parseCatalogParams({ minPrice: 'abc', maxPrice: '-1' })).toEqual({})
+  })
+
+  it('сохраняет инвертированную пару без нормализации', () => {
+    expect(parseCatalogParams({ minPrice: '500', maxPrice: '100' })).toEqual({
+      minPrice: 500,
+      maxPrice: 100,
+    })
+  })
 })

@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { cache } from 'react'
-import { and, asc, desc, eq, getTableColumns, sql } from 'drizzle-orm'
+import { and, asc, desc, eq, getTableColumns, gte, lte, sql } from 'drizzle-orm'
 
 import { db } from '@db/client'
 import { productToppings, products, toppings } from '@db/schema'
@@ -23,6 +23,8 @@ export const getProducts = cache(
       toppings: selectedKinds = [],
       page = 1,
       limit = ITEMS_PER_PAGE,
+      minPrice,
+      maxPrice,
     } = options
     const offset = (page - 1) * ITEMS_PER_PAGE
     const orderBy = ORDER_BY[sort ?? 'popular']
@@ -31,6 +33,8 @@ export const getProducts = cache(
       eq(products.isAvailable, true),
       ...(base ? [eq(products.base, base)] : []),
       ...(isNew ? [eq(products.isNew, true)] : []),
+      ...(minPrice != null ? [gte(products.price, minPrice)] : []),
+      ...(maxPrice != null ? [lte(products.price, maxPrice)] : []),
       ...(selectedKinds.length > 0
         ? [
             sql`EXISTS (

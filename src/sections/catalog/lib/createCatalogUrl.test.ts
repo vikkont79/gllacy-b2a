@@ -32,4 +32,30 @@ describe('createCatalogUrl', () => {
       '/products?toppings=chunk&toppings=syrup',
     )
   })
+
+  it('пишет minPrice и maxPrice', () => {
+    expect(createCatalogUrl({ minPrice: 150, maxPrice: 400 })).toBe(
+      '/products?minPrice=150&maxPrice=400',
+    )
+  })
+
+  it('поддерживает односторонний фильтр цены', () => {
+    expect(createCatalogUrl({ minPrice: 50 })).toBe('/products?minPrice=50')
+    expect(createCatalogUrl({ maxPrice: 250 })).toBe('/products?maxPrice=250')
+  })
+
+  it('сериализует нулевую цену', () => {
+    expect(createCatalogUrl({ minPrice: 0 })).toBe('/products?minPrice=0')
+  })
+
+  it('пропускает незаданную цену', () => {
+    expect(createCatalogUrl({ sort: 'cheap' })).not.toContain('minPrice')
+    expect(createCatalogUrl({ sort: 'cheap' })).not.toContain('maxPrice')
+  })
+
+  it('сохраняет порядок при комбинации с другими параметрами', () => {
+    expect(createCatalogUrl({ base: 'sorbet', minPrice: 100, maxPrice: 200 })).toBe(
+      '/products?base=sorbet&minPrice=100&maxPrice=200',
+    )
+  })
 })

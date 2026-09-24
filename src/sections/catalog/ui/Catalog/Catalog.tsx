@@ -1,6 +1,8 @@
 import { createCatalogUrl, parseCatalogParams } from '@/sections/catalog/lib'
 import { getProducts } from '@/entities/product/api/getProducts'
+import { getPriceBounds } from '@/entities/product/api/getPriceBounds'
 import type { ProductRow } from '@db/schema'
+import type { PriceBounds } from '@/entities/product/types'
 import { ErrorState } from '@/shared/ui'
 import { getCatalogTitle } from '@/shared/config'
 import { CatalogHeader } from '../CatalogHeader/CatalogHeader'
@@ -15,19 +17,27 @@ interface CatalogPageProps {
 
 const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
   const options = parseCatalogParams(await searchParams)
-  const title = getCatalogTitle(options.base)    
-  
+  const title = getCatalogTitle(options.base)
+
   let products: ProductRow[] = []
   let total = 0
   let productsError = false
 
-  try {    
+  let priceBounds: PriceBounds | null = null
+
+  try {
     const result = await getProducts(options)
     products = result.items
     total = result.total
   } catch (error) {
     console.error('CatalogPage: не удалось загрузить каталог:', error)
     productsError = true
+  }
+
+  try {
+    priceBounds = await getPriceBounds(options)
+  } catch (error) {
+    console.error('CatalogPage: не удалось загрузить диапазон цен:', error)
   }
 
   return (
@@ -39,6 +49,7 @@ const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
           key={createCatalogUrl(options)}
           className={styles.filter}
           initialOptions={options}
+          priceBounds={priceBounds ?? undefined}
         />
         {productsError ? (
           <ErrorState message="Не удалось загрузить каталог. Попробуйте позже" />

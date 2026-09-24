@@ -4,4 +4,5 @@ export { Link } from './Link/Link'
 export { Icon } from './Icon/Icon'
 export { IconButton } from './IconButton/IconButton'
 export { Toggle } from './Toggle/Toggle'
+export { Input } from './Input/Input'
 

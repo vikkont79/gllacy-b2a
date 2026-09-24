@@ -18,9 +18,16 @@ export type GetProductsOptions = {
   base?: Base
   isNew?: boolean
   toppings?: ToppingKind[]
+  minPrice?: number
+  maxPrice?: number
 }
 
 export type ProductsResult = {
   items: ProductRow[]
   total: number
+}
+
+export type PriceBounds = {
+  minPrice: number
+  maxPrice: number
 }

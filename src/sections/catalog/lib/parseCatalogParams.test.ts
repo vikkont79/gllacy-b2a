@@ -1,0 +1,95 @@
+import { describe, expect, it } from 'vitest'
+
+import { parseCatalogParams } from './parseCatalogParams'
+
+describe('parseCatalogParams', () => {
+  it('без параметров возвращает пустые опции', () => {
+    expect(parseCatalogParams({})).toEqual({})
+  })
+
+  it('читает валидную сортировку', () => {
+    expect(parseCatalogParams({ sort: 'cheap' })).toEqual({ sort: 'cheap' })
+  })
+
+  it('читает «популярный» сорт', () => {
+    expect(parseCatalogParams({ sort: 'popular' })).toEqual({ sort: 'popular' })
+  })
+
+  it('игнорирует неизвестный сорт', () => {
+    expect(parseCatalogParams({ sort: 'abc' })).toEqual({})
+  })
+
+  it('читает page и limit из цифр', () => {
+    expect(parseCatalogParams({ page: '2', limit: '6' })).toEqual({ page: 2, limit: 6 })
+  })
+
+  it('игнорирует нецифровые page и limit', () => {
+    expect(parseCatalogParams({ page: 'abc', limit: '-1' })).toEqual({})
+  })
+
+  it('читает base категории', () => {
+    expect(parseCatalogParams({ base: 'sorbet' })).toEqual({ base: 'sorbet' })
+  })
+
+  it('игнорирует неизвестный base', () => {
+    expect(parseCatalogParams({ base: 'newbase' })).toEqual({})
+  })
+
+  it('читает isNew из "1"', () => {
+    expect(parseCatalogParams({ isNew: '1' })).toEqual({ isNew: true })
+  })
+
+  it('игнорирует неединичный isNew', () => {
+    expect(parseCatalogParams({ isNew: '0' })).toEqual({})
+    expect(parseCatalogParams({ isNew: 'abc' })).toEqual({})
+  })
+
+  it('читает выбранные kinds из массива', () => {
+    expect(parseCatalogParams({ toppings: ['chunk', 'syrup'] })).toEqual({
+      toppings: ['chunk', 'syrup'],
+    })
+  })
+
+  it('читает одиночный kind из строки', () => {
+    expect(parseCatalogParams({ toppings: 'syrup' })).toEqual({
+      toppings: ['syrup'],
+    })
+  })
+
+  it('игнорирует невалидный одиночный kind', () => {
+    expect(parseCatalogParams({ toppings: 'newkind' })).toEqual({})
+  })
+
+  it('отбрасывает неизвестные kinds, оставляя валидные', () => {
+    expect(parseCatalogParams({ toppings: ['chunk', 'newkind'] })).toEqual({
+      toppings: ['chunk'],
+    })
+  })
+
+  it('игнорирует toppings, пустой после фильтрации', () => {
+    expect(parseCatalogParams({ toppings: ['nope'] })).toEqual({})
+  })
+
+  it('читает minPrice и maxPrice из цифр', () => {
+    expect(parseCatalogParams({ minPrice: '150', maxPrice: '400' })).toEqual({
+      minPrice: 150,
+      maxPrice: 400,
+    })
+  })
+
+  it('читает одно из полей цены', () => {
+    expect(parseCatalogParams({ minPrice: '50' })).toEqual({ minPrice: 50 })
+    expect(parseCatalogParams({ maxPrice: '250' })).toEqual({ maxPrice: 250 })
+  })
+
+  it('игнорирует нецифровую и отрицательную цену', () => {
+    expect(parseCatalogParams({ minPrice: 'abc', maxPrice: '-1' })).toEqual({})
+  })
+
+  it('сохраняет инвертированную пару без нормализации', () => {
+    expect(parseCatalogParams({ minPrice: '500', maxPrice: '100' })).toEqual({
+      minPrice: 500,
+      maxPrice: 100,
+    })
+  })
+})

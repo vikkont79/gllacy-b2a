@@ -194,3 +194,13 @@ export default function Page({ params }: { params: { id: string } }) {
 ```powershell
 wsl /home/vikkont/.local/share/pnpm/pnpm add package-name
 ```
+
+**Проверки кода (`lint`, `tsc --noEmit`, `test`)** напрямую через `wsl <full-path>` не запустятся:
+обёртки в `node_modules/.bin` (eslint, vitest и т.д.) находят `node` через PATH, а он там не собран —
+падение `node: not found`. Запускать через bash с инъекцией bin-каталога node в PATH:
+
+```powershell
+wsl bash -lc 'export PATH=/home/vikkont/.local/share/pnpm/nodejs/22.21.1/bin:"$PATH" && /home/vikkont/.local/share/pnpm/pnpm lint'
+```
+
+`bash -lc` заодно подхватывает профиль пользователя WSL.

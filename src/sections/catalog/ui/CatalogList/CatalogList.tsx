@@ -10,9 +10,9 @@ interface CatalogListProps {
 const CatalogList = ({ className = '', products }: CatalogListProps) => {
   return (
     <ul className={`${styles.catalog} ${className}`.trim()}>
-      {products.map((product) => (
+      {products.map((product, index) => (
         <li key={product.id} className={styles.item}>
-          <ProductCard product={product} />
+          <ProductCard product={product} priority={index === 0} />
         </li>
       ))}
     </ul>

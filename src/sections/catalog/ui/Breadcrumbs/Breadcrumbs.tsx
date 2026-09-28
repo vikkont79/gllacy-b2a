@@ -1,23 +1,30 @@
+import type { Crumb } from '@/sections/catalog/lib/createBreadcrumbs'
 import { Link } from '@/shared/ui'
 import styles from './Breadcrumbs.module.css'
 
 interface BreadcrumbsProps {
   className?: string
-  crumb: string
+  crumbs: readonly Crumb[]
 }
 
-const Breadcrumbs = ({ className = '', crumb }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ className = '', crumbs }: BreadcrumbsProps) => {
+  const lastIndex = crumbs.length - 1
+
   return (
     <ul className={`${styles.list} ${className || ''}`.trim()}>
-      <li className={styles.item}>
-        <Link href="/" className={styles.link}>Главная</Link>
-      </li>
-      <li className={styles.item}>
-        <Link href="/products" className={styles.link}>Каталог</Link>
-      </li>
-      <li className={`${styles.item} ${styles.current}`}>
-        <span className={styles.link}>{crumb}</span>
-      </li>
+      {crumbs.map((crumb, index) =>
+        index === lastIndex ? (
+          <li key={crumb.name} className={`${styles.item} ${styles.current}`}>
+            <span className={styles.link}>{crumb.name}</span>
+          </li>
+        ) : (
+          <li key={crumb.name} className={styles.item}>
+            <Link href={crumb.url} className={styles.link}>
+              {crumb.name}
+            </Link>
+          </li>
+        ),
+      )}
     </ul>
   )
 }

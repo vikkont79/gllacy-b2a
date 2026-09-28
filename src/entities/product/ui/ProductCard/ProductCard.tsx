@@ -5,9 +5,10 @@ import styles from './ProductCard.module.css'
 
 interface ProductCardProps {
   product: ProductRow
+  priority?: boolean
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, priority = false }: ProductCardProps) => {
   return (
     <article className={styles.card}>
       <Image
@@ -16,6 +17,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         width={168}
         height={168}
         alt={product.name}
+        priority={priority}
       />
       <h3 className={styles.title}>{product.name}</h3>
       <p className={styles.description}>{product.description}</p>

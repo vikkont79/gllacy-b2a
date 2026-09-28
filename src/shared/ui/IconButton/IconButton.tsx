@@ -33,7 +33,7 @@ const IconButton = ({
         size={iconSize}
         mobSize={iconSizeMob}
         color={iconColor}
-        label={iconLabel || (typeof children === 'string' ? children : undefined)}
+        label={children ? undefined : iconLabel}
         className={styles.icon}
       />
       {children && <span className={styles.text}>{children}</span>}

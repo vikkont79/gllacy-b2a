@@ -5,7 +5,7 @@ interface ErrorStateProps {
 }
 
 const ErrorState = ({ message }: ErrorStateProps) => {
-  return <p className={styles.error}>{message}</p>
+  return <p className={styles.error} role="alert">{message}</p>
 }
 
 export { ErrorState }

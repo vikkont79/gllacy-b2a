@@ -161,6 +161,7 @@ const Promo = () => {
                   width={350}
                   height={507}
                   alt={slide.image.alt}
+                  priority={index === 1}
                 />
                 {isActive && (
                   <>
@@ -187,6 +188,9 @@ const Promo = () => {
           )
         })}
       </ul>
+      <span className="visually-hidden" aria-live="polite" aria-atomic="true">
+        Слайд {activeIndex + 1} из {slideCount}.
+      </span>
     </section>
   )
 }

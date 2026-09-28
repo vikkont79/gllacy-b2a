@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Icon, IconButton, Link } from '@/shared/ui'
 import logo from '@/shared/assets/images/logo.svg'
 import { CATALOG_CATEGORIES } from '@/shared/config'
+import { CONTACT_PHONE, phoneHref } from '@/shared/config/contacts'
 import { AutoCloseDetails } from './AutoCloseDetails'
 import styles from './Header.module.css'
 
@@ -53,8 +54,8 @@ const Header = () => {
           </ul>
         </nav>
         <div className={styles.actions}>
-          <Link href='tel:+78005558628' className={styles.phone}>
-            +7 800 555-86-28
+          <Link href={phoneHref(CONTACT_PHONE.raw)} className={styles.phone}>
+            {CONTACT_PHONE.display}
           </Link>
           {/* Заглушка: станет открывашкой модалки с формой поиска */}
             <IconButton

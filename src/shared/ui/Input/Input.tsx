@@ -23,6 +23,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   ...props
 }, ref) => {
   const id = useId()
+  const errorId = useId()
   const name = label
     .toLowerCase()
     .replace(/[^a-z0-9а-яё]/g, '_')
@@ -43,10 +44,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
         name={name}
         disabled={disabled}
         aria-invalid={!!error}
+        aria-describedby={error ? errorId : undefined}
         {...props}
       />
       {error && (
-        <span className={styles.error}>{error}</span>
+        <span id={errorId} role="alert" className={styles.error}>{error}</span>
       )}
     </label>
   )

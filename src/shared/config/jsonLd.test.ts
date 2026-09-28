@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { env } from '@/shared/lib/env'
 import { CONTACT_PHONE, OPENING_HOURS } from './contacts'
-import { buildBreadcrumbListJsonLd, buildOrganizationJsonLd } from './jsonLd'
+import { buildBreadcrumbListJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from './jsonLd'
 
 vi.mock('@/shared/lib/env', () => ({
   env: { SITE_URL: 'https://gllacy-b2a.vercel.app' },
@@ -44,6 +44,18 @@ describe('buildOrganizationJsonLd', () => {
     ])
     expect(organization.openingHoursSpecification[0].opens).toBe(OPENING_HOURS.opens)
     expect(organization.openingHoursSpecification[0].closes).toBe(OPENING_HOURS.closes)
+  })
+})
+
+describe('buildWebSiteJsonLd', () => {
+  const website = buildWebSiteJsonLd()
+
+  it('WebSite с контекстом', () => {
+    expect(website['@context']).toBe('https://schema.org')
+    expect(website['@type']).toBe('WebSite')
+  })
+  it('url совпадает с SITE_URL', () => {
+    expect(website.url).toBe(env.SITE_URL)
   })
 })
 

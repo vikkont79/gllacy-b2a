@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { inter } from '@/shared/lib/fonts'
 import { env } from '@/shared/lib/env'
-import { buildOrganizationJsonLd } from '@/shared/config'
+import { buildOrganizationJsonLd, buildWebSiteJsonLd } from '@/shared/config'
 import { JsonLd } from '@/shared/ui'
 import { Layout } from '@/widgets/layout'
 import './globals.css'
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 }
 
 const organization = buildOrganizationJsonLd()
+const website = buildWebSiteJsonLd()
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <Layout>{children}</Layout>
         <JsonLd data={organization} />
+        <JsonLd data={website} />
       </body>
     </html>
   )

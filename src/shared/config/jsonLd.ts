@@ -40,6 +40,15 @@ export const buildOrganizationJsonLd = () => {
   }
 }
 
+export const buildWebSiteJsonLd = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Глейси',
+    url: env.SITE_URL,
+  }
+}
+
 export const buildBreadcrumbListJsonLd = (items: readonly BreadcrumbItem[]) => {
   return {
     '@context': 'https://schema.org',

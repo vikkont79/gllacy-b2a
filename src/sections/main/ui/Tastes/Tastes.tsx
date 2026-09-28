@@ -23,9 +23,9 @@ const Tastes = async () => {
         Попробуйте самые популярные вкусы нашего мороженого
       </p>
       <ul className={styles.list}>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <li key={item.id} className={styles.item}>
-            <ProductCard product={item} />
+            <ProductCard product={item} priority={index === 0} />
           </li>
         ))}
       </ul>

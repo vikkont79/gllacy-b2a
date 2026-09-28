@@ -17,7 +17,7 @@ interface CatalogPageProps {
 
 const CatalogPage = async ({ searchParams }: CatalogPageProps) => {
   const options = parseCatalogParams(await searchParams)
-  const title = getCatalogTitle(options.base)
+  const title = getCatalogTitle(options)
 
   let products: ProductRow[] = []
   let total = 0

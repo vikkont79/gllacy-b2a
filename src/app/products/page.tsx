@@ -14,9 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const options = parseCatalogParams(await searchParams)
 
-  const title = options.isNew
-    ? 'Новинки мороженого'
-    : getCatalogTitle(options.base)
+  const title = getCatalogTitle(options)
 
   return {
     title,

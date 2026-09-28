@@ -5,7 +5,7 @@ type CatalogBase = 'plombir' | 'slivochnoe' | 'sorbet'
 
 export const CATEGORY_LABELS: Record<CatalogBase, string> = {
   plombir: 'Пломбир',
-  slivochnoe: 'Сливочное мороженное',
+  slivochnoe: 'Сливочное',
   sorbet: 'Сорбеты',
 }
 
@@ -18,5 +18,12 @@ export const CATALOG_CATEGORIES: readonly CatalogCategory[] = [
   { title: CATEGORY_LABELS.sorbet, href: '/products?base=sorbet' },
 ]
 
-export const getCatalogTitle = (base?: CatalogBase): string =>
-  base ? CATEGORY_LABELS[base] : DEFAULT_CATALOG_TITLE
+export type CatalogTitleOptions = {
+  base?: CatalogBase
+  isNew?: boolean
+}
+
+export const getCatalogTitle = ({ base, isNew }: CatalogTitleOptions = {}): string => {
+  if (isNew) return NEW_CATEGORY_TITLE
+  return base ? CATEGORY_LABELS[base] : DEFAULT_CATALOG_TITLE
+}

@@ -8,11 +8,11 @@ const Delivery = () => {
       <h2 className="visually-hidden">Доставка.</h2>
       <div className={styles.inner}>
         <div className={styles.intro}>
-          <h3 className={`${styles.title} title`}>
+          <p className={`${styles.title} title`}>
                       Доставка
                       <br /> любимого мороженого
                       <br /> на дом
-          </h3>
+          </p>
           <p className={styles.text}>
             Хочется полакомиться любимым десертом,
             <br /> но нет времени съездить в магазин? Закажите доставку

@@ -1,6 +1,9 @@
 import { Button, Link } from '@/shared/ui'
+import { CONTACT_PHONE, OPENING_HOURS, phoneHref } from '@/shared/config/contacts'
 
 import styles from './Delivery.module.css'
+
+const formatHour = (time: string): string => time.replace(/:00$/, '')
 
 const Delivery = () => {
   return (
@@ -23,12 +26,12 @@ const Delivery = () => {
 
         <div className={styles.cards}>
           <div className={styles.card}>
-            <Link href="tel:+78005558628" className={styles.phone}>
-              +7 800 555-86-28
+            <Link href={phoneHref(CONTACT_PHONE.raw)} className={styles.phone}>
+              {CONTACT_PHONE.display}
             </Link>
             <p className={styles.cardText}>
               Позвоните нам — мы на связи
-              <br /> (с 10 до 20 ежедневно)
+              <br /> (с {formatHour(OPENING_HOURS.opens)} до {formatHour(OPENING_HOURS.closes)} ежедневно)
             </p>
           </div>
 

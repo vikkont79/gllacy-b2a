@@ -1,18 +1,25 @@
 import type { Metadata } from 'next'
 import { inter } from '@/shared/lib/fonts'
+import { env } from '@/shared/lib/env'
+import { buildOrganizationJsonLd } from '@/shared/config'
+import { JsonLd } from '@/shared/ui'
 import { Layout } from '@/widgets/layout'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(env.SITE_URL),
   title: { default: 'Глейси', template: '%s | Глейси' },
   description: 'Магазин мороженого собственного производства под заказ.',
 }
+
+const organization = buildOrganizationJsonLd()
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ru" className={inter.variable} data-scroll-behavior="smooth">
       <body>
         <Layout>{children}</Layout>
+        <JsonLd data={organization} />
       </body>
     </html>
   )

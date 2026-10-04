@@ -9,7 +9,7 @@ export type Sort = 'popular' | 'cheap' | 'expensive'
 
 export type Base = ProductRow['base']
 
-export type ToppingKind = 'chunk' | 'topping' | 'syrup' | 'sprinkle'
+export type ToppingKind = 'chunk' | 'jam' | 'syrup' | 'sprinkle'
 
 export type GetProductsOptions = {
   sort?: Sort

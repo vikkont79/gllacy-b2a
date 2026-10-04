@@ -67,7 +67,7 @@
 
   &:active {
     outline: 2px solid var(--color-text-dark);
-    background-color: var(--color-primary-lighter);
+    background-color: var(--color-primary-light);
     color: var(--color-white);
   }
 

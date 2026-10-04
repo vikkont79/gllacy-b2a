@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { FATNESS_OPTIONS } from './fatnessOptions'
+import { FATNESS_OPTIONS } from './fatness'
 
 describe('FATNESS_OPTIONS', () => {
   it('содержит ровно три опции', () => {

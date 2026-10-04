@@ -9,7 +9,7 @@ export const flavours = sqliteTable('flavours', {
 export const toppings = sqliteTable('toppings', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull().unique(),
-  kind: text('kind', { enum: ['chunk', 'topping', 'syrup', 'sprinkle'] }).notNull(),
+  kind: text('kind', { enum: ['chunk', 'jam', 'syrup', 'sprinkle'] }).notNull(),
 })
 
 export const products = sqliteTable('products', {

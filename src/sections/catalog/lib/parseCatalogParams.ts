@@ -4,7 +4,7 @@ type RawSearchParams = Record<string, string | string[] | undefined>
 
 const SORTS: readonly Sort[] = ['popular', 'cheap', 'expensive']
 const BASES: readonly Base[] = ['plombir', 'slivochnoe', 'sorbet']
-const TOPPING_KINDS: readonly ToppingKind[] = ['chunk', 'topping', 'syrup', 'sprinkle']
+const TOPPING_KINDS: readonly ToppingKind[] = ['chunk', 'jam', 'syrup', 'sprinkle']
 
 export const parseCatalogParams = (params: RawSearchParams): GetProductsOptions => {
   const options: GetProductsOptions = {}

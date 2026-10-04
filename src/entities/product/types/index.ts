@@ -1,15 +1,20 @@
 import type { ProductRow } from '@db/schema'
 
+export type ToppingKind = 'chunk' | 'jam' | 'syrup' | 'sprinkle'
+
+export type ProductTopping = {
+  name: string
+  kind: ToppingKind
+}
+
 export type Product = ProductRow & {
   flavour: string
-  toppings: string[]
+  toppings: ProductTopping[]
 }
 
 export type Sort = 'popular' | 'cheap' | 'expensive'
 
 export type Base = ProductRow['base']
-
-export type ToppingKind = 'chunk' | 'jam' | 'syrup' | 'sprinkle'
 
 export type GetProductsOptions = {
   sort?: Sort

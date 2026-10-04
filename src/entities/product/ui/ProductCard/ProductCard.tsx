@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { IconButton } from '@/shared/ui'
+import { IconButton, Link } from '@/shared/ui'
 import type { ProductRow } from '@db/schema'
 import styles from './ProductCard.module.css'
 
@@ -19,7 +19,9 @@ const ProductCard = ({ product, priority = false }: ProductCardProps) => {
         alt={product.name}
         priority={priority}
       />
-      <h3 className={styles.title}>{product.name}</h3>
+      <h3 className={styles.title}>
+        <Link href={`/products/${product.slug}`}>{product.name}</Link>
+      </h3>
       <p className={styles.description}>{product.description}</p>
       <div className={styles.purchase}>
         <p className={styles.price}>{product.price / 100} ₽/кг</p>

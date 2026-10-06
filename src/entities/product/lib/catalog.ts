@@ -1,9 +1,10 @@
+import type { Base } from '../types'
+
 export const DEFAULT_CATALOG_TITLE = 'Все продукты'
+
 export const NEW_CATEGORY_TITLE = 'Новинки'
 
-type CatalogBase = 'plombir' | 'slivochnoe' | 'sorbet'
-
-export const CATEGORY_LABELS: Record<CatalogBase, string> = {
+export const CATEGORY_LABELS: Record<Base, string> = {
   plombir: 'Пломбир',
   slivochnoe: 'Сливочное',
   sorbet: 'Сорбеты',
@@ -19,7 +20,7 @@ export const CATALOG_CATEGORIES: readonly CatalogCategory[] = [
 ]
 
 export type CatalogTitleOptions = {
-  base?: CatalogBase
+  base?: Base
   isNew?: boolean
 }
 

@@ -1,5 +1,5 @@
 import type { GetProductsOptions } from '@/entities/product/types'
-import { getCatalogTitle } from '@/shared/config/catalog'
+import { getCatalogTitle } from '@/entities/product/lib'
 import { createCatalogUrl } from './createCatalogUrl'
 
 export type Crumb = {

@@ -1,6 +1,8 @@
 import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 
+import type { Base, ProductRow, ToppingKind } from '@/entities/product/types'
+
 export const flavours = sqliteTable('flavours', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull().unique(),
@@ -9,14 +11,14 @@ export const flavours = sqliteTable('flavours', {
 export const toppings = sqliteTable('toppings', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull().unique(),
-  kind: text('kind', { enum: ['chunk', 'jam', 'syrup', 'sprinkle'] }).notNull(),
+  kind: text('kind').$type<ToppingKind>().notNull(),
 })
 
 export const products = sqliteTable('products', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   slug: text('slug').notNull().unique(),
   name: text('name').notNull(),
-  base: text('base', { enum: ['plombir', 'slivochnoe', 'sorbet'] }).notNull(),
+  base: text('base').$type<Base>().notNull(),
   flavourId: integer('flavourId').notNull().references(() => flavours.id),
   price: integer('price').notNull(),
   calories: integer('calories').notNull(),
@@ -28,8 +30,6 @@ export const products = sqliteTable('products', {
   createdAt: integer('createdAt', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
   updatedAt: integer('updatedAt', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
 })
-
-export type ProductRow = typeof products.$inferSelect
 
 export const productToppings = sqliteTable(
   'product_toppings',
@@ -43,3 +43,11 @@ export const productToppings = sqliteTable(
   },
   (table) => [primaryKey({ columns: [table.productId, table.toppingId] })],
 )
+
+/*
+ * Рукиописный ProductRow живёт в entities/product/types, чтобы слой сущности не
+ * зависел от инфраструктуры. Проверка ниже не даёт ему разойтись с таблицей:
+ * если колонку добавят, удалят или поменяют тип, tsc упадёт здесь.
+ */
+type AssertAssignable<T extends U, U> = T
+export type ProductRowMatchesSchema = AssertAssignable<typeof products.$inferSelect, ProductRow>

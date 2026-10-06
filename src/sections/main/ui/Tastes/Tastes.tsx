@@ -1,6 +1,5 @@
 import { getProducts } from '@/entities/product/api/getProducts'
-import { ProductCard } from '@/entities/product'
-import type { ProductRow } from '@db/schema'
+import { ProductCard, type ProductRow } from '@/entities/product'
 import styles from './Tastes.module.css'
 
 const Tastes = async () => {

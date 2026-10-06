@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { IconButton, Link } from '@/shared/ui'
-import type { ProductRow } from '@db/schema'
+import type { ProductRow } from '@/entities/product'
 import styles from './ProductCard.module.css'
 
 interface ProductCardProps {

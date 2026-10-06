@@ -1,5 +1,5 @@
 import type { Crumb } from '@/sections/catalog/lib/createBreadcrumbs'
-import { DEFAULT_CATALOG_TITLE } from '@/shared/config'
+import { DEFAULT_CATALOG_TITLE } from '@/entities/product/lib'
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs'
 import styles from './CatalogHeader.module.css'
 

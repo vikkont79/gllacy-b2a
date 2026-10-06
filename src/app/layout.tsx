@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { inter } from '@/shared/lib/fonts'
 import { env } from '@/shared/lib/env'
-import { buildOrganizationJsonLd, buildWebSiteJsonLd } from '@/shared/config'
+import { buildOrganizationJsonLd, buildWebSiteJsonLd } from '@/shared/config/jsonLd'
 import { JsonLd } from '@/shared/ui'
 import { Layout } from '@/widgets/layout'
 import './globals.css'

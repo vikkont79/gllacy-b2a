@@ -1,3 +1,11 @@
+/*
+ * Разметка для поисковых агентов. Только серверный модуль.
+ *
+ * Использует env.SITE_URL, поэтому лежит вне барреля shared/config и
+ * импортируется по полному пути '@/shared/config/jsonLd'. В браузере
+ * переменные окружения недоступны, и валидация env падает на импорте.
+ */
+
 import { env } from '@/shared/lib/env'
 import { CONTACT_PHONE, OPENING_HOURS } from './contacts'
 

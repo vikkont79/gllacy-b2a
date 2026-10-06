@@ -12,9 +12,13 @@ export type ProductRow = {
   flavourId: number
   price: number
   calories: number
+  protein: number
+  fat: number
+  carbs: number
   shelfLife: number
   image: string
   description: string
+  composition: string
   isAvailable: boolean
   isNew: boolean
   createdAt: Date

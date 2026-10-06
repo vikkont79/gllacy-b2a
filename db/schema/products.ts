@@ -1,4 +1,4 @@
-import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { integer, primaryKey, real, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 
 import type { Base, ProductRow, ToppingKind } from '@/entities/product/types'
@@ -22,9 +22,13 @@ export const products = sqliteTable('products', {
   flavourId: integer('flavourId').notNull().references(() => flavours.id),
   price: integer('price').notNull(),
   calories: integer('calories').notNull(),
+  protein: real('protein').notNull(),
+  fat: real('fat').notNull(),
+  carbs: real('carbs').notNull(),
   shelfLife: integer('shelfLife').notNull(),
   image: text('image').notNull(),
   description: text('description').notNull(),
+  composition: text('composition').notNull(),
   isAvailable: integer('isAvailable', { mode: 'boolean' }).notNull().default(true),
   isNew: integer('isNew', { mode: 'boolean' }).notNull().default(false),
   createdAt: integer('createdAt', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),

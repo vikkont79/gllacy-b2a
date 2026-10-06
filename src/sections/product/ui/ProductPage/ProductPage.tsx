@@ -19,8 +19,12 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
     flavour,
     price,
     calories,
+    protein,
+    fat,
+    carbs,
     shelfLife,
     description,
+    composition,
     isAvailable,
     isNew,
     createdAt,
@@ -46,6 +50,15 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
         <dt>calories</dt>
         <dd>{calories} ккал/100 г</dd>
 
+        <dt>protein</dt>
+        <dd>{protein} г</dd>
+
+        <dt>fat</dt>
+        <dd>{fat} г</dd>
+
+        <dt>carbs</dt>
+        <dd>{carbs} г</dd>
+
         <dt>shelfLife</dt>
         <dd>{shelfLife} сут</dd>
 
@@ -60,6 +73,9 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
 
         <dt>description</dt>
         <dd>{description}</dd>
+
+        <dt>composition</dt>
+        <dd>{composition}</dd>
 
         <dt>toppings</dt>
         <dd>

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { env } from '@/shared/lib/env'
-import { CONTACT_PHONE, OPENING_HOURS } from './contacts'
+import { CONTACT_PHONE, OPENING_HOURS, SITE_NAME } from './contacts'
 import { buildBreadcrumbListJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from './jsonLd'
 
 vi.mock('@/shared/lib/env', () => ({
@@ -22,6 +22,9 @@ describe('buildOrganizationJsonLd', () => {
   })
   it('url совпадает с SITE_URL', () => {
     expect(organization.url).toBe(env.SITE_URL)
+  })
+  it('name берётся из конфига, а не литерала', () => {
+    expect(organization.name).toBe(SITE_NAME)
   })
   it('logo построен от SITE_URL', () => {
     expect(organization.logo).toEqual({
@@ -56,6 +59,9 @@ describe('buildWebSiteJsonLd', () => {
   })
   it('url совпадает с SITE_URL', () => {
     expect(website.url).toBe(env.SITE_URL)
+  })
+  it('name берётся из конфига, а не литерала', () => {
+    expect(website.name).toBe(SITE_NAME)
   })
 })
 

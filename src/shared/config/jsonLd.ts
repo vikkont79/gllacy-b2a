@@ -7,7 +7,7 @@
  */
 
 import { env } from '@/shared/lib/env'
-import { CONTACT_PHONE, OPENING_HOURS } from './contacts'
+import { CONTACT_PHONE, OPENING_HOURS, SITE_NAME } from './contacts'
 
 export type BreadcrumbItem = {
   name: string
@@ -30,7 +30,7 @@ export const buildOrganizationJsonLd = () => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Глейси',
+    name: SITE_NAME,
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
@@ -52,7 +52,7 @@ export const buildWebSiteJsonLd = () => {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Глейси',
+    name: SITE_NAME,
     url: env.SITE_URL,
   }
 }

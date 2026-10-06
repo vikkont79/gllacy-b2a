@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { cache } from 'react'
-import { and, eq, getTableColumns } from 'drizzle-orm'
+import { eq, getTableColumns } from 'drizzle-orm'
 
 import { db } from '@db/client'
 import { flavours, productToppings, products, toppings } from '@db/schema'
@@ -14,7 +14,7 @@ export const getProduct = cache(
         .select({ ...getTableColumns(products), flavour: flavours.name })
         .from(products)
         .innerJoin(flavours, eq(products.flavourId, flavours.id))
-        .where(and(eq(products.slug, slug), eq(products.isAvailable, true)))
+        .where(eq(products.slug, slug))
         .limit(1)
 
       if (!row) return null

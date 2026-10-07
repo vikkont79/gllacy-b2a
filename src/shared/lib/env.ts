@@ -5,7 +5,6 @@ const envSchema = z.object({
   TURSO_DATABASE_URL: z.string().min(1, 'TURSO_DATABASE_URL не задан'),
   TURSO_AUTH_TOKEN: z.string().min(1, 'TURSO_AUTH_TOKEN не задан'),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-  SITE_URL: z.string().url('SITE_URL не задан'),
 })
 
 const parsed = envSchema.safeParse(process.env)

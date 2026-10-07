@@ -1,4 +1,4 @@
-import type { GetProductsOptions } from '@/entities/product/types'
+import type { GetProductsOptions } from '../types'
 
 export const createCatalogUrl = (params: GetProductsOptions): string => {
   const search = new URLSearchParams()

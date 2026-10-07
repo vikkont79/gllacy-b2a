@@ -9,15 +9,10 @@
  * а состав и так лежит в ingredients, а вкус — в name и description. Пока в
  * базе лежат категории («кусочки», «джем»), отдельное поле только дублировало
  * бы уже сказанное. С появлением конкретных вкусов вопрос вернётся.
- *
- * Тянет env.SITE_URL, поэтому вне барреля и импортируется по полному пути
- * '@/sections/product/lib/buildProductJsonLd'. В браузере переменные окружения
- * недоступны, и валидация env падает на импорте.
  */
 
 import type { Product } from '@/entities/product'
-import { SITE_NAME } from '@/shared/config'
-import { env } from '@/shared/lib/env'
+import { SITE_NAME, SITE_URL } from '@/shared/config'
 
 export const buildProductJsonLd = (product: Product) => {
   const {
@@ -39,7 +34,7 @@ export const buildProductJsonLd = (product: Product) => {
     '@type': 'Product',
     name,
     description,
-    image: `${env.SITE_URL}/${image}`,
+    image: `${SITE_URL}/${image}`,
     brand: {
       '@type': 'Brand',
       name: SITE_NAME,
@@ -60,7 +55,7 @@ export const buildProductJsonLd = (product: Product) => {
       availability: isAvailable
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
-      url: `${env.SITE_URL}/products/${slug}`,
+      url: `${SITE_URL}/products/${slug}`,
       additionalProperty: {
         '@type': 'PropertyValue',
         name: 'Единица измерения',

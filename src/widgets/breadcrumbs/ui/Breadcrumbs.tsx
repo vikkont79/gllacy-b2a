@@ -1,5 +1,5 @@
-import type { Crumb } from '@/sections/catalog/lib/createBreadcrumbs'
 import { Link } from '@/shared/ui'
+import type { Crumb } from '../types'
 import styles from './Breadcrumbs.module.css'
 
 interface BreadcrumbsProps {
@@ -7,7 +7,7 @@ interface BreadcrumbsProps {
   crumbs: readonly Crumb[]
 }
 
-const Breadcrumbs = ({ className = '', crumbs }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ className = '', crumbs }: Readonly<BreadcrumbsProps>) => {
   const lastIndex = crumbs.length - 1
 
   return (

@@ -3,9 +3,8 @@
 import { useRef, useState, useTransition, type SubmitEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { createCatalogUrl } from '@/sections/catalog/lib'
 import type { Base, GetProductsOptions, PriceBounds, Sort, ToppingKind } from '@/entities/product/types'
-import { FATNESS_OPTIONS, TOPPING_KIND_OPTIONS } from '@/entities/product/lib'
+import { createCatalogUrl, FATNESS_OPTIONS, TOPPING_KIND_OPTIONS } from '@/entities/product/lib'
 import { Button, Input, Toggle } from '@/shared/ui'
 
 import styles from './CatalogFilter.module.css'

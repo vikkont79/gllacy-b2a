@@ -1,12 +1,7 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import type { Product } from '@/entities/product'
-import { SITE_NAME } from '@/shared/config'
-import { env } from '@/shared/lib/env'
+import { SITE_NAME, SITE_URL } from '@/shared/config'
 import { buildProductJsonLd } from './buildProductJsonLd'
-
-vi.mock('@/shared/lib/env', () => ({
-  env: { SITE_URL: 'https://gllacy-b2a.vercel.app' },
-}))
 
 const makeProduct = (overrides: Partial<Product> = {}): Product => ({
   id: 1,
@@ -43,7 +38,7 @@ describe('buildProductJsonLd', () => {
   it('image абсолютный, собран от SITE_URL без двойного слэша', () => {
     const jsonLd = buildProductJsonLd(makeProduct())
 
-    expect(jsonLd.image).toBe(`${env.SITE_URL}/products/pistacio-taste.png`)
+    expect(jsonLd.image).toBe(`${SITE_URL}/products/pistacio-taste.png`)
     expect(jsonLd.image).not.toContain('//products')
   })
 
@@ -56,7 +51,7 @@ describe('buildProductJsonLd', () => {
   it('url предложения ведёт на страницу товара', () => {
     const jsonLd = buildProductJsonLd(makeProduct())
 
-    expect(jsonLd.offers.url).toBe(`${env.SITE_URL}/products/fistashka`)
+    expect(jsonLd.offers.url).toBe(`${SITE_URL}/products/fistashka`)
   })
 
   describe('пищевая ценность', () => {

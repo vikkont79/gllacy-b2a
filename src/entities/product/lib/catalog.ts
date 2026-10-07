@@ -1,4 +1,5 @@
 import type { Base } from '../types'
+import { createCatalogUrl } from './createCatalogUrl'
 
 export const DEFAULT_CATALOG_TITLE = 'Все продукты'
 
@@ -13,10 +14,10 @@ export const CATEGORY_LABELS: Record<Base, string> = {
 export type CatalogCategory = { title: string; href: string; isNew?: boolean }
 
 export const CATALOG_CATEGORIES: readonly CatalogCategory[] = [
-  { title: NEW_CATEGORY_TITLE, href: '/products?isNew=1', isNew: true },
-  { title: CATEGORY_LABELS.plombir, href: '/products?base=plombir' },
-  { title: CATEGORY_LABELS.slivochnoe, href: '/products?base=slivochnoe' },
-  { title: CATEGORY_LABELS.sorbet, href: '/products?base=sorbet' },
+  { title: NEW_CATEGORY_TITLE, href: createCatalogUrl({ isNew: true }), isNew: true },
+  { title: CATEGORY_LABELS.plombir, href: createCatalogUrl({ base: 'plombir' }) },
+  { title: CATEGORY_LABELS.slivochnoe, href: createCatalogUrl({ base: 'slivochnoe' }) },
+  { title: CATEGORY_LABELS.sorbet, href: createCatalogUrl({ base: 'sorbet' }) },
 ]
 
 export type CatalogTitleOptions = {

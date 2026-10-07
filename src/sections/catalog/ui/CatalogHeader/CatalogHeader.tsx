@@ -1,6 +1,6 @@
-import type { Crumb } from '@/sections/catalog/lib/createBreadcrumbs'
+import type { Crumb } from '@/widgets/breadcrumbs'
 import { DEFAULT_CATALOG_TITLE } from '@/entities/product/lib'
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs'
+import { Breadcrumbs } from '@/widgets/breadcrumbs'
 import styles from './CatalogHeader.module.css'
 
 interface CatalogHeaderProps {

@@ -1,11 +1,7 @@
 import type { Metadata } from 'next'
 import { CatalogPage } from '@/sections/catalog'
 import { parseCatalogParams } from '@/sections/catalog/lib'
-import { createBreadcrumbs } from '@/sections/catalog/lib/createBreadcrumbs'
 import { getCatalogTitle } from '@/entities/product/lib'
-import { buildBreadcrumbListJsonLd } from '@/shared/config/jsonLd'
-import { env } from '@/shared/lib/env'
-import { JsonLd } from '@/shared/ui'
 
 const CATALOG_DESCRIPTION =
   'Мороженое под заказ: подбор вкуса по жирности, наполнителям и цене, ' +
@@ -31,19 +27,5 @@ export default async function Products({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
-  const options = parseCatalogParams(await searchParams)
-
-  const breadcrumb = buildBreadcrumbListJsonLd(
-    createBreadcrumbs(options).map((crumb) => ({
-      name: crumb.name,
-      url: `${env.SITE_URL}${crumb.url}`,
-    })),
-  )
-
-  return (
-    <>
-      <JsonLd data={breadcrumb} />
-      <CatalogPage searchParams={searchParams} />
-    </>
-  )
+  return <CatalogPage searchParams={searchParams} />
 }

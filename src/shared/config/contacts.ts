@@ -1,5 +1,7 @@
 export const SITE_NAME = 'Глейси'
 
+export const SITE_URL = 'https://gllacy-b2a.vercel.app'
+
 export const CONTACT_PHONE = {
   raw: '+79006470352',
   display: '+7 900 647-03-52',

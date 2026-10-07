@@ -1,17 +1,6 @@
-import { describe, expect, it, vi } from 'vitest'
-import { env } from '@/shared/lib/env'
-import { CONTACT_PHONE, OPENING_HOURS } from './contacts'
-import { buildBreadcrumbListJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from './jsonLd'
-
-vi.mock('@/shared/lib/env', () => ({
-  env: { SITE_URL: 'https://gllacy-b2a.vercel.app' },
-}))
-
-const crumbs = [
-  { name: 'Главная', url: '/' },
-  { name: 'Каталог', url: '/products' },
-  { name: 'Пломбир', url: '/products?base=plombir' },
-] as const
+import { describe, expect, it } from 'vitest'
+import { CONTACT_PHONE, OPENING_HOURS, SITE_NAME, SITE_URL } from './contacts'
+import { buildOrganizationJsonLd, buildWebSiteJsonLd } from './jsonLd'
 
 describe('buildOrganizationJsonLd', () => {
   const organization = buildOrganizationJsonLd()
@@ -21,12 +10,15 @@ describe('buildOrganizationJsonLd', () => {
     expect(organization['@type']).toBe('Organization')
   })
   it('url совпадает с SITE_URL', () => {
-    expect(organization.url).toBe(env.SITE_URL)
+    expect(organization.url).toBe(SITE_URL)
+  })
+  it('name берётся из конфига, а не литерала', () => {
+    expect(organization.name).toBe(SITE_NAME)
   })
   it('logo построен от SITE_URL', () => {
     expect(organization.logo).toEqual({
       '@type': 'ImageObject',
-      url: `${env.SITE_URL}/logo.svg`,
+      url: `${SITE_URL}/logo.svg`,
     })
   })
   it('телефон совпадает с контактом', () => {
@@ -55,32 +47,10 @@ describe('buildWebSiteJsonLd', () => {
     expect(website['@type']).toBe('WebSite')
   })
   it('url совпадает с SITE_URL', () => {
-    expect(website.url).toBe(env.SITE_URL)
+    expect(website.url).toBe(SITE_URL)
+  })
+  it('name берётся из конфига, а не литерала', () => {
+    expect(website.name).toBe(SITE_NAME)
   })
 })
 
-describe('buildBreadcrumbListJsonLd', () => {
-  it('позиции по порядку, последний элемент без item', () => {
-    const breadcrumb = buildBreadcrumbListJsonLd(crumbs)
-
-    expect(breadcrumb['@type']).toBe('BreadcrumbList')
-    expect(breadcrumb.itemListElement).toHaveLength(3)
-    expect(breadcrumb.itemListElement[0]).toEqual({
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Главная',
-      item: '/',
-    })
-    expect(breadcrumb.itemListElement[1]).toEqual({
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Каталог',
-      item: '/products',
-    })
-    expect(breadcrumb.itemListElement[2]).toEqual({
-      '@type': 'ListItem',
-      position: 3,
-      name: 'Пломбир',
-    })
-  })
-})

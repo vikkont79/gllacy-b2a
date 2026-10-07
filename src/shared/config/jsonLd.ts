@@ -1,10 +1,8 @@
-import { env } from '@/shared/lib/env'
-import { CONTACT_PHONE, OPENING_HOURS } from './contacts'
+/* Разметка сайта для поисковых агентов. */
 
-export type BreadcrumbItem = {
-  name: string
-  url: string
-}
+import { CONTACT_PHONE, OPENING_HOURS, SITE_NAME, SITE_URL } from './contacts'
+
+
 
 const DAY_OF_WEEK: Record<(typeof OPENING_HOURS.days)[number], string> = {
   Mo: 'Monday',
@@ -17,12 +15,10 @@ const DAY_OF_WEEK: Record<(typeof OPENING_HOURS.days)[number], string> = {
 }
 
 export const buildOrganizationJsonLd = () => {
-  const { SITE_URL } = env
-
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Глейси',
+    name: SITE_NAME,
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
@@ -44,20 +40,8 @@ export const buildWebSiteJsonLd = () => {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Глейси',
-    url: env.SITE_URL,
+    name: SITE_NAME,
+    url: SITE_URL,
   }
 }
 
-export const buildBreadcrumbListJsonLd = (items: readonly BreadcrumbItem[]) => {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      ...(index === items.length - 1 ? {} : { item: item.url }),
-    })),
-  }
-}

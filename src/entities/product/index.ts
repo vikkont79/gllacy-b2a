@@ -1,2 +1,2 @@
 export { ProductCard } from './ui'
-export type { Product } from './types'
+export type { Product, ProductRow } from './types'

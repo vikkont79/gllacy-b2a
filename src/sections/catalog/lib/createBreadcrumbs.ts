@@ -1,11 +1,6 @@
+import { createCatalogUrl, getCatalogTitle } from '@/entities/product/lib'
 import type { GetProductsOptions } from '@/entities/product/types'
-import { getCatalogTitle } from '@/shared/config/catalog'
-import { createCatalogUrl } from './createCatalogUrl'
-
-export type Crumb = {
-  name: string
-  url: string
-}
+import type { Crumb } from '@/widgets/breadcrumbs'
 
 export const createBreadcrumbs = (options: GetProductsOptions): Crumb[] => [
   { name: 'Главная', url: '/' },

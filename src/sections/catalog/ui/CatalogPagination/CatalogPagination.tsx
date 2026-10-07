@@ -1,6 +1,6 @@
 import { Button, Icon, Link } from '@/shared/ui'
 import { ITEMS_PER_PAGE } from '@/shared/config'
-import { createCatalogUrl } from '@/sections/catalog/lib'
+import { createCatalogUrl } from '@/entities/product/lib'
 import type { GetProductsOptions } from '@/entities/product/types'
 import styles from './CatalogPagination.module.css'
 

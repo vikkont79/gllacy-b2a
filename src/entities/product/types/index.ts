@@ -1,15 +1,41 @@
-import type { ProductRow } from '@db/schema'
+import type { BASE_VALUES, TOPPING_KIND_VALUES } from '@/shared/config/product'
+
+export type Base = (typeof BASE_VALUES)[number]
+
+export type ToppingKind = (typeof TOPPING_KIND_VALUES)[number]
+
+export type ProductRow = {
+  id: number
+  slug: string
+  name: string
+  base: Base
+  flavourId: number
+  price: number
+  calories: number
+  protein: number
+  fat: number
+  carbs: number
+  shelfLife: number
+  image: string
+  description: string
+  composition: string
+  isAvailable: boolean
+  isNew: boolean
+  createdAt: Date
+  updatedAt: Date
+}
+
+export type ProductTopping = {
+  name: string
+  kind: ToppingKind
+}
 
 export type Product = ProductRow & {
   flavour: string
-  toppings: string[]
+  toppings: ProductTopping[]
 }
 
 export type Sort = 'popular' | 'cheap' | 'expensive'
-
-export type Base = ProductRow['base']
-
-export type ToppingKind = 'chunk' | 'topping' | 'syrup' | 'sprinkle'
 
 export type GetProductsOptions = {
   sort?: Sort

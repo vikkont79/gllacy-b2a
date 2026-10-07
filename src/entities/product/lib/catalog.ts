@@ -1,9 +1,11 @@
+import type { Base } from '../types'
+import { createCatalogUrl } from './createCatalogUrl'
+
 export const DEFAULT_CATALOG_TITLE = 'Все продукты'
+
 export const NEW_CATEGORY_TITLE = 'Новинки'
 
-type CatalogBase = 'plombir' | 'slivochnoe' | 'sorbet'
-
-export const CATEGORY_LABELS: Record<CatalogBase, string> = {
+export const CATEGORY_LABELS: Record<Base, string> = {
   plombir: 'Пломбир',
   slivochnoe: 'Сливочное',
   sorbet: 'Сорбеты',
@@ -12,14 +14,14 @@ export const CATEGORY_LABELS: Record<CatalogBase, string> = {
 export type CatalogCategory = { title: string; href: string; isNew?: boolean }
 
 export const CATALOG_CATEGORIES: readonly CatalogCategory[] = [
-  { title: NEW_CATEGORY_TITLE, href: '/products?isNew=1', isNew: true },
-  { title: CATEGORY_LABELS.plombir, href: '/products?base=plombir' },
-  { title: CATEGORY_LABELS.slivochnoe, href: '/products?base=slivochnoe' },
-  { title: CATEGORY_LABELS.sorbet, href: '/products?base=sorbet' },
+  { title: NEW_CATEGORY_TITLE, href: createCatalogUrl({ isNew: true }), isNew: true },
+  { title: CATEGORY_LABELS.plombir, href: createCatalogUrl({ base: 'plombir' }) },
+  { title: CATEGORY_LABELS.slivochnoe, href: createCatalogUrl({ base: 'slivochnoe' }) },
+  { title: CATEGORY_LABELS.sorbet, href: createCatalogUrl({ base: 'sorbet' }) },
 ]
 
 export type CatalogTitleOptions = {
-  base?: CatalogBase
+  base?: Base
   isNew?: boolean
 }
 

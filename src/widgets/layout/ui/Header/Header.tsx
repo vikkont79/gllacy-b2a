@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Icon, IconButton, Link } from '@/shared/ui'
 import logo from '@/shared/assets/images/logo.svg'
-import { CATALOG_CATEGORIES } from '@/shared/config'
+import { CATALOG_CATEGORIES } from '@/entities/product/lib'
 import { CONTACT_PHONE, phoneHref } from '@/shared/config/contacts'
 import { AutoCloseDetails } from './AutoCloseDetails'
 import styles from './Header.module.css'

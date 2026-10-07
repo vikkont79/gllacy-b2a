@@ -1,2 +1,2 @@
 export { CatalogPage } from './ui'
-export { createCatalogUrl, parseCatalogParams } from './lib'
+export { parseCatalogParams } from './lib'

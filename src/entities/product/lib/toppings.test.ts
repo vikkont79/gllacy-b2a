@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { TOPPING_KIND_OPTIONS } from './toppingKindOptions'
+import { TOPPING_KIND_OPTIONS } from './toppings'
 
 describe('TOPPING_KIND_OPTIONS', () => {
   it('содержит ровно четыре опции', () => {
@@ -10,7 +10,7 @@ describe('TOPPING_KIND_OPTIONS', () => {
   it('покрывает все kinds ровно по разу', () => {
     expect(TOPPING_KIND_OPTIONS.map((option) => option.kind)).toEqual([
       'chunk',
-      'topping',
+      'jam',
       'syrup',
       'sprinkle',
     ])
@@ -19,7 +19,7 @@ describe('TOPPING_KIND_OPTIONS', () => {
   it('содержит подписи по группам', () => {
     expect(TOPPING_KIND_OPTIONS.map((option) => option.label)).toEqual([
       'Кусочки',
-      'Топпинги',
+      'Джемы',
       'Сиропы',
       'Посыпки',
     ])

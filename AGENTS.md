@@ -80,6 +80,7 @@ src/{layer}/{domain}/
 ### `src/app/` (роутинг Next.js)
 - Только `export default function`
 - Без стрелочных функций, без именованных экспортов
+- Исключение: `metadata`, `generateMetadata`, `revalidate` и подобное — Next требует их именованными экспортами. Значения живут в секциях, роут только реэкспортирует
 - Сигнатура как в шаблоне: `export default function Page() { ... }`
 
 ### Вне `src/app/` (компоненты, возвращающие JSX)

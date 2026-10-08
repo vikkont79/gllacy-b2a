@@ -1,0 +1,17 @@
+.notFound {
+  padding-block: 60px 80px;
+  text-align: center;
+}
+
+.title {
+  margin-block: 0 8px;
+  font-size: var(--title-large);
+  line-height: 32px;
+  font-weight: 900;
+}
+
+.message {
+  margin-block: 0 24px;
+  color: var(--color-text-medium);
+  text-wrap: balance;
+}

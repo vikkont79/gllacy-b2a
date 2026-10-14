@@ -40,6 +40,7 @@ Turso (libSQL) + Drizzle ORM · zod · pnpm
 ## Документация
 
 - `docs/roadmap.md` — цели, принципы, вертикали
+- `docs/decisions.md` — почему выбрано именно так
 - `AGENTS.md` — правила разработки и структура проекта
 
 ## Деплой

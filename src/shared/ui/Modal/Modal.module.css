@@ -1,0 +1,20 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  inline-size: min(100%, 24rem);
+  max-block-size: calc(100dvh - var(--space-2xl));
+  overflow: auto;
+  padding: var(--space-lg);
+  border: none;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-lg);
+  /* в body текст центрирован глобально — в модалке выравниваем по началу */
+  text-align: start;
+  color: var(--color-text-dark);
+}
+
+.modal::backdrop {
+  background-color: oklch(from var(--color-text-dark) l c h / 0.4);
+}

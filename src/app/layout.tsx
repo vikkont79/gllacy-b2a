@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 import { inter } from '@/shared/lib/fonts'
 import { SITE_NAME, SITE_URL } from '@/shared/config'
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from '@/shared/config'
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="ru" className={inter.variable} data-scroll-behavior="smooth">
       <body>
         <Layout>{children}</Layout>
+        <Toaster position="top-center" richColors />
         <JsonLd data={organization} />
         <JsonLd data={website} />
       </body>

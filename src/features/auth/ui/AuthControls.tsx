@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Button, ConfirmModal, IconButton } from '@/shared/ui'
 import { isAdminRole } from '@/shared/lib/roles'
@@ -21,6 +22,7 @@ interface AuthControlsProps {
  * на сервере перевело бы все страницы в динамический рендер и убило бы ISR.
  */
 const AuthControls = ({ className = '' }: AuthControlsProps) => {
+  const router = useRouter()
   const [isSigningOut, setIsSigningOut] = useState(false)
   const { data: session, isPending } = authClient.useSession()
 
@@ -35,6 +37,9 @@ const AuthControls = ({ className = '' }: AuthControlsProps) => {
     try {
       await authClient.signOut()
       toast.success('Вы вышли из аккаунта')
+      // Уходим явно: страница уже отрисована и proxy повторно не сработает,
+      // поэтому без перехода человек остался бы там, куда доступа больше нет.
+      router.replace('/')
     } catch {
       toast.error('Не удалось выйти')
     } finally {

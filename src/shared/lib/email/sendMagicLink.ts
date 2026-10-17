@@ -1,5 +1,4 @@
-import { env } from '@/shared/lib/env'
-import { getEmailSender } from './index'
+import { getEmailSender } from './getEmailSender'
 
 const escapeHtml = (value: string): string =>
   value
@@ -18,20 +17,18 @@ const buildMagicLinkEmail = (url: string): string => `
 `
 
 /**
- * Отправляет письмо со ссылкой входа. В разработке ссылка дополнительно
- * печатается в терминал: отправка идёт через Resend, но в консоль попадает
- * только при NODE_ENV !== production, поэтому в прод такое письмо не утекает.
+ * Отправляет письмо со ссылкой входа. Куда попадёт письмо, решает отправитель:
+ * при наличии RESEND_API_KEY — в Resend, без него — в консоль, где печатается
+ * и ссылка, и тело письма. Здесь условий нет намеренно: выбор отправителя —
+ * единственное решение, и оно живёт в getEmailSender.
  */
 const sendMagicLink = async (email: string, url: string): Promise<void> => {
-  if (env.NODE_ENV !== 'production') {
-    console.log(`\n========== MAGIC LINK (dev) ==========\nTo: ${email}\n${url}\n====================================\n`)
-  }
-
   const sender = getEmailSender()
 
   await sender.send({
     to: email,
     subject: 'Вход на сайт',
+    url,
     html: buildMagicLinkEmail(url),
   })
 }

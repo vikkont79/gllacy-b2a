@@ -3,12 +3,8 @@ import type { EmailMessage } from './types'
 
 const send = vi.fn<(message: EmailMessage) => Promise<void>>()
 
-vi.mock('./index', () => ({
+vi.mock('./getEmailSender', () => ({
   getEmailSender: () => ({ send }),
-}))
-
-vi.mock('@/shared/lib/env', () => ({
-  env: { NODE_ENV: 'development', RESEND_API_KEY: 'test' },
 }))
 
 const { sendMagicLink } = await import('./sendMagicLink')
@@ -23,39 +19,26 @@ describe('sendMagicLink', () => {
     vi.restoreAllMocks()
   })
 
-  it('передаёт письмо отправителю с ссылкой в теле', async () => {
-    await sendMagicLink('user@example.com', 'https://glaicy.vercel.app/api/auth/magic-link/verify?token=abc')
+  it('передаёт письмо отправителю со ссылкой и телом', async () => {
+    const url = 'https://glaicy.vercel.app/api/auth/magic-link/verify?token=abc'
+
+    await sendMagicLink('user@example.com', url)
 
     expect(send).toHaveBeenCalledTimes(1)
     expect(send).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'user@example.com',
         subject: 'Вход на сайт',
+        url,
         html: expect.stringContaining('token=abc'),
       }),
     )
   })
 
-  it('печатает ссылку в консоль в разработке', async () => {
+  it('не печатает ссылку сам: это дело отправителя', async () => {
     const log = vi.spyOn(console, 'log').mockImplementation(() => {})
 
     await sendMagicLink('user@example.com', 'https://glaicy.vercel.app/magic-link')
-
-    const printed = log.mock.calls.flat().join('\n')
-    expect(printed).toContain('MAGIC LINK (dev)')
-    expect(printed).toContain('https://glaicy.vercel.app/magic-link')
-  })
-
-  it('не печатает ссылку на проде', async () => {
-    vi.doMock('@/shared/lib/env', () => ({
-      env: { NODE_ENV: 'production', RESEND_API_KEY: 'test' },
-    }))
-
-    vi.resetModules()
-    const { sendMagicLink: sendInProd } = await import('./sendMagicLink')
-    const log = vi.spyOn(console, 'log').mockImplementation(() => {})
-
-    await sendInProd('user@example.com', 'https://glaicy.vercel.app/magic-link')
 
     expect(log).not.toHaveBeenCalled()
     expect(send).toHaveBeenCalledTimes(1)
@@ -67,5 +50,13 @@ describe('sendMagicLink', () => {
     const html = send.mock.calls[0]?.[0]?.html ?? ''
     expect(html).toContain('&quot;')
     expect(html).not.toContain('x"onmouseover="alert(1)')
+  })
+
+  it('отдаёт ссылку для печати сырой, экранируя её только в html', async () => {
+    const url = 'https://glaicy.vercel.app/verify?token=abc&callbackURL=%2F'
+
+    await sendMagicLink('user@example.com', url)
+
+    expect(send.mock.calls[0]?.[0]?.url).toBe(url)
   })
 })

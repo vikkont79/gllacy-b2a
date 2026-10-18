@@ -36,6 +36,13 @@
       "when": 1791288908464,
       "tag": "0004_wild_forge",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1791550007297,
+      "tag": "0005_remarkable_raider",
+      "breakpoints": true
     }
   ]
 }

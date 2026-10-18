@@ -1,0 +1,11 @@
+.controls {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.signOut {
+  padding-inline: var(--space-sm);
+  padding-block: var(--space-xs);
+  font-size: var(--text-sm);
+}

@@ -1,0 +1,29 @@
+.title {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--title-md);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.message {
+  margin: 0 0 var(--space-lg);
+  color: var(--color-text-medium);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.cancel {
+  padding-inline: var(--space-md);
+  padding-block: var(--space-sm);
+}
+
+.confirm {
+  padding-inline: var(--space-md);
+  padding-block: var(--space-sm);
+}

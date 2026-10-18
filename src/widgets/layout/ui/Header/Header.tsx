@@ -3,6 +3,7 @@ import { Icon, IconButton, Link } from '@/shared/ui'
 import logo from '@/shared/assets/images/logo.svg'
 import { CATALOG_CATEGORIES } from '@/entities/product/lib'
 import { CONTACT_PHONE, phoneHref } from '@/shared/config/contacts'
+import { AuthControls } from '@/features/auth'
 import { AutoCloseDetails } from './AutoCloseDetails'
 import styles from './Header.module.css'
 
@@ -65,15 +66,7 @@ const Header = () => {
               iconSize={16}
               iconLabel='Поиск по сайту'
           />
-          {/* Заглушка: станет открывашкой модалки регистрации при реализации Auth.js */}
-          <IconButton
-            className={styles.actionsButton}
-            variant='transparent'
-            icon='login'
-            iconSize={16}
-          >
-            Вход
-          </IconButton>
+          <AuthControls className={styles.actionsButton} />
           {/* Заглушка: счётчик и поповер появятся вместе с features/cart */}
           <IconButton
             className={styles.actionsButton}

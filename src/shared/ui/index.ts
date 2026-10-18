@@ -6,4 +6,6 @@ export { IconButton } from './IconButton/IconButton'
 export { Toggle } from './Toggle/Toggle'
 export { Input } from './Input/Input'
 export { JsonLd } from './JsonLd/JsonLd'
+export { Modal } from './Modal/Modal'
+export { ConfirmModal } from './ConfirmModal/ConfirmModal'
 

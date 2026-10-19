@@ -20,7 +20,7 @@ export const getProduct = cache(
       if (!row) return null
 
       const toppingRows = await db
-        .select({ name: toppings.name, kind: toppings.kind })
+        .select({ id: toppings.id, name: toppings.name, kind: toppings.kind })
         .from(productToppings)
         .innerJoin(toppings, eq(productToppings.toppingId, toppings.id))
         .where(eq(productToppings.productId, row.id))

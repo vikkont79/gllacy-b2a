@@ -6,7 +6,7 @@ const Tastes = async () => {
   let items: ProductRow[] = []
 
   try {
-    items = (await getProducts({ limit: 4 })).items
+    items = (await getProducts({ isNew: true })).items
   } catch {
     return null
   }
@@ -17,9 +17,9 @@ const Tastes = async () => {
 
   return (
     <section className={styles.tastes}>
-      <h2 className="visually-hidden">Наши лучшие вкусы.</h2>
+      <h2 className="visually-hidden">Наши новинки.</h2>
       <p className={`${styles.title} title`}>
-        Попробуйте самые популярные вкусы нашего мороженого
+        Попробуйте наши новинки
       </p>
       <ul className={styles.list}>
         {items.map((item, index) => (

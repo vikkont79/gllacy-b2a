@@ -42,7 +42,7 @@ export type AdminProductDetails = ProductRow & {
 
 export type AdminProductRow = Pick<
   ProductRow,
-  'id' | 'slug' | 'name' | 'price' | 'image' | 'isAvailable'
+  'id' | 'slug' | 'name' | 'price' | 'isNew' | 'image' | 'isAvailable'
 >
 
 export type FlavourOption = {

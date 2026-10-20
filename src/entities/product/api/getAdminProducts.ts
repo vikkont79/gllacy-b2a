@@ -10,7 +10,7 @@ import type { AdminProductRow } from '../types'
 /*
  * Список для /admin: все товары, включая скрытые. Отличается от
  * getProducts, который фильтрует по isAvailable и считает total.
- * Цена тянется как ключевая метрика карточки; base/КБЖУ не нужны.
+ * Цена и isNew нужны карточке; base/КБЖУ не нужны.
  */
 export const getAdminProducts = cache(async (): Promise<AdminProductRow[]> => {
   try {
@@ -20,6 +20,7 @@ export const getAdminProducts = cache(async (): Promise<AdminProductRow[]> => {
         slug: products.slug,
         name: products.name,
         price: products.price,
+        isNew: products.isNew,
         image: products.image,
         isAvailable: products.isAvailable,
       })

@@ -12,8 +12,8 @@ import { resolveToppingIds } from '../lib'
 import { productFormSchema, type ProductFormValues } from '../types'
 
 export type SaveProductResult =
-  | { ok: true; id: number }
-  | { ok: false; error: string }
+  | { success: true; id: number }
+  | { success: false; error: string }
 
 export const saveProduct = async (
   productId: number | null,
@@ -22,14 +22,14 @@ export const saveProduct = async (
   const session = await getAdminSession()
 
   if (!session) {
-    return { ok: false, error: 'Сессия истекла. Войдите заново.' }
+    return { success: false, error: 'Сессия истекла. Войдите заново.' }
   }
 
   const parsed = productFormSchema.safeParse(values)
 
   if (!parsed.success) {
     return {
-      ok: false,
+      success: false,
       error: parsed.error.issues[0]?.message ?? 'Проверьте поля формы',
     }
   }
@@ -63,7 +63,7 @@ export const saveProduct = async (
         .limit(1)
 
       if (existing) {
-        return { ok: false, error: 'Товар с таким адресом уже существует' }
+        return { success: false, error: 'Товар с таким адресом уже существует' }
       }
 
       slug = data.slug
@@ -75,7 +75,7 @@ export const saveProduct = async (
         .limit(1)
 
       if (!existing) {
-        return { ok: false, error: 'Товар не найден' }
+        return { success: false, error: 'Товар не найден' }
       }
 
       slug = existing.slug
@@ -150,7 +150,7 @@ export const saveProduct = async (
     revalidatePath('/products')
     revalidatePath(`/products/${slug}`)
 
-    return { ok: true, id: savedId }
+    return { success: true, id: savedId }
   } catch (error) {
     console.error('Ошибка сохранения товара', error)
 
@@ -158,13 +158,13 @@ export const saveProduct = async (
       error instanceof Error &&
       error.message.includes('UNIQUE constraint failed: products.slug')
     ) {
-      return { ok: false, error: 'Товар с таким адресом уже существует' }
+      return { success: false, error: 'Товар с таким адресом уже существует' }
     }
 
     if (error instanceof Error && error.message.includes('FOREIGN KEY constraint failed')) {
-      return { ok: false, error: 'Выберите вкус из списка' }
+      return { success: false, error: 'Выберите вкус из списка' }
     }
 
-    return { ok: false, error: 'Не удалось сохранить товар' }
+    return { success: false, error: 'Не удалось сохранить товар' }
   }
 }

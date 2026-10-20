@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import type { ProductTopping } from '@/entities/product/types'
 
-import { resolveToppingIds } from './index'
+import { resolveToppingIds } from './resolveToppingIds'
 
 const catalog: ProductTopping[] = [
   { id: 1, name: 'клубничный джем', kind: 'jam' },

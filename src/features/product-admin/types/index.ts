@@ -60,6 +60,12 @@ const shelfLifeField = z.coerce
  * Без .default(): RHF всегда передаёт isAvailable/isNew/toppingIds,
  * а совпадение input и output типов избавляет zodResolver от сюрпризов.
  */
+export const productPriceSchema = z.object({
+  price: priceField,
+})
+
+export type ProductPriceValues = z.infer<typeof productPriceSchema>
+
 export const productFormSchema = z.object({
   name: nameField,
   slug: slugField,

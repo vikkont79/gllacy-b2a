@@ -1,0 +1,97 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-inline-size: 64rem;
+  margin-inline: auto;
+  padding-block-end: var(--space-xl);
+  text-align: start;
+}
+
+.fieldset {
+  display: grid;
+  gap: var(--space-md);
+  margin: 0;
+  padding: var(--space-md);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+}
+
+.legend {
+  padding: 0;
+  font-size: var(--title-sm);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--space-md);
+}
+
+.image {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-md);
+}
+
+.imageField {
+  flex: 1 1 16rem;
+}
+
+.preview {
+  flex: none;
+  inline-size: 6rem;
+  block-size: 6rem;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+
+.groups {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.groupTitle {
+  padding: 0;
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.toppingList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.error {
+  inline-size: 100%;
+  margin: 0;
+  color: var(--color-error);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.empty {
+  margin: 0;
+  color: var(--color-text-medium);
+  font-size: var(--text-sm);
+}

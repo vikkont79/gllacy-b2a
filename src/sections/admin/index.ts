@@ -1,1 +1,1 @@
-export { AdminProducts } from './ui'
+export { AdminProductForm, AdminProducts } from './ui'

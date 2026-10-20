@@ -8,7 +8,7 @@ import { products } from '@db/schema'
 import type { AdminProductRow } from '../types'
 
 /*
- * Список для /admin: все товары, включая скрытые. Отличается от
+ * Список для /admin/products: все товары, включая скрытые. Отличается от
  * getProducts, который фильтрует по isAvailable и считает total.
  * Цена и isNew нужны карточке; base/КБЖУ не нужны.
  */

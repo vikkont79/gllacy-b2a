@@ -145,7 +145,7 @@ export const saveProduct = async (
       return id
     })
 
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
     revalidatePath('/')
     revalidatePath('/products')
     revalidatePath(`/products/${slug}`)

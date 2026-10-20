@@ -22,7 +22,7 @@ const AdminProducts = async () => {
     <main id="content" tabIndex={-1} className="wrapper">
       <div className={styles.header}>
         <h1 className="title">Товары</h1>
-        <Button href="/admin/product">Добавить товар</Button>
+        <Button href="/admin/products/new">Добавить товар</Button>
       </div>
 
       {productsError ? (

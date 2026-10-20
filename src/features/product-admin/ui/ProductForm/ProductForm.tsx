@@ -131,7 +131,7 @@ const ProductForm = ({ product, flavours, toppings }: ProductFormProps) => {
       }
 
       toast.success(isEdit ? 'Товар сохранён' : 'Товар создан')
-      router.push('/admin')
+      router.push('/admin/products')
       router.refresh()
     } catch {
       setServerError('Не удалось сохранить товар')
@@ -413,7 +413,7 @@ const ProductForm = ({ product, flavours, toppings }: ProductFormProps) => {
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Сохраняем…' : 'Сохранить'}
         </Button>
-        <Button href="/admin" variant="transparent">
+        <Button href="/admin/products" variant="transparent">
           Отмена
         </Button>
         {serverError && (

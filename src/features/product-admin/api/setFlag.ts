@@ -41,7 +41,7 @@ export const setFlag = async (
       return { success: false, error: 'Товар не найден' }
     }
 
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
     revalidatePath('/')
     revalidatePath('/products')
     revalidatePath(`/products/${updated.slug}`)

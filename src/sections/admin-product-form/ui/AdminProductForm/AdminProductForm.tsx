@@ -10,14 +10,10 @@ import { ProductForm } from '@/features/product-admin/ui'
 import { Button, ErrorState } from '@/shared/ui'
 
 interface AdminProductFormProps {
-  searchParams: Promise<Record<string, string | string[] | undefined>>
+  productId: number | null
 }
 
-const AdminProductForm = async ({ searchParams }: AdminProductFormProps) => {
-  const params = await searchParams
-  const idParam = Array.isArray(params.id) ? params.id[0] : params.id
-  const productId = idParam && /^\d+$/.test(idParam) ? Number(idParam) : null
-
+const AdminProductForm = async ({ productId }: AdminProductFormProps) => {
   let product: AdminProductDetails | null = null
   let flavours: FlavourOption[] = []
   let toppings: ProductTopping[] = []
@@ -49,7 +45,7 @@ const AdminProductForm = async ({ searchParams }: AdminProductFormProps) => {
       ) : productId !== null && product === null ? (
         <div>
           <ErrorState message="Товар не найден" />
-          <Button href="/admin" variant="transparent">
+          <Button href="/admin/products" variant="transparent">
             К списку товаров
           </Button>
         </div>

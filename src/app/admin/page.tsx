@@ -1,15 +1,5 @@
-import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { AdminProducts } from '@/sections/admin'
-import { requireAdmin } from '@/shared/lib/requireAdmin'
-
-export const metadata: Metadata = {
-  title: 'Админка',
-  robots: { index: false, follow: false },
-}
-
-export default async function AdminPage() {
-  await requireAdmin()
-
-  return <AdminProducts />
+export default function AdminPage() {
+  redirect('/admin/products')
 }

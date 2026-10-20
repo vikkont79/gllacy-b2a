@@ -72,7 +72,7 @@ const ProductRowActions = ({
         {isNew ? 'Из новинок' : 'В новинки'}
       </Button>
       <Button
-        href={`/admin/product?id=${productId}`}
+        href={`/admin/products/${productId}`}
         variant="transparent"
         size="small"
       >

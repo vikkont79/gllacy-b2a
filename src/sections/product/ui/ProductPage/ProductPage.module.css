@@ -66,6 +66,24 @@
   color: var(--color-text-medium);
 }
 
+.toppings {
+  display: block;
+}
+
+.toppingGroup {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  vertical-align: middle;
+}
+
+.toppingNames {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
 .description {
   margin-block: var(--space-md) 0;
   color: var(--color-text-medium);

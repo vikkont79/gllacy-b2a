@@ -7,6 +7,7 @@ import styles from './AdminNav.module.css'
 
 const TABS = [
   { href: '/admin/products', label: 'Товары' },
+  { href: '/admin/dictionaries', label: 'Справочники' },
   { href: '/admin/orders', label: 'Заказы' },
   { href: '/admin/clients', label: 'Клиенты' },
 ] as const

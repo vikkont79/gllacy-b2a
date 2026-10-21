@@ -26,6 +26,7 @@ export type ProductRow = {
 }
 
 export type ProductTopping = {
+  id: number
   name: string
   kind: ToppingKind
 }
@@ -33,6 +34,20 @@ export type ProductTopping = {
 export type Product = ProductRow & {
   flavour: string
   toppings: ProductTopping[]
+}
+
+export type AdminProductDetails = ProductRow & {
+  toppingIds: number[]
+}
+
+export type AdminProductRow = Pick<
+  ProductRow,
+  'id' | 'slug' | 'name' | 'price' | 'isNew' | 'image' | 'isAvailable'
+>
+
+export type FlavourOption = {
+  id: number
+  name: string
 }
 
 export type Sort = 'popular' | 'cheap' | 'expensive'

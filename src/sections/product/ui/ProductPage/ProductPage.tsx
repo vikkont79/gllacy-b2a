@@ -1,23 +1,19 @@
+import { Fragment } from 'react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import { getProduct } from '@/entities/product/api/getProduct'
 import { CATEGORY_LABELS } from '@/entities/product/lib'
-import { TOPPING_KIND_OPTIONS } from '@/entities/product/lib/toppings'
-import type { ToppingKind } from '@/entities/product/types'
 import { IconButton, JsonLd } from '@/shared/ui'
 import { Breadcrumbs, buildBreadcrumbsJsonLd } from '@/widgets/breadcrumbs'
 import { buildProductJsonLd } from '../../lib/buildProductJsonLd'
 import { createProductCrumbs } from '../../lib/createProductCrumbs'
+import { groupProductToppings } from '../../lib/groupProductToppings'
 import styles from './ProductPage.module.css'
 
 interface ProductPageProps {
   readonly slug: string
 }
-
-const KIND_LABELS = Object.fromEntries(
-  TOPPING_KIND_OPTIONS.map((option) => [option.kind, option.label]),
-) as Record<ToppingKind, string>
 
 const ProductPage = async ({ slug }: ProductPageProps) => {
   const product = await getProduct(slug)
@@ -44,6 +40,7 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
   const jsonLd = buildProductJsonLd(product)
   const crumbs = createProductCrumbs(product)
   const breadcrumbJsonLd = buildBreadcrumbsJsonLd(crumbs)
+  const toppingGroups = groupProductToppings(toppings)
 
   return (
     <>
@@ -100,12 +97,24 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
               <dd>{CATEGORY_LABELS[base]}</dd>
 
               <dt>Наполнители</dt>
-              <dd>
-                {toppings.length === 0
+              <dd className={styles.toppings}>
+                {toppingGroups.length === 0
                   ? 'нет'
-                  : toppings
-                      .map((topping) => KIND_LABELS[topping.kind] ?? topping.name)
-                      .join(', ')}
+                  : toppingGroups.map((group, index) => (
+                      <Fragment key={group.kind}>
+                        <span className={styles.toppingGroup}>
+                          <span className={styles.badge}>{group.label}</span>
+                          {group.names.length > 0 && (
+                            <span className={styles.toppingNames}>
+                              {group.names.map((name) => (
+                                <span key={name}>{name}</span>
+                              ))}
+                            </span>
+                          )}
+                        </span>
+                        {index < toppingGroups.length - 1 && ', '}
+                      </Fragment>
+                    ))}
               </dd>
 
               <dt>Срок хранения</dt>

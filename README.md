@@ -17,12 +17,15 @@ Next.js, значения макета собраны в дизайн-систе
 ## Стек
 
 Next.js 16 (App Router, `src/`) · TypeScript (strict) · CSS-модули + токены в `:root`
-Turso (libSQL) + Drizzle ORM · zod · pnpm
+Turso (libSQL) + Drizzle ORM · Better Auth · zod · pnpm
 
 ## Быстрый старт
 
 1. `pnpm install`
-2. Скопировать `.env.example` → `.env` и заполнить переменные (Turso)
+2. Скопировать `.env.example` → `.env` и заполнить:
+   - Turso: `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`
+   - авторизация: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`
+   - по желанию: `RESEND_API_KEY` (без него ссылка входа печатается в консоль), `VK_ID` и `VK_SECRET`
 3. `pnpm db:migrate`
 4. `pnpm dev`
 
@@ -34,6 +37,7 @@ Turso (libSQL) + Drizzle ORM · zod · pnpm
 | `pnpm build` | прод-сборка |
 | `pnpm lint` | eslint |
 | `pnpm tsc --noEmit` | проверка типов |
+| `pnpm test` | юнит-тесты (vitest) |
 | `pnpm db:generate` | генерация миграции из схемы |
 | `pnpm db:migrate` | накатить миграции |
 

@@ -1,0 +1,7 @@
+.hint {
+  max-inline-size: 60ch;
+  margin-inline: auto;
+  margin-block: 0 var(--space-lg);
+  color: var(--color-text-medium);
+  text-align: start;
+}

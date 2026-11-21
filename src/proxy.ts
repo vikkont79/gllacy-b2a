@@ -43,6 +43,15 @@ export async function proxy(request: NextRequest) {
     })
   }
 
+  /*
+   * Server Action — это POST на текущий роут. Если редиректить его, клиент
+   * получит HTML вместо ответа экшена и уйдёт в error boundary. Доступ
+   * проверяет сам экшен через getAdminSession.
+   */
+  if (request.method === 'POST' && request.headers.has('next-action')) {
+    return NextResponse.next()
+  }
+
   if (session && (!isAdminSection(pathname) || session.user.role === ADMIN_ROLE)) {
     return NextResponse.next()
   }

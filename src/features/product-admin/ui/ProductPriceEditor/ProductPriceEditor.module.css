@@ -20,13 +20,6 @@
   }
 }
 
-.editField {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
 .field {
   inline-size: 9rem;
 }

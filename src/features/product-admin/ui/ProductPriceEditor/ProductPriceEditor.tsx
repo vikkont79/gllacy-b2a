@@ -4,7 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-import { IconButton, Input } from '@/shared/ui'
+import { InlineInput } from '@/shared/ui'
 
 import { updateProductPrice } from '../../api/updateProductPrice'
 import { formatPrice } from '../../lib'
@@ -70,45 +70,21 @@ const ProductPriceEditor = ({ productId, price }: ProductPriceEditorProps) => {
 
   if (isEditing) {
     return (
-      <div className={styles.editField} aria-busy={isPending}>
-        <div className={styles.field}>
-          <Input
-            label="Цена, ₽"
-            hiddenLabel
-            size="small"
-            type="text"
-            inputMode="decimal"
-            value={editValue}
-            onChange={(event) => {
-              setEditValue(event.target.value)
-              setError(undefined)
-            }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') handleSave()
-              if (event.key === 'Escape') handleClose()
-            }}
-            autoFocus
-            disabled={isPending}
-            error={error}
-          />
-        </div>
-        <IconButton
-          icon="check"
-          variant="transparent"
-          iconSize={16}
-          iconLabel="Сохранить"
-          onClick={handleSave}
-          disabled={isPending}
-        />
-        <IconButton
-          icon="cross"
-          variant="transparent"
-          iconSize={16}
-          iconLabel="Отмена"
-          onClick={handleClose}
-          disabled={isPending}
-        />
-      </div>
+      <InlineInput
+        className={styles.field}
+        label="Цена, ₽"
+        value={editValue}
+        type="text"
+        inputMode="decimal"
+        error={error}
+        pending={isPending}
+        onChange={(nextValue) => {
+          setEditValue(nextValue)
+          setError(undefined)
+        }}
+        onSave={handleSave}
+        onCancel={handleClose}
+      />
     )
   }
 

@@ -1,4 +1,11 @@
-import { integer, primaryKey, real, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import {
+  integer,
+  primaryKey,
+  real,
+  sqliteTable,
+  text,
+  uniqueIndex,
+} from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 
 import type { Base, ProductRow, ToppingKind } from '@/entities/product/types'
@@ -8,11 +15,15 @@ export const flavours = sqliteTable('flavours', {
   name: text('name').notNull().unique(),
 })
 
-export const toppings = sqliteTable('toppings', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  name: text('name').notNull().unique(),
-  kind: text('kind').$type<ToppingKind>().notNull(),
-})
+export const toppings = sqliteTable(
+  'toppings',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    name: text('name').notNull(),
+    kind: text('kind').$type<ToppingKind>().notNull(),
+  },
+  (table) => [uniqueIndex('toppings_name_kind_unique').on(table.name, table.kind)],
+)
 
 export const products = sqliteTable('products', {
   id: integer('id').primaryKey({ autoIncrement: true }),

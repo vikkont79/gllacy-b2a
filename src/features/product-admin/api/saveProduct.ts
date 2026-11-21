@@ -1,6 +1,6 @@
 'use server'
 
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 import { db } from '@db/client'
@@ -128,7 +128,12 @@ export const saveProduct = async (
         const [found] = await tx
           .select({ id: toppings.id })
           .from(toppings)
-          .where(eq(toppings.name, marker.name))
+          .where(
+            and(
+              eq(toppings.name, marker.name),
+              eq(toppings.kind, marker.kind),
+            ),
+          )
           .limit(1)
 
         if (found) finalToppingIds.add(found.id)

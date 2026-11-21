@@ -26,6 +26,7 @@ const ToppingDelete = ({
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const modalId = `delete-topping-${topping.id}`
+  const kindSuffix = `из вида «${label}»`
 
   const handleDelete = () => {
     startTransition(async () => {
@@ -54,13 +55,13 @@ const ToppingDelete = ({
         variant="transparent"
         size="small"
         iconSize={12}
-        iconLabel={`Удалить ${topping.name}`}
+        iconLabel={`Удалить ${topping.name} ${kindSuffix}`}
         popoverTarget={modalId}
         disabled={isPending}
       />
       <ConfirmModal
         id={modalId}
-        title={`Удалить «${topping.name}»?`}
+        title={`Удалить «${topping.name}» ${kindSuffix}?`}
         message={message}
         confirmLabel="Удалить"
         pending={isPending}

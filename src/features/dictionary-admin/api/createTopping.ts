@@ -1,5 +1,7 @@
 'use server'
 
+import { LibsqlError } from '@libsql/client'
+import { and, eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 import { db } from '@db/client'
@@ -31,6 +33,21 @@ export const createTopping = async (
     }
   }
 
+  const [existing] = await db
+    .select({ id: toppings.id })
+    .from(toppings)
+    .where(
+      and(
+        eq(toppings.name, parsed.data.name),
+        eq(toppings.kind, parsed.data.kind),
+      ),
+    )
+    .limit(1)
+
+  if (existing) {
+    return { success: false, error: 'Такой наполнитель уже есть' }
+  }
+
   try {
     await db.insert(toppings).values(parsed.data)
 
@@ -42,7 +59,8 @@ export const createTopping = async (
 
     if (
       error instanceof Error &&
-      error.message.includes('UNIQUE constraint failed: toppings.name')
+      error.cause instanceof LibsqlError &&
+      error.cause.code === 'SQLITE_CONSTRAINT'
     ) {
       return { success: false, error: 'Такой наполнитель уже есть' }
     }

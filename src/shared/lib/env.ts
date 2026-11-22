@@ -4,6 +4,8 @@ import { z } from 'zod'
 const envSchema = z.object({
   TURSO_DATABASE_URL: z.string().min(1, 'TURSO_DATABASE_URL не задан'),
   TURSO_AUTH_TOKEN: z.string().min(1, 'TURSO_AUTH_TOKEN не задан'),
+  UPSTASH_REDIS_REST_URL: z.string().url('UPSTASH_REDIS_REST_URL: ожидается https://…'),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1, 'UPSTASH_REDIS_REST_TOKEN не задан'),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   BETTER_AUTH_SECRET: z.string().min(32, 'BETTER_AUTH_SECRET: минимум 32 символа'),
   // Необязательна намеренно: на Vercel адрес берётся из VERCEL_URL, потому что

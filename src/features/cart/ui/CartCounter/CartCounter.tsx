@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Button, Icon } from '@/shared/ui'
 
-import { getCartCount } from '../../api/getCartCount'
+import { syncCart } from '../../api/syncCart'
 import {
   CART_CHANGED_EVENT,
   CART_COUNT_REFRESH_MS,
@@ -19,7 +19,7 @@ interface CartCounterProps {
 
 const loadCount = async (): Promise<number | null> => {
   try {
-    const result = await getCartCount()
+    const result = await syncCart()
 
     return result.success ? result.count : null
   } catch {

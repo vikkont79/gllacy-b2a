@@ -6,9 +6,9 @@ import { db } from '@db/client'
 import { products } from '@db/schema'
 import { redis } from '@/shared/lib/redis'
 
-import { calculateCartTotal, cartKey } from '../lib'
+import { calculateCartTotal } from '../lib'
 import type { CartItem, CartSnapshot } from '../types'
-import { readGuestId } from './guestId'
+import { resolveCartOwner } from './cartOwner'
 
 export type GetCartResult =
   | { success: true; cart: CartSnapshot }
@@ -44,11 +44,11 @@ const toQuantities = (stored: Record<string, unknown> | null) => {
 
 export const getCart = async (): Promise<GetCartResult> => {
   try {
-    const guestId = await readGuestId()
+    const owner = await resolveCartOwner()
 
-    if (!guestId) return { success: true, cart: emptyCart() }
+    if (!owner.key) return { success: true, cart: emptyCart() }
 
-    const key = cartKey(guestId)
+    const key = owner.key
     const quantities = toQuantities(
       await redis.hgetall<Record<string, unknown>>(key),
     )

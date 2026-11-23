@@ -4,9 +4,10 @@ export {
   CART_MAX_KG,
   CART_MIN_KG,
   CART_TTL_SECONDS,
+  CART_USER_TTL_SECONDS,
 } from './constants'
-export { cartKey } from './cartKey'
-export { clampQuantity, parseQuantityInput } from './quantity'
+export { guestCartKey, userCartKey } from './cartKey'
+export { clampQuantity, mergeQuantity, parseQuantityInput } from './quantity'
 export { calculateCartTotal, calculateLineTotal } from './calculateTotals'
 export {
   CART_CHANGED_EVENT,

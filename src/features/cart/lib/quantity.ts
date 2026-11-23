@@ -20,3 +20,10 @@ export const parseQuantityInput = (raw: string): number | null => {
 /* Страховка после HINCRBY: параллельные клики не уведут количество за предел. */
 export const clampQuantity = (value: number): number =>
   Math.min(CART_MAX_KG, Math.max(CART_MIN_KG, Math.trunc(value)))
+
+/*
+ * Слияние корзин при входе: количества суммируются и подрезаются до предела.
+ * Lua-скрипт в mergeGuestCart зеркалит эту формулу — правки синхронизировать.
+ */
+export const mergeQuantity = (current: number, guest: number): number =>
+  clampQuantity(current + guest)

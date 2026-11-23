@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { clampQuantity, parseQuantityInput } from './quantity'
+import { clampQuantity, mergeQuantity, parseQuantityInput } from './quantity'
 
 describe('parseQuantityInput', () => {
   it.each([
@@ -29,5 +29,17 @@ describe('clampQuantity', () => {
     [2.9, 2],
   ] as const)('%d → %d', (value, expected) => {
     expect(clampQuantity(value)).toBe(expected)
+  })
+})
+
+describe('mergeQuantity', () => {
+  it.each([
+    [1, 1, 2],
+    [40, 50, 90],
+    [50, 50, 99],
+    [99, 5, 99],
+    [0, 5, 5],
+  ] as const)('%d + %d → %d', (current, guest, expected) => {
+    expect(mergeQuantity(current, guest)).toBe(expected)
   })
 })

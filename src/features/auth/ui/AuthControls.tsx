@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Button, ConfirmModal, IconButton } from '@/shared/ui'
+import { notifyCartChanged } from '@/shared/lib/cartEvents'
 import { isAdminRole } from '@/shared/lib/roles'
 
 import { authClient } from '../lib/client'
@@ -35,7 +36,17 @@ const AuthControls = ({ className = '' }: AuthControlsProps) => {
     setIsSigningOut(true)
 
     try {
-      await authClient.signOut()
+      const { error } = await authClient.signOut()
+
+      if (error) {
+        toast.error('Не удалось выйти')
+
+        return
+      }
+
+      // Корзина снова гостевая: бейдж в шапке обнуляем сразу, иначе он
+      // останется со старым числом до следующего обновления по фокусу.
+      notifyCartChanged(0)
       toast.success('Вы вышли из аккаунта')
       // Уходим явно: страница уже отрисована и proxy повторно не сработает,
       // поэтому без перехода человек остался бы там, куда доступа больше нет.

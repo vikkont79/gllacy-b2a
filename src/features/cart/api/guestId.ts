@@ -39,3 +39,13 @@ export const ensureGuestId = async (): Promise<string> => {
 
   return guestId
 }
+
+/**
+ * Стирает cookie гостя после слияния корзины в аккаунт.
+ * Вызывать только из Server Action: удаление cookie в рендере запрещено.
+ */
+export const clearGuestId = async (): Promise<void> => {
+  const store = await cookies()
+
+  store.delete(CART_COOKIE_NAME)
+}

@@ -3,14 +3,14 @@
 import { redis } from '@/shared/lib/redis'
 
 import {
-  cartKey,
   CART_MAX_KG,
   CART_TTL_SECONDS,
+  CART_USER_TTL_SECONDS,
   clampQuantity,
 } from '../lib'
 import { cartProductIdSchema, type CartMutationResult } from '../types'
+import { resolveCartOwner } from './cartOwner'
 import { getProductAvailability } from './getProductAvailability'
-import { ensureGuestId } from './guestId'
 
 export const addToCart = async (
   productId: number,
@@ -32,7 +32,16 @@ export const addToCart = async (
       return { success: false, error: 'Товар снят с продажи' }
     }
 
-    const key = cartKey(await ensureGuestId())
+    const owner = await resolveCartOwner({
+      createGuest: true,
+      clearMergedCookie: true,
+    })
+    const key = owner.key
+
+    if (!key) {
+      return { success: false, error: 'Не удалось добавить товар' }
+    }
+
     const field = String(parsed.data)
     const stored = await redis.hget<number>(key, field)
     const current = typeof stored === 'number' ? stored : 0
@@ -50,7 +59,10 @@ export const addToCart = async (
     }
 
     const count = await redis.hlen(key)
-    await redis.expire(key, CART_TTL_SECONDS)
+    const ttl =
+      owner.type === 'user' ? CART_USER_TTL_SECONDS : CART_TTL_SECONDS
+
+    await redis.expire(key, ttl)
 
     return { success: true, quantity, count }
   } catch (error) {

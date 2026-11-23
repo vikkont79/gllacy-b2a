@@ -2,16 +2,15 @@
 
 import { redis } from '@/shared/lib/redis'
 
-import { cartKey } from '../lib'
 import type { CartMutationResult } from '../types'
-import { readGuestId } from './guestId'
+import { resolveCartOwner } from './cartOwner'
 
 export const clearCart = async (): Promise<CartMutationResult> => {
   try {
-    const guestId = await readGuestId()
+    const owner = await resolveCartOwner({ clearMergedCookie: true })
 
-    if (guestId) {
-      await redis.del(cartKey(guestId))
+    if (owner.key) {
+      await redis.del(owner.key)
     }
 
     return { success: true, quantity: 0, count: 0 }

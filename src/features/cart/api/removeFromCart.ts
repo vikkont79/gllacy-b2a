@@ -2,9 +2,9 @@
 
 import { redis } from '@/shared/lib/redis'
 
-import { cartKey, CART_TTL_SECONDS } from '../lib'
+import { CART_TTL_SECONDS, CART_USER_TTL_SECONDS } from '../lib'
 import { cartProductIdSchema, type CartMutationResult } from '../types'
-import { readGuestId } from './guestId'
+import { resolveCartOwner } from './cartOwner'
 
 export const removeFromCart = async (
   productId: number,
@@ -16,19 +16,22 @@ export const removeFromCart = async (
   }
 
   try {
-    const guestId = await readGuestId()
+    const owner = await resolveCartOwner({ clearMergedCookie: true })
 
-    if (!guestId) {
+    if (!owner.key) {
       return { success: true, quantity: 0, count: 0 }
     }
 
-    const key = cartKey(guestId)
+    const key = owner.key
     await redis.hdel(key, String(parsed.data))
 
     const count = await redis.hlen(key)
 
     if (count > 0) {
-      await redis.expire(key, CART_TTL_SECONDS)
+      const ttl =
+        owner.type === 'user' ? CART_USER_TTL_SECONDS : CART_TTL_SECONDS
+
+      await redis.expire(key, ttl)
     }
 
     return { success: true, quantity: 0, count }

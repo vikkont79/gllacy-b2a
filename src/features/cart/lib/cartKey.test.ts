@@ -1,9 +1,15 @@
 import { describe, expect, it } from 'vitest'
 
-import { cartKey } from './cartKey'
+import { guestCartKey, userCartKey } from './cartKey'
 
-describe('cartKey', () => {
-  it('строит ключ корзины с префиксом проекта', () => {
-    expect(cartKey('uuid')).toBe('gllacy:cart:uuid')
+describe('guestCartKey', () => {
+  it('строит ключ гостевой корзины с префиксом проекта', () => {
+    expect(guestCartKey('uuid')).toBe('gllacy:cart:guest:uuid')
+  })
+})
+
+describe('userCartKey', () => {
+  it('строит ключ корзины аккаунта с префиксом проекта', () => {
+    expect(userCartKey('user-id')).toBe('gllacy:cart:user:user-id')
   })
 })

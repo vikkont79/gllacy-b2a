@@ -1,14 +1,19 @@
 import Image from 'next/image'
-import { IconButton, Link } from '@/shared/ui'
+import { Link } from '@/shared/ui'
 import type { ProductRow } from '@/entities/product'
 import styles from './ProductCard.module.css'
 
 interface ProductCardProps {
   product: ProductRow
   priority?: boolean
+  cartAction?: React.ReactNode
 }
 
-const ProductCard = ({ product, priority = false }: ProductCardProps) => {
+const ProductCard = ({
+  product,
+  priority = false,
+  cartAction,
+}: ProductCardProps) => {
   return (
     <article className={styles.card}>
       <Image
@@ -25,13 +30,7 @@ const ProductCard = ({ product, priority = false }: ProductCardProps) => {
       <p className={styles.description}>{product.description}</p>
       <div className={styles.purchase}>
         <p className={styles.price}>{product.price / 100} ₽/кг</p>
-        <IconButton
-          className={styles.button}
-          icon="cart"
-          iconSize={16}
-          iconLabel="Корзина."
-          variant="secondary"
-        />
+        {cartAction}
       </div>
     </article>
   )

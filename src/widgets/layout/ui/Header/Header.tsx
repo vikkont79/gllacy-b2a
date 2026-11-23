@@ -4,6 +4,7 @@ import logo from '@/shared/assets/images/logo.svg'
 import { CATALOG_CATEGORIES } from '@/entities/product/lib'
 import { CONTACT_PHONE, phoneHref } from '@/shared/config/contacts'
 import { AuthControls } from '@/features/auth'
+import { CartCounter } from '@/features/cart'
 import { AutoCloseDetails } from './AutoCloseDetails'
 import styles from './Header.module.css'
 
@@ -67,15 +68,7 @@ const Header = () => {
               iconLabel='Поиск по сайту'
           />
           <AuthControls className={styles.actionsButton} />
-          {/* Заглушка: счётчик и поповер появятся вместе с features/cart */}
-          <IconButton
-            className={styles.actionsButton}
-            variant='transparent'
-            icon='cart'
-            iconSize={16}
-          >
-            Корзина
-          </IconButton>
+          <CartCounter className={styles.actionsButton} />
         </div>
     </header>
   )

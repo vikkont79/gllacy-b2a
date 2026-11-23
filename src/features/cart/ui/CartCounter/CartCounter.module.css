@@ -1,0 +1,36 @@
+.counter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.label {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.badge {
+  position: absolute;
+  inset-block-start: -4px;
+  inset-inline-end: -4px;
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 18px;
+  block-size: 18px;
+  padding-inline: 4px;
+  border-radius: 999px;
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  pointer-events: none;
+}

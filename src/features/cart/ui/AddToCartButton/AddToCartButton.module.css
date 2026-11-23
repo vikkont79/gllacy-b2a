@@ -1,0 +1,11 @@
+.iconOnly {
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 0;
+  outline: none;
+
+  &:active {
+    outline: 2px solid var(--color-primary-dark);
+    color: var(--color-text-dark);
+  }
+}

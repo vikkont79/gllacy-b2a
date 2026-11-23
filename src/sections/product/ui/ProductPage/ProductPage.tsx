@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 
 import { getProduct } from '@/entities/product/api/getProduct'
 import { CATEGORY_LABELS } from '@/entities/product/lib'
-import { IconButton, JsonLd } from '@/shared/ui'
+import { AddToCartButton } from '@/features/cart'
+import { JsonLd } from '@/shared/ui'
 import { Breadcrumbs, buildBreadcrumbsJsonLd } from '@/widgets/breadcrumbs'
 import { buildProductJsonLd } from '../../lib/buildProductJsonLd'
 import { createProductCrumbs } from '../../lib/createProductCrumbs'
@@ -21,6 +22,7 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
   if (!product) notFound()
 
   const {
+    id,
     name,
     description,
     image,
@@ -79,17 +81,11 @@ const ProductPage = async ({ slug }: ProductPageProps) => {
 
             <div className={styles.purchase}>
               <p className={styles.price}>{price / 100} ₽/кг</p>
-              <IconButton
-                className={styles.cart}
-                icon="cart"
-                iconSize={20}
-                iconPosition="right"
-                variant="secondary"
-
+              <AddToCartButton
+                productId={id}
                 disabled={!isAvailable}
-              >
-                Добавить в корзину
-              </IconButton>
+                className={styles.cart}
+              />
             </div>
 
             <dl className={styles.list}>

@@ -1,5 +1,6 @@
 import { getProducts } from '@/entities/product/api/getProducts'
 import { ProductCard, type ProductRow } from '@/entities/product'
+import { AddToCartButton } from '@/features/cart'
 import styles from './Tastes.module.css'
 
 const Tastes = async () => {
@@ -24,7 +25,17 @@ const Tastes = async () => {
       <ul className={styles.list}>
         {items.map((item, index) => (
           <li key={item.id} className={styles.item}>
-            <ProductCard product={item} priority={index === 0} />
+            <ProductCard
+              product={item}
+              priority={index === 0}
+              cartAction={
+                <AddToCartButton
+                  productId={item.id}
+                  disabled={!item.isAvailable}
+                  iconOnly
+                />
+              }
+            />
           </li>
         ))}
       </ul>

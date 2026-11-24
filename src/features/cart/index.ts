@@ -3,4 +3,4 @@ export type {
   CartMutationResult,
   CartSnapshot,
 } from './types'
-export { AddToCartButton, CartCounter } from './ui'
+export { AddToCartButton, CartCounter, CartView } from './ui'
